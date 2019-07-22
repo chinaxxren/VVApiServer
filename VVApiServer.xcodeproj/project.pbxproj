@@ -1,0 +1,784 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A15613FC5E29D726314AB7EA /* libPods-VVApiServer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD1A50891A2FB8AFCEAC0D1 /* libPods-VVApiServer.a */; };
+		B90F868022E559E4008586B6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B90F867F22E559E4008586B6 /* AppDelegate.m */; };
+		B90F868322E559E4008586B6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B90F868222E559E4008586B6 /* ViewController.m */; };
+		B90F868622E559E4008586B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B90F868422E559E4008586B6 /* Main.storyboard */; };
+		B90F868822E559E5008586B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B90F868722E559E5008586B6 /* Assets.xcassets */; };
+		B90F868B22E559E5008586B6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B90F868922E559E5008586B6 /* LaunchScreen.storyboard */; };
+		B90F868E22E559E5008586B6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B90F868D22E559E5008586B6 /* main.m */; };
+		B90F869822E559E6008586B6 /* VVApiServerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B90F869722E559E6008586B6 /* VVApiServerTests.m */; };
+		B90F86A322E559E6008586B6 /* VVApiServerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B90F86A222E559E6008586B6 /* VVApiServerUITests.m */; };
+		B90F86B122E55A01008586B6 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = B90F86B022E55A01008586B6 /* Podfile */; };
+		C3AE6014A47566BE27E72C85 /* NSData+DDData.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE6B35652DBC92AD3EDAD7 /* NSData+DDData.m */; };
+		C3AE6046ABD7E9A5F1ED13D4 /* VVRouteRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE63A1C83A0B4D180DC10C /* VVRouteRequest.m */; };
+		C3AE6141C0597F892B75A02E /* HTTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE63FE67B3BE49125010F4 /* HTTPConnection.m */; };
+		C3AE64AE5DADC3F0A5914762 /* WebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE6F21EEA7CC060DBD8B40 /* WebSocket.m */; };
+		C3AE64EBA41889CE82A8E017 /* HTTPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE67FA79529E8F85377F47 /* HTTPMessage.m */; };
+		C3AE6554623B5EE30503B145 /* HTTPFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE60CF9BDCD8A8D6B5909E /* HTTPFileResponse.m */; };
+		C3AE657E635EF9F0B8485ACA /* VVHTTPResponseProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE69654C43C0CFE4D0D8EA /* VVHTTPResponseProxy.m */; };
+		C3AE661FD5E3208897163D75 /* NSNumber+DDNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE6533EF9205400AD6709C /* NSNumber+DDNumber.m */; };
+		C3AE668446C3352877212366 /* DDRange.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE6326B2AF5D8B5294B02E /* DDRange.m */; };
+		C3AE695964AA25B6EE793525 /* HTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE60BBFE38168B25C78AFB /* HTTPServer.m */; };
+		C3AE69C390921C229435B9F0 /* VVRoutingConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE6E7B4C3B29A02590AC88 /* VVRoutingConnection.m */; };
+		C3AE69CD7C4F2CDBC1E79360 /* HTTPAuthenticationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE6CEC8C21CF9694025065 /* HTTPAuthenticationRequest.m */; };
+		C3AE6CF97E038B27355D6E28 /* HTTPAsyncFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE6B0A2AE412376E2A1C1F /* HTTPAsyncFileResponse.m */; };
+		C3AE6D4C201B72D059EC312D /* VVRouteResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE685668143372DFE08BED /* VVRouteResponse.m */; };
+		C3AE6DABAFAA3C0B39528C7C /* VVRoutingHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE66C5FB649FEF00C1F12C /* VVRoutingHTTPServer.m */; };
+		C3AE6DF5C7B220ED54A38B0F /* VVRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE625F173548533E4B90F5 /* VVRoute.m */; };
+		C3AE6E29CA9F38B0EEF812DC /* HTTPLogging.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE6409F4746F10A6BAC779 /* HTTPLogging.m */; };
+		C3AE6FFA19B0E9FE7107AA90 /* HTTPDataResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE6FB7BA382BBA23995AD8 /* HTTPDataResponse.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B90F869422E559E6008586B6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B90F867322E559E4008586B6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B90F867A22E559E4008586B6;
+			remoteInfo = VVApiServer;
+		};
+		B90F869F22E559E6008586B6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B90F867322E559E4008586B6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B90F867A22E559E4008586B6;
+			remoteInfo = VVApiServer;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		07AFF8CB561CF8DFA714AD62 /* Pods-VVApiServer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VVApiServer.debug.xcconfig"; path = "Target Support Files/Pods-VVApiServer/Pods-VVApiServer.debug.xcconfig"; sourceTree = "<group>"; };
+		2499EB36F05C5D55C779396F /* Pods-VVApiServer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VVApiServer.release.xcconfig"; path = "Target Support Files/Pods-VVApiServer/Pods-VVApiServer.release.xcconfig"; sourceTree = "<group>"; };
+		B90F867B22E559E4008586B6 /* VVApiServer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VVApiServer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B90F867E22E559E4008586B6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		B90F867F22E559E4008586B6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		B90F868122E559E4008586B6 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		B90F868222E559E4008586B6 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		B90F868522E559E4008586B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B90F868722E559E5008586B6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B90F868A22E559E5008586B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B90F868C22E559E5008586B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B90F868D22E559E5008586B6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		B90F869322E559E6008586B6 /* VVApiServerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VVApiServerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B90F869722E559E6008586B6 /* VVApiServerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VVApiServerTests.m; sourceTree = "<group>"; };
+		B90F869922E559E6008586B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B90F869E22E559E6008586B6 /* VVApiServerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VVApiServerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B90F86A222E559E6008586B6 /* VVApiServerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VVApiServerUITests.m; sourceTree = "<group>"; };
+		B90F86A422E559E6008586B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B90F86B022E55A01008586B6 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		C3AE609BABB876DA87BAB2FF /* HTTPMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPMessage.h; sourceTree = "<group>"; };
+		C3AE60BBFE38168B25C78AFB /* HTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPServer.m; sourceTree = "<group>"; };
+		C3AE60CF9BDCD8A8D6B5909E /* HTTPFileResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPFileResponse.m; sourceTree = "<group>"; };
+		C3AE625F173548533E4B90F5 /* VVRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVRoute.m; sourceTree = "<group>"; };
+		C3AE626797BC568713E72883 /* HTTPAuthenticationRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPAuthenticationRequest.h; sourceTree = "<group>"; };
+		C3AE62A0B90BA8FE6C8000D9 /* NSData+DDData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+DDData.h"; sourceTree = "<group>"; };
+		C3AE6326B2AF5D8B5294B02E /* DDRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDRange.m; sourceTree = "<group>"; };
+		C3AE6335AE916819BDEAC86E /* VVRouteRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVRouteRequest.h; sourceTree = "<group>"; };
+		C3AE6398B683E90E2C7FACAB /* DDRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDRange.h; sourceTree = "<group>"; };
+		C3AE63A1C83A0B4D180DC10C /* VVRouteRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVRouteRequest.m; sourceTree = "<group>"; };
+		C3AE63EA1385C186A3B8E708 /* WebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebSocket.h; sourceTree = "<group>"; };
+		C3AE63FE67B3BE49125010F4 /* HTTPConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPConnection.m; sourceTree = "<group>"; };
+		C3AE6409F4746F10A6BAC779 /* HTTPLogging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPLogging.m; sourceTree = "<group>"; };
+		C3AE64651ECC43A1185B8852 /* VVRoutingConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVRoutingConnection.h; sourceTree = "<group>"; };
+		C3AE649BB9F627A30CF1154B /* HTTPLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPLogging.h; sourceTree = "<group>"; };
+		C3AE64B706EAA797308E9AA6 /* VVRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVRoute.h; sourceTree = "<group>"; };
+		C3AE6533EF9205400AD6709C /* NSNumber+DDNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+DDNumber.m"; sourceTree = "<group>"; };
+		C3AE6682580F7DDA85F2DF78 /* VVRoutingHTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVRoutingHTTPServer.h; sourceTree = "<group>"; };
+		C3AE66C5FB649FEF00C1F12C /* VVRoutingHTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVRoutingHTTPServer.m; sourceTree = "<group>"; };
+		C3AE67458E4A24608B70BAD8 /* HTTPConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPConnection.h; sourceTree = "<group>"; };
+		C3AE67FA79529E8F85377F47 /* HTTPMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPMessage.m; sourceTree = "<group>"; };
+		C3AE6816BF565248C3BE851B /* NSNumber+DDNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+DDNumber.h"; sourceTree = "<group>"; };
+		C3AE685668143372DFE08BED /* VVRouteResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVRouteResponse.m; sourceTree = "<group>"; };
+		C3AE6864410C08ED66CB4CE9 /* HTTPFileResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPFileResponse.h; sourceTree = "<group>"; };
+		C3AE689F17CEECB72438311E /* VVHTTPResponseProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVHTTPResponseProxy.h; sourceTree = "<group>"; };
+		C3AE69654C43C0CFE4D0D8EA /* VVHTTPResponseProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVHTTPResponseProxy.m; sourceTree = "<group>"; };
+		C3AE69BAFC69F7EF465EBA84 /* HTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPServer.h; sourceTree = "<group>"; };
+		C3AE6A95C825F88C366F8384 /* HTTPAsyncFileResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPAsyncFileResponse.h; sourceTree = "<group>"; };
+		C3AE6B0A2AE412376E2A1C1F /* HTTPAsyncFileResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPAsyncFileResponse.m; sourceTree = "<group>"; };
+		C3AE6B35652DBC92AD3EDAD7 /* NSData+DDData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+DDData.m"; sourceTree = "<group>"; };
+		C3AE6B430AB00A5C5EA6EF5B /* HTTPDataResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPDataResponse.h; sourceTree = "<group>"; };
+		C3AE6CEC8C21CF9694025065 /* HTTPAuthenticationRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPAuthenticationRequest.m; sourceTree = "<group>"; };
+		C3AE6E7B4C3B29A02590AC88 /* VVRoutingConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVRoutingConnection.m; sourceTree = "<group>"; };
+		C3AE6F21EEA7CC060DBD8B40 /* WebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebSocket.m; sourceTree = "<group>"; };
+		C3AE6FB14FB277ED67566D5C /* VVRouteResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVRouteResponse.h; sourceTree = "<group>"; };
+		C3AE6FB7BA382BBA23995AD8 /* HTTPDataResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPDataResponse.m; sourceTree = "<group>"; };
+		C3AE6FFC2467003E31F092D7 /* HTTPResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPResponse.h; sourceTree = "<group>"; };
+		CDD1A50891A2FB8AFCEAC0D1 /* libPods-VVApiServer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VVApiServer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B90F867822E559E4008586B6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A15613FC5E29D726314AB7EA /* libPods-VVApiServer.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B90F869022E559E6008586B6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B90F869B22E559E6008586B6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B90F867222E559E4008586B6 = {
+			isa = PBXGroup;
+			children = (
+				B90F86B022E55A01008586B6 /* Podfile */,
+				B90F867D22E559E4008586B6 /* VVApiServer */,
+				B90F869622E559E6008586B6 /* VVApiServerTests */,
+				B90F86A122E559E6008586B6 /* VVApiServerUITests */,
+				B90F867C22E559E4008586B6 /* Products */,
+				DB6AEA0A3B821C49CF542751 /* Pods */,
+				CA7D1E4E9D0FCE14A084FDCD /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		B90F867C22E559E4008586B6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B90F867B22E559E4008586B6 /* VVApiServer.app */,
+				B90F869322E559E6008586B6 /* VVApiServerTests.xctest */,
+				B90F869E22E559E6008586B6 /* VVApiServerUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B90F867D22E559E4008586B6 /* VVApiServer */ = {
+			isa = PBXGroup;
+			children = (
+				B90F86B222E55B80008586B6 /* Source */,
+				B90F867E22E559E4008586B6 /* AppDelegate.h */,
+				B90F867F22E559E4008586B6 /* AppDelegate.m */,
+				B90F868122E559E4008586B6 /* ViewController.h */,
+				B90F868222E559E4008586B6 /* ViewController.m */,
+				B90F868422E559E4008586B6 /* Main.storyboard */,
+				B90F868722E559E5008586B6 /* Assets.xcassets */,
+				B90F868922E559E5008586B6 /* LaunchScreen.storyboard */,
+				B90F868C22E559E5008586B6 /* Info.plist */,
+				B90F868D22E559E5008586B6 /* main.m */,
+			);
+			path = VVApiServer;
+			sourceTree = "<group>";
+		};
+		B90F869622E559E6008586B6 /* VVApiServerTests */ = {
+			isa = PBXGroup;
+			children = (
+				B90F869722E559E6008586B6 /* VVApiServerTests.m */,
+				B90F869922E559E6008586B6 /* Info.plist */,
+			);
+			path = VVApiServerTests;
+			sourceTree = "<group>";
+		};
+		B90F86A122E559E6008586B6 /* VVApiServerUITests */ = {
+			isa = PBXGroup;
+			children = (
+				B90F86A222E559E6008586B6 /* VVApiServerUITests.m */,
+				B90F86A422E559E6008586B6 /* Info.plist */,
+			);
+			path = VVApiServerUITests;
+			sourceTree = "<group>";
+		};
+		B90F86B222E55B80008586B6 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				C3AE6E6EE74016647CB0413A /* Route */,
+				C3AE691DB7A0B92AB2144020 /* Http */,
+				C3AE681367DB258C868502BC /* Categories */,
+				C3AE6C78CD7CBF0EC5BF0C22 /* Responses */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		C3AE681367DB258C868502BC /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				C3AE6B35652DBC92AD3EDAD7 /* NSData+DDData.m */,
+				C3AE62A0B90BA8FE6C8000D9 /* NSData+DDData.h */,
+				C3AE6533EF9205400AD6709C /* NSNumber+DDNumber.m */,
+				C3AE6816BF565248C3BE851B /* NSNumber+DDNumber.h */,
+				C3AE6326B2AF5D8B5294B02E /* DDRange.m */,
+				C3AE6398B683E90E2C7FACAB /* DDRange.h */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		C3AE691DB7A0B92AB2144020 /* Http */ = {
+			isa = PBXGroup;
+			children = (
+				C3AE60BBFE38168B25C78AFB /* HTTPServer.m */,
+				C3AE69BAFC69F7EF465EBA84 /* HTTPServer.h */,
+				C3AE6409F4746F10A6BAC779 /* HTTPLogging.m */,
+				C3AE649BB9F627A30CF1154B /* HTTPLogging.h */,
+				C3AE63FE67B3BE49125010F4 /* HTTPConnection.m */,
+				C3AE67458E4A24608B70BAD8 /* HTTPConnection.h */,
+				C3AE6CEC8C21CF9694025065 /* HTTPAuthenticationRequest.m */,
+				C3AE626797BC568713E72883 /* HTTPAuthenticationRequest.h */,
+				C3AE67FA79529E8F85377F47 /* HTTPMessage.m */,
+				C3AE609BABB876DA87BAB2FF /* HTTPMessage.h */,
+				C3AE6FFC2467003E31F092D7 /* HTTPResponse.h */,
+				C3AE6F21EEA7CC060DBD8B40 /* WebSocket.m */,
+				C3AE63EA1385C186A3B8E708 /* WebSocket.h */,
+			);
+			path = Http;
+			sourceTree = "<group>";
+		};
+		C3AE6C78CD7CBF0EC5BF0C22 /* Responses */ = {
+			isa = PBXGroup;
+			children = (
+				C3AE60CF9BDCD8A8D6B5909E /* HTTPFileResponse.m */,
+				C3AE6864410C08ED66CB4CE9 /* HTTPFileResponse.h */,
+				C3AE6B0A2AE412376E2A1C1F /* HTTPAsyncFileResponse.m */,
+				C3AE6A95C825F88C366F8384 /* HTTPAsyncFileResponse.h */,
+				C3AE6FB7BA382BBA23995AD8 /* HTTPDataResponse.m */,
+				C3AE6B430AB00A5C5EA6EF5B /* HTTPDataResponse.h */,
+			);
+			path = Responses;
+			sourceTree = "<group>";
+		};
+		C3AE6E6EE74016647CB0413A /* Route */ = {
+			isa = PBXGroup;
+			children = (
+				C3AE6682580F7DDA85F2DF78 /* VVRoutingHTTPServer.h */,
+				C3AE6E7B4C3B29A02590AC88 /* VVRoutingConnection.m */,
+				C3AE689F17CEECB72438311E /* VVHTTPResponseProxy.h */,
+				C3AE6335AE916819BDEAC86E /* VVRouteRequest.h */,
+				C3AE63A1C83A0B4D180DC10C /* VVRouteRequest.m */,
+				C3AE685668143372DFE08BED /* VVRouteResponse.m */,
+				C3AE69654C43C0CFE4D0D8EA /* VVHTTPResponseProxy.m */,
+				C3AE64B706EAA797308E9AA6 /* VVRoute.h */,
+				C3AE625F173548533E4B90F5 /* VVRoute.m */,
+				C3AE6FB14FB277ED67566D5C /* VVRouteResponse.h */,
+				C3AE66C5FB649FEF00C1F12C /* VVRoutingHTTPServer.m */,
+				C3AE64651ECC43A1185B8852 /* VVRoutingConnection.h */,
+			);
+			path = Route;
+			sourceTree = "<group>";
+		};
+		CA7D1E4E9D0FCE14A084FDCD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CDD1A50891A2FB8AFCEAC0D1 /* libPods-VVApiServer.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DB6AEA0A3B821C49CF542751 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				07AFF8CB561CF8DFA714AD62 /* Pods-VVApiServer.debug.xcconfig */,
+				2499EB36F05C5D55C779396F /* Pods-VVApiServer.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B90F867A22E559E4008586B6 /* VVApiServer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B90F86A722E559E6008586B6 /* Build configuration list for PBXNativeTarget "VVApiServer" */;
+			buildPhases = (
+				BC7C69E579BAA8AADDB6D772 /* [CP] Check Pods Manifest.lock */,
+				B90F867722E559E4008586B6 /* Sources */,
+				B90F867822E559E4008586B6 /* Frameworks */,
+				B90F867922E559E4008586B6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VVApiServer;
+			productName = VVApiServer;
+			productReference = B90F867B22E559E4008586B6 /* VVApiServer.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B90F869222E559E6008586B6 /* VVApiServerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B90F86AA22E559E6008586B6 /* Build configuration list for PBXNativeTarget "VVApiServerTests" */;
+			buildPhases = (
+				B90F868F22E559E6008586B6 /* Sources */,
+				B90F869022E559E6008586B6 /* Frameworks */,
+				B90F869122E559E6008586B6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B90F869522E559E6008586B6 /* PBXTargetDependency */,
+			);
+			name = VVApiServerTests;
+			productName = VVApiServerTests;
+			productReference = B90F869322E559E6008586B6 /* VVApiServerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		B90F869D22E559E6008586B6 /* VVApiServerUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B90F86AD22E559E6008586B6 /* Build configuration list for PBXNativeTarget "VVApiServerUITests" */;
+			buildPhases = (
+				B90F869A22E559E6008586B6 /* Sources */,
+				B90F869B22E559E6008586B6 /* Frameworks */,
+				B90F869C22E559E6008586B6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B90F86A022E559E6008586B6 /* PBXTargetDependency */,
+			);
+			name = VVApiServerUITests;
+			productName = VVApiServerUITests;
+			productReference = B90F869E22E559E6008586B6 /* VVApiServerUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B90F867322E559E4008586B6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1020;
+				ORGANIZATIONNAME = Tank;
+				TargetAttributes = {
+					B90F867A22E559E4008586B6 = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
+					B90F869222E559E6008586B6 = {
+						CreatedOnToolsVersion = 10.2.1;
+						TestTargetID = B90F867A22E559E4008586B6;
+					};
+					B90F869D22E559E6008586B6 = {
+						CreatedOnToolsVersion = 10.2.1;
+						TestTargetID = B90F867A22E559E4008586B6;
+					};
+				};
+			};
+			buildConfigurationList = B90F867622E559E4008586B6 /* Build configuration list for PBXProject "VVApiServer" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B90F867222E559E4008586B6;
+			productRefGroup = B90F867C22E559E4008586B6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B90F867A22E559E4008586B6 /* VVApiServer */,
+				B90F869222E559E6008586B6 /* VVApiServerTests */,
+				B90F869D22E559E6008586B6 /* VVApiServerUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B90F867922E559E4008586B6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B90F868B22E559E5008586B6 /* LaunchScreen.storyboard in Resources */,
+				B90F868822E559E5008586B6 /* Assets.xcassets in Resources */,
+				B90F86B122E55A01008586B6 /* Podfile in Resources */,
+				B90F868622E559E4008586B6 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B90F869122E559E6008586B6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B90F869C22E559E6008586B6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		BC7C69E579BAA8AADDB6D772 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-VVApiServer-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B90F867722E559E4008586B6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B90F868322E559E4008586B6 /* ViewController.m in Sources */,
+				B90F868E22E559E5008586B6 /* main.m in Sources */,
+				B90F868022E559E4008586B6 /* AppDelegate.m in Sources */,
+				C3AE69C390921C229435B9F0 /* VVRoutingConnection.m in Sources */,
+				C3AE6046ABD7E9A5F1ED13D4 /* VVRouteRequest.m in Sources */,
+				C3AE6D4C201B72D059EC312D /* VVRouteResponse.m in Sources */,
+				C3AE657E635EF9F0B8485ACA /* VVHTTPResponseProxy.m in Sources */,
+				C3AE6DF5C7B220ED54A38B0F /* VVRoute.m in Sources */,
+				C3AE6DABAFAA3C0B39528C7C /* VVRoutingHTTPServer.m in Sources */,
+				C3AE695964AA25B6EE793525 /* HTTPServer.m in Sources */,
+				C3AE6E29CA9F38B0EEF812DC /* HTTPLogging.m in Sources */,
+				C3AE6141C0597F892B75A02E /* HTTPConnection.m in Sources */,
+				C3AE69CD7C4F2CDBC1E79360 /* HTTPAuthenticationRequest.m in Sources */,
+				C3AE64EBA41889CE82A8E017 /* HTTPMessage.m in Sources */,
+				C3AE64AE5DADC3F0A5914762 /* WebSocket.m in Sources */,
+				C3AE6014A47566BE27E72C85 /* NSData+DDData.m in Sources */,
+				C3AE661FD5E3208897163D75 /* NSNumber+DDNumber.m in Sources */,
+				C3AE668446C3352877212366 /* DDRange.m in Sources */,
+				C3AE6554623B5EE30503B145 /* HTTPFileResponse.m in Sources */,
+				C3AE6CF97E038B27355D6E28 /* HTTPAsyncFileResponse.m in Sources */,
+				C3AE6FFA19B0E9FE7107AA90 /* HTTPDataResponse.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B90F868F22E559E6008586B6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B90F869822E559E6008586B6 /* VVApiServerTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B90F869A22E559E6008586B6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B90F86A322E559E6008586B6 /* VVApiServerUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B90F869522E559E6008586B6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B90F867A22E559E4008586B6 /* VVApiServer */;
+			targetProxy = B90F869422E559E6008586B6 /* PBXContainerItemProxy */;
+		};
+		B90F86A022E559E6008586B6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B90F867A22E559E4008586B6 /* VVApiServer */;
+			targetProxy = B90F869F22E559E6008586B6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		B90F868422E559E4008586B6 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B90F868522E559E4008586B6 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		B90F868922E559E5008586B6 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B90F868A22E559E5008586B6 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B90F86A522E559E6008586B6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		B90F86A622E559E6008586B6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B90F86A822E559E6008586B6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 07AFF8CB561CF8DFA714AD62 /* Pods-VVApiServer.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = VVApiServer/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.waqu.httpserver.VVApiServer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B90F86A922E559E6008586B6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2499EB36F05C5D55C779396F /* Pods-VVApiServer.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = VVApiServer/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.waqu.httpserver.VVApiServer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		B90F86AB22E559E6008586B6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = VVApiServerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.waqu.httpserver.VVApiServerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VVApiServer.app/VVApiServer";
+			};
+			name = Debug;
+		};
+		B90F86AC22E559E6008586B6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = VVApiServerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.waqu.httpserver.VVApiServerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VVApiServer.app/VVApiServer";
+			};
+			name = Release;
+		};
+		B90F86AE22E559E6008586B6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = VVApiServerUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.waqu.httpserver.VVApiServerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = VVApiServer;
+			};
+			name = Debug;
+		};
+		B90F86AF22E559E6008586B6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = VVApiServerUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.waqu.httpserver.VVApiServerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = VVApiServer;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B90F867622E559E4008586B6 /* Build configuration list for PBXProject "VVApiServer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B90F86A522E559E6008586B6 /* Debug */,
+				B90F86A622E559E6008586B6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B90F86A722E559E6008586B6 /* Build configuration list for PBXNativeTarget "VVApiServer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B90F86A822E559E6008586B6 /* Debug */,
+				B90F86A922E559E6008586B6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B90F86AA22E559E6008586B6 /* Build configuration list for PBXNativeTarget "VVApiServerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B90F86AB22E559E6008586B6 /* Debug */,
+				B90F86AC22E559E6008586B6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B90F86AD22E559E6008586B6 /* Build configuration list for PBXNativeTarget "VVApiServerUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B90F86AE22E559E6008586B6 /* Debug */,
+				B90F86AF22E559E6008586B6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B90F867322E559E4008586B6 /* Project object */;
+}

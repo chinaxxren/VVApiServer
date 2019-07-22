@@ -1,0 +1,14 @@
+#XCode
+.idea
+.DS_Store
+.idea
+Pods
+Podfile.lock
+VVRichText.xcworkspace
+
+build/
+IPA/
+upload
+
+xcuserdata
+~         
