@@ -66,9 +66,9 @@
 
 - (void)respondWithFile:(NSString *)path async:(BOOL)async {
     if (async) {
-        self.response = [[VVHTTPAsyncFileResponse alloc] initWithFilePath:path forConnection:connection];
+        self.response = [[VVHTTPAsyncFileResponse alloc] initWithFilePath:path forConnection:_connection];
     } else {
-        self.response = [[VVHTTPFileResponse alloc] initWithFilePath:path forConnection:connection];
+        self.response = [[VVHTTPFileResponse alloc] initWithFilePath:path forConnection:_connection];
     }
 }
 
