@@ -11,7 +11,7 @@
 
 // Log levels: off, error, warn, info, verbose
 // Other flags : trace
-static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
+static const int httpLogLevel = VV_HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 
 #define TIMEOUT_NONE          -1
 #define TIMEOUT_REQUEST_BODY  10
@@ -110,7 +110,7 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame) {
         isWebSocket = NO;
     }
 
-    HTTPLogTrace2(@"%@: %@ - %@", THIS_FILE, THIS_METHOD, (isWebSocket ? @"YES" : @"NO"));
+    VVHTTPLogTrace2(@"%@: %@ - %@", VV_THIS_FILE, VV_THIS_METHOD, (isWebSocket ? @"YES" : @"NO"));
 
     return isWebSocket;
 }
@@ -127,7 +127,7 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame) {
         isVersion76 = YES;
     }
 
-    HTTPLogTrace2(@"%@: %@ - %@", THIS_FILE, THIS_METHOD, (isVersion76 ? @"YES" : @"NO"));
+    VVHTTPLogTrace2(@"%@: %@ - %@", VV_THIS_FILE, VV_THIS_METHOD, (isVersion76 ? @"YES" : @"NO"));
 
     return isVersion76;
 }
@@ -136,7 +136,7 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame) {
     NSString *key = [request headerField:@"Sec-VVWebSocket-Key"];
     BOOL isRFC6455 = (key != nil);
 
-    HTTPLogTrace2(@"%@: %@ - %@", THIS_FILE, THIS_METHOD, (isRFC6455 ? @"YES" : @"NO"));
+    VVHTTPLogTrace2(@"%@: %@ - %@", VV_THIS_FILE, VV_THIS_METHOD, (isRFC6455 ? @"YES" : @"NO"));
 
     return isRFC6455;
 }
@@ -148,18 +148,18 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame) {
 @synthesize websocketQueue;
 
 - (id)initWithRequest:(VVHTTPMessage *)aRequest socket:(GCDAsyncSocket *)socket {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     if (aRequest == nil) {
         return nil;
     }
 
     if ((self = [super init])) {
-        if (HTTP_LOG_VERBOSE) {
+        if (VV_HTTP_LOG_VERBOSE) {
             NSData *requestHeaders = [aRequest messageData];
 
             NSString *temp = [[NSString alloc] initWithData:requestHeaders encoding:NSUTF8StringEncoding];
-            HTTPLogVerbose(@"%@[%p] Request Headers:\n%@", THIS_FILE, self, temp);
+            VVHTTPLogVerbose(@"%@[%p] Request Headers:\n%@", VV_THIS_FILE, self, temp);
         }
 
         websocketQueue = dispatch_queue_create("VVWebSocket", NULL);
@@ -178,7 +178,7 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame) {
 }
 
 - (void)dealloc {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     [asyncSocket setDelegate:nil delegateQueue:NULL];
     [asyncSocket disconnect];
@@ -249,7 +249,7 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 - (void)readRequestBody {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     NSAssert(isVersion76, @"VVWebSocket version 75 doesn't contain a request body");
 
@@ -257,7 +257,7 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame) {
 }
 
 - (NSString *)originResponseHeaderValue {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     NSString *origin = [request headerField:@"Origin"];
 
@@ -271,7 +271,7 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame) {
 }
 
 - (NSString *)locationResponseHeaderValue {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     NSString *location;
 
@@ -298,7 +298,7 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame) {
 }
 
 - (void)sendResponseHeaders {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     // Request (Draft 75):
     //
@@ -379,16 +379,16 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame) {
     NSData *responseHeaders = [wsResponse messageData];
 
 
-    if (HTTP_LOG_VERBOSE) {
+    if (VV_HTTP_LOG_VERBOSE) {
         NSString *temp = [[NSString alloc] initWithData:responseHeaders encoding:NSUTF8StringEncoding];
-        HTTPLogVerbose(@"%@[%p] Response Headers:\n%@", THIS_FILE, self, temp);
+        VVHTTPLogVerbose(@"%@[%p] Response Headers:\n%@", VV_THIS_FILE, self, temp);
     }
 
     [asyncSocket writeData:responseHeaders withTimeout:TIMEOUT_NONE tag:TAG_HTTP_RESPONSE_HEADERS];
 }
 
 - (NSData *)processKey:(NSString *)key {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     unichar c;
     NSUInteger i;
@@ -419,7 +419,7 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame) {
     else
         resultHostNum = num / numSpaces;
 
-    HTTPLogVerbose(@"key(%@) -> %qi / %qi = %qi", key, num, numSpaces, resultHostNum);
+    VVHTTPLogVerbose(@"key(%@) -> %qi / %qi = %qi", key, num, numSpaces, resultHostNum);
 
     // Convert result to 4 byte big-endian (network byte order)
     // and then convert to raw data.
@@ -430,7 +430,7 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame) {
 }
 
 - (void)sendResponseBody:(NSData *)d3 {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     NSAssert(isVersion76, @"VVWebSocket version 75 doesn't contain a response body");
     NSAssert([d3 length] == 8, @"Invalid requestBody length");
@@ -454,7 +454,7 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame) {
 
     [asyncSocket writeData:responseBody withTimeout:TIMEOUT_NONE tag:TAG_HTTP_RESPONSE_BODY];
 
-    if (HTTP_LOG_VERBOSE) {
+    if (VV_HTTP_LOG_VERBOSE) {
         NSString *s1 = [[NSString alloc] initWithData:d1 encoding:NSASCIIStringEncoding];
         NSString *s2 = [[NSString alloc] initWithData:d2 encoding:NSASCIIStringEncoding];
         NSString *s3 = [[NSString alloc] initWithData:d3 encoding:NSASCIIStringEncoding];
@@ -463,11 +463,11 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame) {
 
         NSString *sH = [[NSString alloc] initWithData:responseBody encoding:NSASCIIStringEncoding];
 
-        HTTPLogVerbose(@"key1 result : raw(%@) str(%@)", d1, s1);
-        HTTPLogVerbose(@"key2 result : raw(%@) str(%@)", d2, s2);
-        HTTPLogVerbose(@"key3 passed : raw(%@) str(%@)", d3, s3);
-        HTTPLogVerbose(@"key0 concat : raw(%@) str(%@)", d0, s0);
-        HTTPLogVerbose(@"responseBody: raw(%@) str(%@)", responseBody, sH);
+        VVHTTPLogVerbose(@"key1 result : raw(%@) str(%@)", d1, s1);
+        VVHTTPLogVerbose(@"key2 result : raw(%@) str(%@)", d2, s2);
+        VVHTTPLogVerbose(@"key3 passed : raw(%@) str(%@)", d3, s3);
+        VVHTTPLogVerbose(@"key0 concat : raw(%@) str(%@)", d0, s0);
+        VVHTTPLogVerbose(@"responseBody: raw(%@) str(%@)", responseBody, sH);
 
     }
 }
@@ -477,7 +477,7 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 - (void)didOpen {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     // Override me to perform any custom actions once the VVWebSocket has been opened.
     // This method is invoked on the websocketQueue.
@@ -499,7 +499,7 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame) {
 }
 
 - (void)sendData:(NSData *)msgData {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     NSMutableData *data = nil;
 
@@ -538,7 +538,7 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame) {
 }
 
 - (void)didReceiveMessage:(NSString *)msg {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     // Override me to process incoming messages.
     // This method is invoked on the websocketQueue.
@@ -552,7 +552,7 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame) {
 }
 
 - (void)didClose {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     // Override me to perform any cleanup when the socket is closed
     // This method is invoked on the websocketQueue.
@@ -603,7 +603,7 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame) {
 // +---------------------------------------------------------------+
 
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     if (tag == TAG_HTTP_REQUEST_BODY) {
         [self sendResponseHeaders];
@@ -693,7 +693,7 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame) {
 }
 
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)error {
-    HTTPLogTrace2(@"%@[%p]: socketDidDisconnect:withError: %@", THIS_FILE, self, error);
+    VVHTTPLogTrace2(@"%@[%p]: socketDidDisconnect:withError: %@", VV_THIS_FILE, self, error);
 
     [self didClose];
 }

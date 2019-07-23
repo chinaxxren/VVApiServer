@@ -10,7 +10,7 @@
 
 // Log levels: off, error, warn, info, verbose
 // Other flags: trace
-static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
+static const int httpLogLevel = VV_HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 
 @interface VVHTTPServer (PrivateAPI)
 
@@ -36,7 +36,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 **/
 - (id)init {
     if ((self = [super init])) {
-        HTTPLogTrace();
+        VVHTTPLogTrace();
 
         // Setup underlying dispatch queues
         serverQueue = dispatch_queue_create("VVHTTPServer", NULL);
@@ -103,7 +103,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
  * Stops the server, and clients, and releases any resources connected with this instance.
 **/
 - (void)dealloc {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     // Remove notification observer
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -134,14 +134,14 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 }
 
 - (void)setDocumentRoot:(NSString *)value {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     // Document root used to be of type NSURL.
     // Add type checking for early warning to developers upgrading from older versions.
 
     if (value && ![value isKindOfClass:[NSString class]]) {
-        HTTPLogWarn(@"%@: %@ - Expecting NSString parameter, received %@ parameter",
-                THIS_FILE, THIS_METHOD, NSStringFromClass([value class]));
+        VVHTTPLogWarn(@"%@: %@ - Expecting NSString parameter, received %@ parameter",
+                VV_THIS_FILE, VV_THIS_METHOD, NSStringFromClass([value class]));
         return;
     }
 
@@ -169,7 +169,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 }
 
 - (void)setConnectionClass:(Class)value {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     dispatch_async(serverQueue, ^{
         connectionClass = value;
@@ -226,7 +226,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 }
 
 - (void)setPort:(UInt16)value {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     dispatch_async(serverQueue, ^{
         port = value;
@@ -248,7 +248,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 }
 
 - (void)setDomain:(NSString *)value {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     NSString *valueCopy = [value copy];
 
@@ -338,7 +338,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 }
 
 - (void)setTXTRecordDictionary:(NSDictionary *)value {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     NSDictionary *valueCopy = [value copy];
 
@@ -368,7 +368,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 - (BOOL)start:(NSError **)errPtr {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     __block BOOL success = YES;
     __block NSError *err = nil;
@@ -378,12 +378,12 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 
             success = [asyncSocket acceptOnInterface:interface port:port error:&err];
             if (success) {
-                HTTPLogInfo(@"%@: Started HTTP server on port %hu", THIS_FILE, [asyncSocket localPort]);
+                VVHTTPLogInfo(@"%@: Started HTTP server on port %hu", VV_THIS_FILE, [asyncSocket localPort]);
 
                 isRunning = YES;
                 [self publishBonjour];
             } else {
-                HTTPLogError(@"%@: Failed to start HTTP Server: %@", THIS_FILE, err);
+                VVHTTPLogError(@"%@: Failed to start HTTP Server: %@", VV_THIS_FILE, err);
             }
         }
     });
@@ -399,7 +399,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 }
 
 - (void)stop:(BOOL)keepExistingConnections {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     dispatch_sync(serverQueue, ^{
         @autoreleasepool {
@@ -445,7 +445,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 - (void)addWebSocket:(VVWebSocket *)ws {
     [webSocketsLock lock];
 
-    HTTPLogTrace();
+    VVHTTPLogTrace();
     [webSockets addObject:ws];
 
     [webSocketsLock unlock];
@@ -515,7 +515,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 - (void)publishBonjour {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     NSAssert(dispatch_get_specific(IsOnServerQueueKey) != NULL, @"Must be on serverQueue");
 
@@ -547,7 +547,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 }
 
 - (void)unpublishBonjour {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     NSAssert(dispatch_get_specific(IsOnServerQueueKey) != NULL, @"Must be on serverQueue");
 
@@ -570,7 +570,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
  * If the service was not previously published, this method will publish it (if the server is running).
 **/
 - (void)republishBonjour {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     dispatch_async(serverQueue, ^{
 
@@ -588,7 +588,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
     //
     // Note: This method is invoked on our bonjour thread.
 
-    HTTPLogInfo(@"Bonjour Service Published: domain(%@) type(%@) name(%@)", [ns domain], [ns type], [ns name]);
+    VVHTTPLogInfo(@"Bonjour Service Published: domain(%@) type(%@) name(%@)", [ns domain], [ns type], [ns name]);
 }
 
 /**
@@ -600,7 +600,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
     //
     // Note: This method in invoked on our bonjour thread.
 
-    HTTPLogWarn(@"Failed to Publish Service: domain(%@) type(%@) name(%@) - %@",
+    VVHTTPLogWarn(@"Failed to Publish Service: domain(%@) type(%@) name(%@) - %@",
             [ns domain], [ns type], [ns name], errorDict);
 }
 
@@ -617,7 +617,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 
     [connectionsLock lock];
 
-    HTTPLogTrace();
+    VVHTTPLogTrace();
     [connections removeObject:[notification object]];
 
     [connectionsLock unlock];
@@ -632,7 +632,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 
     [webSocketsLock lock];
 
-    HTTPLogTrace();
+    VVHTTPLogTrace();
     [webSockets removeObject:[notification object]];
 
     [webSocketsLock unlock];
@@ -656,12 +656,12 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 static NSThread *bonjourThread;
 
 + (void)startBonjourThreadIfNeeded {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     static dispatch_once_t predicate;
     dispatch_once(&predicate, ^{
 
-        HTTPLogVerbose(@"%@: Starting bonjour thread...", THIS_FILE);
+        VVHTTPLogVerbose(@"%@: Starting bonjour thread...", VV_THIS_FILE);
 
         bonjourThread = [[NSThread alloc] initWithTarget:self
                                                 selector:@selector(bonjourThread)
@@ -673,7 +673,7 @@ static NSThread *bonjourThread;
 + (void)bonjourThread {
     @autoreleasepool {
 
-        HTTPLogVerbose(@"%@: BonjourThread: Started", THIS_FILE);
+        VVHTTPLogVerbose(@"%@: BonjourThread: Started", VV_THIS_FILE);
 
         // We can't run the run loop unless it has an associated input source or a timer.
         // So we'll just create a timer that will never fire - unless the server runs for 10,000 years.
@@ -688,13 +688,13 @@ static NSThread *bonjourThread;
 
         [[NSRunLoop currentRunLoop] run];
 
-        HTTPLogVerbose(@"%@: BonjourThread: Aborted", THIS_FILE);
+        VVHTTPLogVerbose(@"%@: BonjourThread: Aborted", VV_THIS_FILE);
 
     }
 }
 
 + (void)executeBonjourBlock:(dispatch_block_t)block {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     NSAssert([NSThread currentThread] == bonjourThread, @"Executed on incorrect thread");
 
@@ -702,7 +702,7 @@ static NSThread *bonjourThread;
 }
 
 + (void)performBonjourBlock:(dispatch_block_t)block {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     [self performSelector:@selector(executeBonjourBlock:)
                  onThread:bonjourThread

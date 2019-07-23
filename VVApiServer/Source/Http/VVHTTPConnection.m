@@ -18,7 +18,7 @@
 
 // Log levels: off, error, warn, info, verbose
 // Other flags: trace
-static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
+static const int httpLogLevel = VV_HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 
 // Define chunk size used to read in data for responses
 // This is how much data will be read from disk into RAM at a time
@@ -178,7 +178,7 @@ static NSMutableArray *recentNonces;
 **/
 - (id)initWithAsyncSocket:(GCDAsyncSocket *)newSocket configuration:(HTTPConfig *)aConfig {
     if ((self = [super init])) {
-        HTTPLogTrace();
+        VVHTTPLogTrace();
 
         if (aConfig.queue) {
             connectionQueue = aConfig.queue;
@@ -212,7 +212,7 @@ static NSMutableArray *recentNonces;
  * Standard Deconstructor.
 **/
 - (void)dealloc {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     [asyncSocket setDelegate:nil delegateQueue:NULL];
     [asyncSocket disconnect];
@@ -231,7 +231,7 @@ static NSMutableArray *recentNonces;
  * at a particular URI.
 **/
 - (BOOL)supportsMethod:(NSString *)method atPath:(NSString *)path {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     // Override me to support methods such as POST.
     //
@@ -263,7 +263,7 @@ static NSMutableArray *recentNonces;
  * or for something like PUT where the client is supposed to be uploading a file.
 **/
 - (BOOL)expectsRequestBodyFromMethod:(NSString *)method atPath:(NSString *)path {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     // Override me to add support for other methods that expect the client
     // to send a body along with the request header.
@@ -295,7 +295,7 @@ static NSMutableArray *recentNonces;
  * Note: In order to support secure connections, the sslIdentityAndCertificates method must be implemented.
 **/
 - (BOOL)isSecureServer {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     // Override me to create an https server...
 
@@ -307,7 +307,7 @@ static NSMutableArray *recentNonces;
  * It should be an array of SecCertificateRefs except for the first element in the array, which is a SecIdentityRef.
 **/
 - (NSArray *)sslIdentityAndCertificates {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     // Override me to provide the proper required SSL identity.
 
@@ -323,7 +323,7 @@ static NSMutableArray *recentNonces;
  * In this generic implementation, nothing is password protected.
 **/
 - (BOOL)isPasswordProtected:(NSString *)path {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     // Override me to provide password protection...
     // You can configure it for the entire server, or based on the current request
@@ -339,7 +339,7 @@ static NSMutableArray *recentNonces;
  * Basic authentication sends passwords in the clear and should be avoided unless using SSL/TLS.
 **/
 - (BOOL)useDigestAccessAuthentication {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     // Override me to customize the authentication scheme
     // Make sure you understand the security risks of using the weaker basic authentication
@@ -352,7 +352,7 @@ static NSMutableArray *recentNonces;
  * In this generic implmentation, a default realm is used for the entire server.
 **/
 - (NSString *)realm {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     // Override me to provide a custom realm...
     // You can configure it for the entire server, or based on the current request
@@ -364,7 +364,7 @@ static NSMutableArray *recentNonces;
  * Returns the password for the given username.
 **/
 - (NSString *)passwordForUser:(NSString *)username {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     // Override me to provide proper password authentication
     // You can configure a password for the entire server, or custom passwords for users and/or resources
@@ -380,7 +380,7 @@ static NSMutableArray *recentNonces;
  * Returns whether or not the user is properly authenticated.
 **/
 - (BOOL)isAuthenticated {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     // Extract the authentication information from the Authorization header
     VVHTTPAuthenticationRequest *auth = [[VVHTTPAuthenticationRequest alloc] initWithRequest:request];
@@ -499,7 +499,7 @@ static NSMutableArray *recentNonces;
  * Adds a digest access authentication challenge to the given response.
 **/
 - (void)addDigestAuthChallenge:(VVHTTPMessage *)response {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     NSString *authFormat = @"Digest realm=\"%@\", qop=\"auth\", nonce=\"%@\"";
     NSString *authInfo = [NSString stringWithFormat:authFormat, [self realm], [[self class] generateNonce]];
@@ -511,7 +511,7 @@ static NSMutableArray *recentNonces;
  * Adds a basic authentication challenge to the given response.
 **/
 - (void)addBasicAuthChallenge:(VVHTTPMessage *)response {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     NSString *authFormat = @"Basic realm=\"%@\"";
     NSString *authInfo = [NSString stringWithFormat:authFormat, [self realm]];
@@ -562,7 +562,7 @@ static NSMutableArray *recentNonces;
     //
     // Be sure to invoke [super startConnection] when you're done.
 
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     if ([self isSecureServer]) {
         // We are configured to be an HTTPS server.
@@ -593,7 +593,7 @@ static NSMutableArray *recentNonces;
  * Starts reading an HTTP request.
 **/
 - (void)startReadingRequest {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     [asyncSocket readDataToData:[GCDAsyncSocket CRLFData]
                     withTimeout:TIMEOUT_READ_FIRST_HEADER_LINE
@@ -681,7 +681,7 @@ static NSMutableArray *recentNonces;
  * Otherwise, NO is returned, and the range request should be ignored.
  **/
 - (BOOL)parseRangeRequest:(NSString *)rangeHeader withContentLength:(UInt64)contentLength {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     // Examples of byte-ranges-specifier values (assuming an entity-body of length 10000):
     //
@@ -824,13 +824,13 @@ static NSMutableArray *recentNonces;
  * The current request is in the HTTPMessage request variable.
 **/
 - (void)replyToHTTPRequest {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
-    if (HTTP_LOG_VERBOSE) {
+    if (VV_HTTP_LOG_VERBOSE) {
         NSData *tempData = [request messageData];
 
         NSString *tempStr = [[NSString alloc] initWithData:tempData encoding:NSUTF8StringEncoding];
-        HTTPLogVerbose(@"%@[%p]: Received HTTP request:\n%@", THIS_FILE, self, tempStr);
+        VVHTTPLogVerbose(@"%@[%p]: Received HTTP request:\n%@", VV_THIS_FILE, self, tempStr);
     }
 
     // Check the HTTP version
@@ -846,7 +846,7 @@ static NSMutableArray *recentNonces;
 
     // Check for VVWebSocket request
     if ([VVWebSocket isWebSocketRequest:request]) {
-        HTTPLogVerbose(@"isWebSocket");
+        VVHTTPLogVerbose(@"isWebSocket");
 
         VVWebSocket *ws = [self webSocketForURI:uri];
 
@@ -860,7 +860,7 @@ static NSMutableArray *recentNonces;
             // The VVWebSocket should now be the delegate of the underlying socket.
             // But gracefully handle the situation if it forgot.
             if ([asyncSocket delegate] == self) {
-                HTTPLogWarn(@"%@[%p]: VVWebSocket forgot to set itself as socket delegate", THIS_FILE, self);
+                VVHTTPLogWarn(@"%@[%p]: VVWebSocket forgot to set itself as socket delegate", VV_THIS_FILE, self);
 
                 // Disconnect the socket.
                 // The socketDidDisconnect delegate method will handle everything else.
@@ -926,7 +926,7 @@ static NSMutableArray *recentNonces;
  * Note: The returned HTTPMessage is owned by the sender, who is responsible for releasing it.
 **/
 - (VVHTTPMessage *)newUniRangeResponse:(UInt64)contentLength {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     // Status Code 206 - Partial Content
     VVHTTPMessage *response = [[VVHTTPMessage alloc] initResponseWithStatusCode:206 description:nil version:HTTPVersion1_1];
@@ -949,7 +949,7 @@ static NSMutableArray *recentNonces;
  * Note: The returned HTTPMessage is owned by the sender, who is responsible for releasing it.
 **/
 - (VVHTTPMessage *)newMultiRangeResponse:(UInt64)contentLength {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     // Status Code 206 - Partial Content
     VVHTTPMessage *response = [[VVHTTPMessage alloc] initResponseWithStatusCode:206 description:nil version:HTTPVersion1_1];
@@ -1206,7 +1206,7 @@ static NSMutableArray *recentNonces;
  * This method should only be called for standard (non-range) responses.
 **/
 - (void)continueSendingStandardResponseBody {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     // This method is called when either asyncSocket has finished writing one of the response data chunks,
     // or when an asynchronous VVHTTPResponse object informs us that it has more available data for us to send.
@@ -1265,7 +1265,7 @@ static NSMutableArray *recentNonces;
  * This method should only be called for single-range responses.
 **/
 - (void)continueSendingSingleRangeResponseBody {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     // This method is called when either asyncSocket has finished writing one of the response data chunks,
     // or when an asynchronous response informs us that is has more available data for us to send.
@@ -1313,7 +1313,7 @@ static NSMutableArray *recentNonces;
  * This method should only be called for multi-range responses.
 **/
 - (void)continueSendingMultiRangeResponseBody {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     // This method is called when either asyncSocket has finished writing one of the response data chunks,
     // or when an asynchronous VVHTTPResponse object informs us that is has more available data for us to send.
@@ -1390,7 +1390,7 @@ static NSMutableArray *recentNonces;
  * For example: {"index.html", "index.htm"}
 **/
 - (NSArray *)directoryIndexFileNames {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     // Override me to support other index pages.
 
@@ -1405,7 +1405,7 @@ static NSMutableArray *recentNonces;
  * Converts relative URI path into full file-system path.
 **/
 - (NSString *)filePathForURI:(NSString *)path allowDirectory:(BOOL)allowDirectory {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     // Override me to perform custom path mapping.
     // For example you may want to use a default file other than index.html, or perhaps support multiple types.
@@ -1418,7 +1418,7 @@ static NSMutableArray *recentNonces;
     // then it makes no sense to try to return anything.
 
     if (documentRoot == nil) {
-        HTTPLogWarn(@"%@[%p]: No configured document root", THIS_FILE, self);
+        VVHTTPLogWarn(@"%@[%p]: No configured document root", VV_THIS_FILE, self);
         return nil;
     }
 
@@ -1428,7 +1428,7 @@ static NSMutableArray *recentNonces;
 
     NSURL *docRoot = [NSURL fileURLWithPath:documentRoot isDirectory:YES];
     if (docRoot == nil) {
-        HTTPLogWarn(@"%@[%p]: Document root is invalid file path", THIS_FILE, self);
+        VVHTTPLogWarn(@"%@[%p]: Document root is invalid file path", VV_THIS_FILE, self);
         return nil;
     }
 
@@ -1467,7 +1467,7 @@ static NSMutableArray *recentNonces;
     }
 
     if (![fullPath hasPrefix:documentRoot]) {
-        HTTPLogWarn(@"%@[%p]: Request for file outside document root", THIS_FILE, self);
+        VVHTTPLogWarn(@"%@[%p]: Request for file outside document root", VV_THIS_FILE, self);
         return nil;
     }
 
@@ -1501,7 +1501,7 @@ static NSMutableArray *recentNonces;
  * HTTPDataResponse is a wrapper for an NSData object, and may be used to send a custom response.
 **/
 - (NSObject <VVHTTPResponse> *)httpResponseForMethod:(NSString *)method URI:(NSString *)path {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     // Override me to provide custom responses.
 
@@ -1522,7 +1522,7 @@ static NSMutableArray *recentNonces;
 }
 
 - (VVWebSocket *)webSocketForURI:(NSString *)path {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     // Override me to provide custom VVWebSocket responses.
     // To do so, simply override the base VVWebSocket implementation, and add your custom functionality.
@@ -1587,7 +1587,7 @@ static NSMutableArray *recentNonces;
     // If you simply want to add a few extra header fields, see the preprocessErrorResponse: method.
     // You can also use preprocessErrorResponse: to add an optional HTML body.
 
-    HTTPLogWarn(@"HTTP Server: Error 505 - Version Not Supported: %@ (%@)", version, [self requestURI]);
+    VVHTTPLogWarn(@"HTTP Server: Error 505 - Version Not Supported: %@ (%@)", version, [self requestURI]);
 
     VVHTTPMessage *response = [[VVHTTPMessage alloc] initResponseWithStatusCode:505 description:nil version:HTTPVersion1_1];
     [response setHeaderField:@"Content-Length" value:@"0"];
@@ -1604,7 +1604,7 @@ static NSMutableArray *recentNonces;
     // If you simply want to add a few extra header fields, see the preprocessErrorResponse: method.
     // You can also use preprocessErrorResponse: to add an optional HTML body.
 
-    HTTPLogInfo(@"HTTP Server: Error 401 - Unauthorized (%@)", [self requestURI]);
+    VVHTTPLogInfo(@"HTTP Server: Error 401 - Unauthorized (%@)", [self requestURI]);
 
     // Status Code 401 - Unauthorized
     VVHTTPMessage *response = [[VVHTTPMessage alloc] initResponseWithStatusCode:401 description:nil version:HTTPVersion1_1];
@@ -1630,7 +1630,7 @@ static NSMutableArray *recentNonces;
     // If you simply want to add a few extra header fields, see the preprocessErrorResponse: method.
     // You can also use preprocessErrorResponse: to add an optional HTML body.
 
-    HTTPLogWarn(@"HTTP Server: Error 400 - Bad Request (%@)", [self requestURI]);
+    VVHTTPLogWarn(@"HTTP Server: Error 400 - Bad Request (%@)", [self requestURI]);
 
     // Status Code 400 - Bad Request
     VVHTTPMessage *response = [[VVHTTPMessage alloc] initResponseWithStatusCode:400 description:nil version:HTTPVersion1_1];
@@ -1657,7 +1657,7 @@ static NSMutableArray *recentNonces;
     //
     // See also: supportsMethod:atPath:
 
-    HTTPLogWarn(@"HTTP Server: Error 405 - Method Not Allowed: %@ (%@)", method, [self requestURI]);
+    VVHTTPLogWarn(@"HTTP Server: Error 405 - Method Not Allowed: %@ (%@)", method, [self requestURI]);
 
     // Status code 405 - Method Not Allowed
     VVHTTPMessage *response = [[VVHTTPMessage alloc] initResponseWithStatusCode:405 description:nil version:HTTPVersion1_1];
@@ -1681,7 +1681,7 @@ static NSMutableArray *recentNonces;
     // If you simply want to add a few extra header fields, see the preprocessErrorResponse: method.
     // You can also use preprocessErrorResponse: to add an optional HTML body.
 
-    HTTPLogInfo(@"HTTP Server: Error 404 - Not Found (%@)", [self requestURI]);
+    VVHTTPLogInfo(@"HTTP Server: Error 404 - Not Found (%@)", [self requestURI]);
 
     // Status Code 404 - Not Found
     VVHTTPMessage *response = [[VVHTTPMessage alloc] initResponseWithStatusCode:404 description:nil version:HTTPVersion1_1];
@@ -1737,7 +1737,7 @@ static NSMutableArray *recentNonces;
  * This method adds standard header fields, and then converts the response to an NSData object.
 **/
 - (NSData *)preprocessResponse:(VVHTTPMessage *)message {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     // Override me to customize the response headers
     // You'll likely want to add your own custom headers, and then return [super preprocessResponse:response]
@@ -1770,7 +1770,7 @@ static NSMutableArray *recentNonces;
  * This method adds standard header fields, and then converts the response to an NSData object.
 **/
 - (NSData *)preprocessErrorResponse:(VVHTTPMessage *)response {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     // Override me to customize the error response headers
     // You'll likely want to add your own custom headers, and then return [super preprocessErrorResponse:response]
@@ -1827,7 +1827,7 @@ static NSMutableArray *recentNonces;
         // Append the header line to the http message
         BOOL result = [request appendData:data];
         if (!result) {
-            HTTPLogWarn(@"%@[%p]: Malformed request", THIS_FILE, self);
+            VVHTTPLogWarn(@"%@[%p]: Malformed request", VV_THIS_FILE, self);
 
             [self handleInvalidRequest:data];
         } else if (![request isHeaderComplete]) {
@@ -1870,16 +1870,16 @@ static NSMutableArray *recentNonces;
                     requestContentLength = -1;
                 } else {
                     if (contentLength == nil) {
-                        HTTPLogWarn(@"%@[%p]: Method expects request body, but had no specified Content-Length",
-                                THIS_FILE, self);
+                        VVHTTPLogWarn(@"%@[%p]: Method expects request body, but had no specified Content-Length",
+                                VV_THIS_FILE, self);
 
                         [self handleInvalidRequest:nil];
                         return;
                     }
 
                     if (![NSNumber parseString:(NSString *) contentLength intoUInt64:&requestContentLength]) {
-                        HTTPLogWarn(@"%@[%p]: Unable to parse Content-Length header into a valid number",
-                                THIS_FILE, self);
+                        VVHTTPLogWarn(@"%@[%p]: Unable to parse Content-Length header into a valid number",
+                                VV_THIS_FILE, self);
 
                         [self handleInvalidRequest:nil];
                         return;
@@ -1891,16 +1891,16 @@ static NSMutableArray *recentNonces;
                     // This better be zero...
 
                     if (![NSNumber parseString:(NSString *) contentLength intoUInt64:&requestContentLength]) {
-                        HTTPLogWarn(@"%@[%p]: Unable to parse Content-Length header into a valid number",
-                                THIS_FILE, self);
+                        VVHTTPLogWarn(@"%@[%p]: Unable to parse Content-Length header into a valid number",
+                                VV_THIS_FILE, self);
 
                         [self handleInvalidRequest:nil];
                         return;
                     }
 
                     if (requestContentLength > 0) {
-                        HTTPLogWarn(@"%@[%p]: Method not expecting request body had non-zero Content-Length",
-                                THIS_FILE, self);
+                        VVHTTPLogWarn(@"%@[%p]: Method not expecting request body had non-zero Content-Length",
+                                VV_THIS_FILE, self);
 
                         [self handleInvalidRequest:nil];
                         return;
@@ -1989,7 +1989,7 @@ static NSMutableArray *recentNonces;
             requestChunkSizeReceived = 0;
 
             if (errno != 0) {
-                HTTPLogWarn(@"%@[%p]: Method expects chunk size, but received something else", THIS_FILE, self);
+                VVHTTPLogWarn(@"%@[%p]: Method expects chunk size, but received something else", VV_THIS_FILE, self);
 
                 [self handleInvalidRequest:nil];
                 return;
@@ -2043,7 +2043,7 @@ static NSMutableArray *recentNonces;
             // Just ensure it's a CRLF.
 
             if (![data isEqualToData:[GCDAsyncSocket CRLFData]]) {
-                HTTPLogWarn(@"%@[%p]: Method expects chunk trailer, but is missing", THIS_FILE, self);
+                VVHTTPLogWarn(@"%@[%p]: Method expects chunk trailer, but is missing", VV_THIS_FILE, self);
 
                 [self handleInvalidRequest:nil];
                 return;
@@ -2209,7 +2209,7 @@ static NSMutableArray *recentNonces;
  * Sent after the socket has been disconnected.
 **/
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     asyncSocket = nil;
 
@@ -2227,7 +2227,7 @@ static NSMutableArray *recentNonces;
  * This informs us that the response object has generated more data that we may be able to send.
 **/
 - (void)responseHasAvailableData:(NSObject <VVHTTPResponse> *)sender {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     // We always dispatch this asynchronously onto our connectionQueue,
     // even if the connectionQueue is the current queue.
@@ -2239,7 +2239,7 @@ static NSMutableArray *recentNonces;
         @autoreleasepool {
 
             if (sender != httpResponse) {
-                HTTPLogWarn(@"%@[%p]: %@ - Sender is not current httpResponse", THIS_FILE, self, THIS_METHOD);
+                VVHTTPLogWarn(@"%@[%p]: %@ - Sender is not current httpResponse", VV_THIS_FILE, self, VV_THIS_METHOD);
                 return;
             }
 
@@ -2264,7 +2264,7 @@ static NSMutableArray *recentNonces;
  * and it will be unable to fullfill the request.
 **/
 - (void)responseDidAbort:(NSObject <VVHTTPResponse> *)sender {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     // We always dispatch this asynchronously onto our connectionQueue,
     // even if the connectionQueue is the current queue.
@@ -2276,7 +2276,7 @@ static NSMutableArray *recentNonces;
         @autoreleasepool {
 
             if (sender != httpResponse) {
-                HTTPLogWarn(@"%@[%p]: %@ - Sender is not current httpResponse", THIS_FILE, self, THIS_METHOD);
+                VVHTTPLogWarn(@"%@[%p]: %@ - Sender is not current httpResponse", VV_THIS_FILE, self, VV_THIS_METHOD);
                 return;
             }
 
@@ -2295,7 +2295,7 @@ static NSMutableArray *recentNonces;
  * That is, it will be called after completion of each response.
 **/
 - (void)finishResponse {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     // Override me if you want to perform any custom actions after a response has been fully sent.
     // This is the place to release memory or resources associated with the last request.
@@ -2316,7 +2316,7 @@ static NSMutableArray *recentNonces;
  * It determines whether the connection should stay open and handle another request.
 **/
 - (BOOL)shouldDie {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     // Override me if you have any need to force close the connection.
     // You may do so by simply returning YES.
@@ -2351,7 +2351,7 @@ static NSMutableArray *recentNonces;
 }
 
 - (void)die {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     // Override me if you want to perform any custom actions when a connection is closed.
     // Then call [super die] when you're done.

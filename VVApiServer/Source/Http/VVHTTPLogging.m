@@ -8,7 +8,7 @@
 
 @implementation VVHTTPLogging
 
-+ (void)log:(int)level format:(NSString *)format, ... {
++ (void)vv_log:(int)level format:(NSString *)format, ... {
 
 }
 

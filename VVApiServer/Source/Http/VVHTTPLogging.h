@@ -1,39 +1,39 @@
 
 #import <Foundation/Foundation.h>
 
-#define HTTP_Logging(level, frmt, ...) [HTTPLogging log:level format:frmt, ##__VA_ARGS__]
+#define VV_HTTP_Logging(level, frmt, ...) [HTTPLogging log:level format:frmt, ##__VA_ARGS__]
 
-#define THIS_FILE   self
-#define THIS_METHOD NSStringFromSelector(_cmd)
+#define VV_THIS_FILE   self
+#define VV_THIS_METHOD NSStringFromSelector(_cmd)
 
-#define HTTP_LOG_FLAG_ERROR   (1 << 0)
-#define HTTP_LOG_FLAG_WARN    (1 << 1)
-#define HTTP_LOG_FLAG_INFO    (1 << 2)
-#define HTTP_LOG_FLAG_VERBOSE (1 << 3)
-#define HTTP_LOG_FLAG_TRACE   (1 << 4)
+#define VV_HTTP_LOG_FLAG_ERROR   (1 << 0)
+#define VV_HTTP_LOG_FLAG_WARN    (1 << 1)
+#define VV_HTTP_LOG_FLAG_INFO    (1 << 2)
+#define VV_HTTP_LOG_FLAG_VERBOSE (1 << 3)
+#define VV_HTTP_LOG_FLAG_TRACE   (1 << 4)
 
-#define HTTP_LOG_LEVEL_OFF     0
-#define HTTP_LOG_LEVEL_ERROR   (HTTP_LOG_LEVEL_OFF   | HTTP_LOG_FLAG_ERROR)
-#define HTTP_LOG_LEVEL_WARN    (HTTP_LOG_LEVEL_ERROR | HTTP_LOG_FLAG_WARN)
-#define HTTP_LOG_LEVEL_INFO    (HTTP_LOG_LEVEL_WARN  | HTTP_LOG_FLAG_INFO)
-#define HTTP_LOG_LEVEL_VERBOSE (HTTP_LOG_LEVEL_INFO  | HTTP_LOG_FLAG_VERBOSE)
+#define VV_HTTP_LOG_LEVEL_OFF     0
+#define VV_HTTP_LOG_LEVEL_ERROR   (VV_HTTP_LOG_LEVEL_OFF   | VV_HTTP_LOG_FLAG_ERROR)
+#define VV_HTTP_LOG_LEVEL_WARN    (VV_HTTP_LOG_LEVEL_ERROR | VV_HTTP_LOG_FLAG_WARN)
+#define VV_HTTP_LOG_LEVEL_INFO    (VV_HTTP_LOG_LEVEL_WARN  | VV_HTTP_LOG_FLAG_INFO)
+#define VV_HTTP_LOG_LEVEL_VERBOSE (VV_HTTP_LOG_LEVEL_INFO  | VV_HTTP_LOG_FLAG_VERBOSE)
 
-#define HTTP_LOG_ERROR   (httpLogLevel & HTTP_LOG_FLAG_ERROR)
-#define HTTP_LOG_WARN    (httpLogLevel & HTTP_LOG_FLAG_WARN)
-#define HTTP_LOG_INFO    (httpLogLevel & HTTP_LOG_FLAG_INFO)
-#define HTTP_LOG_VERBOSE (httpLogLevel & HTTP_LOG_FLAG_VERBOSE)
-#define HTTP_LOG_TRACE   (httpLogLevel & HTTP_LOG_FLAG_TRACE)
+#define VV_HTTP_LOG_ERROR   (httpLogLevel & VV_HTTP_LOG_FLAG_ERROR)
+#define VV_HTTP_LOG_WARN    (httpLogLevel & VV_HTTP_LOG_FLAG_WARN)
+#define VV_HTTP_LOG_INFO    (httpLogLevel & VV_HTTP_LOG_FLAG_INFO)
+#define VV_HTTP_LOG_VERBOSE (httpLogLevel & VV_HTTP_LOG_FLAG_VERBOSE)
+#define VV_HTTP_LOG_TRACE   (httpLogLevel & VV_HTTP_LOG_FLAG_TRACE)
 
-#define HTTPLogError(frmt, ...)    HTTP_Logging(HTTP_LOG_ERROR,   frmt, ##__VA_ARGS__)
-#define HTTPLogWarn(frmt, ...)     HTTP_Logging(HTTP_LOG_WARN,    frmt, ##__VA_ARGS__)
-#define HTTPLogInfo(frmt, ...)     HTTP_Logging(HTTP_LOG_INFO,    frmt, ##__VA_ARGS__)
-#define HTTPLogVerbose(frmt, ...)  HTTP_Logging(HTTP_LOG_VERBOSE, frmt, ##__VA_ARGS__)
-#define HTTPLogTrace()             HTTP_Logging(HTTP_LOG_TRACE,   @"%@ : %@", THIS_FILE, THIS_METHOD)
-#define HTTPLogTrace2(frmt, ...)   HTTP_Logging(HTTP_LOG_TRACE,   frmt, ##__VA_ARGS__)
+#define VVHTTPLogError(frmt, ...)    VV_HTTP_Logging(VV_HTTP_LOG_ERROR,   frmt, ##__VA_ARGS__)
+#define VVHTTPLogWarn(frmt, ...)     VV_HTTP_Logging(VV_HTTP_LOG_WARN,    frmt, ##__VA_ARGS__)
+#define VVHTTPLogInfo(frmt, ...)     VV_HTTP_Logging(VV_HTTP_LOG_INFO,    frmt, ##__VA_ARGS__)
+#define VVHTTPLogVerbose(frmt, ...)  VV_HTTP_Logging(VV_HTTP_LOG_VERBOSE, frmt, ##__VA_ARGS__)
+#define VVHTTPLogTrace()             VV_HTTP_Logging(VV_HTTP_LOG_TRACE,   @"%@ : %@", VV_THIS_FILE, VV_THIS_METHOD)
+#define VVHTTPLogTrace2(frmt, ...)   VV_HTTP_Logging(VV_HTTP_LOG_TRACE,   frmt, ##__VA_ARGS__)
 
 
 @interface VVHTTPLogging : NSObject
 
-+ (void)log:(int)level format:(NSString *)format, ...;
++ (void)vv_log:(int)level format:(NSString *)format, ...;
 
 @end

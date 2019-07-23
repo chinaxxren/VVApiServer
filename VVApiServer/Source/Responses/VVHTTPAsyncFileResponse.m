@@ -11,7 +11,7 @@
 
 // Log levels : off, error, warn, info, verbose
 // Other flags: trace
-static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
+static const int httpLogLevel = VV_HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 
 #define NULL_FD  -1
 
@@ -36,21 +36,21 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 
 - (id)initWithFilePath:(NSString *)fpath forConnection:(VVHTTPConnection *)parent {
     if ((self = [super init])) {
-        HTTPLogTrace();
+        VVHTTPLogTrace();
 
         connection = parent; // Parents retain children, children do NOT retain parents
 
         fileFD = NULL_FD;
         filePath = [fpath copy];
         if (filePath == nil) {
-            HTTPLogWarn(@"%@: Init failed - Nil filePath", THIS_FILE);
+            VVHTTPLogWarn(@"%@: Init failed - Nil filePath", VV_THIS_FILE);
 
             return nil;
         }
 
         NSDictionary *fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:NULL];
         if (fileAttributes == nil) {
-            HTTPLogWarn(@"%@: Init failed - Unable to get file attributes. filePath: %@", THIS_FILE, filePath);
+            VVHTTPLogWarn(@"%@: Init failed - Unable to get file attributes. filePath: %@", VV_THIS_FILE, filePath);
 
             return nil;
         }
@@ -67,7 +67,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 }
 
 - (void)abort {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     [connection responseDidAbort:self];
     aborted = YES;
@@ -93,7 +93,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 
 - (void)pauseReadSource {
     if (!readSourceSuspended) {
-        HTTPLogVerbose(@"%@[%p]: Suspending readSource", THIS_FILE, self);
+        VVHTTPLogVerbose(@"%@[%p]: Suspending readSource", VV_THIS_FILE, self);
 
         readSourceSuspended = YES;
         dispatch_suspend(readSource);
@@ -102,7 +102,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 
 - (void)resumeReadSource {
     if (readSourceSuspended) {
-        HTTPLogVerbose(@"%@[%p]: Resuming readSource", THIS_FILE, self);
+        VVHTTPLogVerbose(@"%@[%p]: Resuming readSource", VV_THIS_FILE, self);
 
         readSourceSuspended = NO;
         dispatch_resume(readSource);
@@ -110,7 +110,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 }
 
 - (void)cancelReadSource {
-    HTTPLogVerbose(@"%@[%p]: Canceling readSource", THIS_FILE, self);
+    VVHTTPLogVerbose(@"%@[%p]: Canceling readSource", VV_THIS_FILE, self);
 
     dispatch_source_cancel(readSource);
 
@@ -124,16 +124,16 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 }
 
 - (BOOL)openFileAndSetupReadSource {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     fileFD = open([filePath UTF8String], (O_RDONLY | O_NONBLOCK));
     if (fileFD == NULL_FD) {
-        HTTPLogError(@"%@: Unable to open file. filePath: %@", THIS_FILE, filePath);
+        VVHTTPLogError(@"%@: Unable to open file. filePath: %@", VV_THIS_FILE, filePath);
 
         return NO;
     }
 
-    HTTPLogVerbose(@"%@[%p]: Open fd[%i] -> %@", THIS_FILE, self, fileFD, filePath);
+    VVHTTPLogVerbose(@"%@[%p]: Open fd[%i] -> %@", VV_THIS_FILE, self, fileFD, filePath);
 
     readQueue = dispatch_queue_create("VVHTTPAsyncFileResponse", NULL);
     readSource = dispatch_source_create(DISPATCH_SOURCE_TYPE_READ, fileFD, 0, readQueue);
@@ -141,7 +141,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 
     dispatch_source_set_event_handler(readSource, ^{
 
-        HTTPLogTrace2(@"%@: eventBlock - fd[%i]", THIS_FILE, fileFD);
+        VVHTTPLogTrace2(@"%@: eventBlock - fd[%i]", VV_THIS_FILE, fileFD);
 
         // Determine how much data we should read.
         //
@@ -172,7 +172,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
             readBuffer = reallocf(readBuffer, (size_t) bytesToRead);
 
             if (readBuffer == NULL) {
-                HTTPLogError(@"%@[%p]: Unable to allocate buffer", THIS_FILE, self);
+                VVHTTPLogError(@"%@[%p]: Unable to allocate buffer", VV_THIS_FILE, self);
 
                 [self pauseReadSource];
                 [self abort];
@@ -183,24 +183,24 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 
         // Perform the read
 
-        HTTPLogVerbose(@"%@[%p]: Attempting to read %lu bytes from file", THIS_FILE, self, (unsigned long) bytesToRead);
+        VVHTTPLogVerbose(@"%@[%p]: Attempting to read %lu bytes from file", VV_THIS_FILE, self, (unsigned long) bytesToRead);
 
         ssize_t result = read(fileFD, readBuffer + readBufferOffset, (size_t) bytesToRead);
 
         // Check the results
         if (result < 0) {
-            HTTPLogError(@"%@: Error(%i) reading file(%@)", THIS_FILE, errno, filePath);
+            VVHTTPLogError(@"%@: Error(%i) reading file(%@)", VV_THIS_FILE, errno, filePath);
 
             [self pauseReadSource];
             [self abort];
         } else if (result == 0) {
-            HTTPLogError(@"%@: Read EOF on file(%@)", THIS_FILE, filePath);
+            VVHTTPLogError(@"%@: Read EOF on file(%@)", VV_THIS_FILE, filePath);
 
             [self pauseReadSource];
             [self abort];
         } else // (result > 0)
         {
-            HTTPLogVerbose(@"%@[%p]: Read %lu bytes from file", THIS_FILE, self, (unsigned long) result);
+            VVHTTPLogVerbose(@"%@[%p]: Read %lu bytes from file", VV_THIS_FILE, self, (unsigned long) result);
 
             readOffset += result;
             readBufferOffset += result;
@@ -219,7 +219,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
         //
         // Note: You access self if you reference an iVar.
 
-        HTTPLogTrace2(@"%@: cancelBlock - Close fd[%i]", THIS_FILE, theFileFD);
+        VVHTTPLogTrace2(@"%@: cancelBlock - Close fd[%i]", VV_THIS_FILE, theFileFD);
         close(theFileFD);
     });
 
@@ -245,19 +245,19 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 }
 
 - (UInt64)contentLength {
-    HTTPLogTrace2(@"%@[%p]: contentLength - %llu", THIS_FILE, self, fileLength);
+    VVHTTPLogTrace2(@"%@[%p]: contentLength - %llu", VV_THIS_FILE, self, fileLength);
 
     return fileLength;
 }
 
 - (UInt64)offset {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     return fileOffset;
 }
 
 - (void)setOffset:(UInt64)offset {
-    HTTPLogTrace2(@"%@[%p]: setOffset:%llu", THIS_FILE, self, offset);
+    VVHTTPLogTrace2(@"%@[%p]: setOffset:%llu", VV_THIS_FILE, self, offset);
 
     if (![self openFileIfNeeded]) {
         // File opening failed,
@@ -270,19 +270,19 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 
     off_t result = lseek(fileFD, (off_t) offset, SEEK_SET);
     if (result == -1) {
-        HTTPLogError(@"%@[%p]: lseek failed - errno(%i) filePath(%@)", THIS_FILE, self, errno, filePath);
+        VVHTTPLogError(@"%@[%p]: lseek failed - errno(%i) filePath(%@)", VV_THIS_FILE, self, errno, filePath);
 
         [self abort];
     }
 }
 
 - (NSData *)readDataOfLength:(NSUInteger)length {
-    HTTPLogTrace2(@"%@[%p]: readDataOfLength:%lu", THIS_FILE, self, (unsigned long) length);
+    VVHTTPLogTrace2(@"%@[%p]: readDataOfLength:%lu", VV_THIS_FILE, self, (unsigned long) length);
 
     if (data) {
         NSUInteger dataLength = [data length];
 
-        HTTPLogVerbose(@"%@[%p]: Returning data of length %lu", THIS_FILE, self, (unsigned long) dataLength);
+        VVHTTPLogVerbose(@"%@[%p]: Returning data of length %lu", VV_THIS_FILE, self, (unsigned long) dataLength);
 
         fileOffset += dataLength;
 
@@ -312,7 +312,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 - (BOOL)isDone {
     BOOL result = (fileOffset == fileLength);
 
-    HTTPLogTrace2(@"%@[%p]: isDone - %@", THIS_FILE, self, (result ? @"YES" : @"NO"));
+    VVHTTPLogTrace2(@"%@[%p]: isDone - %@", VV_THIS_FILE, self, (result ? @"YES" : @"NO"));
 
     return result;
 }
@@ -322,13 +322,13 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 }
 
 - (BOOL)isAsynchronous {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     return YES;
 }
 
 - (void)connectionDidClose {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     if (fileFD != NULL_FD) {
         dispatch_sync(readQueue, ^{
@@ -346,7 +346,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 }
 
 - (void)dealloc {
-    HTTPLogTrace();
+    VVHTTPLogTrace();
 
     if (readBuffer)
         free(readBuffer);
