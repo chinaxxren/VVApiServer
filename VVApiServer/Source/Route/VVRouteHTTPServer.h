@@ -8,7 +8,7 @@ typedef void (^VVRequestHandler)(VVRouteRequest *request, VVRouteResponse *respo
 
 @interface VVRouteHTTPServer : VVHTTPServer
 
-@property(nonatomic, readonly) NSDictionary *defaultHeaderDict;
+@property(nonatomic, readonly) NSDictionary *_defaultHeaderDict;
 
 // Specifies headers that will be set on every response.
 // These headers can be overridden by RouteResponses.

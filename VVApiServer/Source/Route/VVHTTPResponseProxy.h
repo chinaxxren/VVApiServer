@@ -5,8 +5,8 @@
 // without needing to create subclasses of every response.
 @interface VVHTTPResponseProxy : NSObject <VVHTTPResponse>
 
-@property(nonatomic) NSObject <VVHTTPResponse> *response;
-@property(nonatomic) NSInteger status;
+@property(nonatomic, assign) NSObject <VVHTTPResponse> *response;
+@property(nonatomic, assign) NSInteger status;
 
 - (NSInteger)customStatus;
 

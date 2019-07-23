@@ -1,11 +1,12 @@
 #import "VVRouteConnection.h"
+
 #import "VVRouteHTTPServer.h"
 #import "VVHTTPMessage.h"
 #import "VVHTTPResponseProxy.h"
 
 @implementation VVRouteConnection {
-    __unsafe_unretained VVRouteHTTPServer *http;
-    NSDictionary *headers;
+    __weak VVRouteHTTPServer *_httpServer;
+    NSDictionary *_headerDict;
 }
 
 - (id)initWithAsyncSocket:(GCDAsyncSocket *)newSocket configuration:(HTTPConfig *)aConfig {
@@ -13,14 +14,13 @@
         NSAssert([config.server isKindOfClass:[VVRouteHTTPServer class]],
                 @"A VVRouteConnection is being used with a server that is not a VVRouteHTTPServer");
 
-        http = (VVRouteHTTPServer *) config.server;
+        _httpServer = (VVRouteHTTPServer *) config.server;
     }
     return self;
 }
 
 - (BOOL)supportsMethod:(NSString *)method atPath:(NSString *)path {
-
-    if ([http supportsMethod:method])
+    if ([_httpServer supportsMethod:method])
         return YES;
 
     return [super supportsMethod:method atPath:path];
@@ -46,7 +46,7 @@
     NSURL *url = [request url];
     NSString *query = nil;
     NSDictionary *params = [NSDictionary dictionary];
-    headers = nil;
+    _headerDict = nil;
 
     if (url) {
         path = [url path]; // Strip the query string from the path
@@ -56,18 +56,18 @@
         }
     }
 
-    VVRouteResponse *response = [http routeMethod:method withPath:path parameters:params request:request connection:self];
+    VVRouteResponse *response = [_httpServer routeMethod:method withPath:path parameters:params request:request connection:self];
     if (response != nil) {
-        headers = response.headers;
+        _headerDict = response.headers;
         return response.proxiedResponse;
     }
 
     // Set a MIME type for static files if possible
     NSObject <VVHTTPResponse> *staticResponse = [super httpResponseForMethod:method URI:path];
     if (staticResponse && [staticResponse respondsToSelector:@selector(filePath)]) {
-        NSString *mimeType = [http mimeTypeForPath:[staticResponse performSelector:@selector(filePath)]];
+        NSString *mimeType = [_httpServer mimeTypeForPath:[staticResponse performSelector:@selector(filePath)]];
         if (mimeType) {
-            headers = @{@"Content-Type": mimeType};
+            _headerDict = @{@"Content-Type": mimeType};
         }
     }
 
@@ -89,12 +89,12 @@
 }
 
 - (void)setHeadersForResponse:(VVHTTPMessage *)response isError:(BOOL)isError {
-    [http.defaultHeaderDict enumerateKeysAndObjectsUsingBlock:^(id field, id value, BOOL *stop) {
+    [_httpServer._defaultHeaderDict enumerateKeysAndObjectsUsingBlock:^(id field, id value, BOOL *stop) {
         [response setHeaderField:field value:value];
     }];
 
-    if (headers && !isError) {
-        [headers enumerateKeysAndObjectsUsingBlock:^(id field, id value, BOOL *stop) {
+    if (_headerDict && !isError) {
+        [_headerDict enumerateKeysAndObjectsUsingBlock:^(id field, id value, BOOL *stop) {
             [response setHeaderField:field value:value];
         }];
     }
@@ -121,8 +121,8 @@
     __block BOOL shouldDie = [super shouldDie];
 
     // Allow custom headers to determine if the connection should be closed
-    if (!shouldDie && headers) {
-        [headers enumerateKeysAndObjectsUsingBlock:^(id field, id value, BOOL *stop) {
+    if (!shouldDie && _headerDict) {
+        [_headerDict enumerateKeysAndObjectsUsingBlock:^(id field, id value, BOOL *stop) {
             if ([field caseInsensitiveCompare:@"connection"] == NSOrderedSame) {
                 if ([value caseInsensitiveCompare:@"close"] == NSOrderedSame) {
                     shouldDie = YES;

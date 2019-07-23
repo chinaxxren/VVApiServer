@@ -1,46 +1,45 @@
 #import "VVRouteRequest.h"
+
 #import "VVHTTPMessage.h"
 
 @implementation VVRouteRequest {
-    VVHTTPMessage *message;
+    VVHTTPMessage *_message;
 }
-
-@synthesize params;
 
 - (id)initWithHTTPMessage:(VVHTTPMessage *)msg parameters:(NSDictionary *)parameters {
     if (self = [super init]) {
-        params = parameters;
-        message = msg;
+        _params = parameters;
+        _message = msg;
     }
     return self;
 }
 
 - (NSDictionary *)headers {
-    return [message allHeaderFields];
+    return [_message allHeaderFields];
 }
 
 - (NSString *)header:(NSString *)field {
-    return [message headerField:field];
+    return [_message headerField:field];
 }
 
 - (id)param:(NSString *)name {
-    return params[name];
+    return _params[name];
 }
 
 - (NSString *)method {
-    return [message method];
+    return [_message method];
 }
 
 - (NSURL *)url {
-    return [message url];
+    return [_message url];
 }
 
 - (NSData *)body {
-    return [message body];
+    return [_message body];
 }
 
 - (NSString *)description {
-    NSData *data = [message messageData];
+    NSData *data = [_message messageData];
     return [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
 }
 

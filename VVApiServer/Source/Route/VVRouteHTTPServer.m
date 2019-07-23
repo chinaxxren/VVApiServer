@@ -4,19 +4,19 @@
 #import "VVRoute.h"
 
 @implementation VVRouteHTTPServer {
-    NSMutableDictionary *routeDict;
-    NSMutableDictionary *defaultHeaderDict;
-    NSMutableDictionary *mimeTypeDict;
-    dispatch_queue_t routeQueue;
+    NSMutableDictionary *_routeDict;
+    NSMutableDictionary *_defaultHeaderDict;
+    NSMutableDictionary *_mimeTypeDict;
+    dispatch_queue_t _routeQueue;
 }
 
-@synthesize defaultHeaderDict;
+@synthesize _defaultHeaderDict;
 
 - (id)init {
     if (self = [super init]) {
         connectionClass = [VVRouteConnection class];
-        routeDict = [[NSMutableDictionary alloc] init];
-        defaultHeaderDict = [[NSMutableDictionary alloc] init];
+        _routeDict = [[NSMutableDictionary alloc] init];
+        _defaultHeaderDict = [[NSMutableDictionary alloc] init];
 
         [self setupMIMETypes];
     }
@@ -25,26 +25,26 @@
 
 - (void)setDefaultHeaders:(NSDictionary *)headers {
     if (headers) {
-        defaultHeaderDict = [headers mutableCopy];
+        _defaultHeaderDict = [headers mutableCopy];
     } else {
-        defaultHeaderDict = [[NSMutableDictionary alloc] init];
+        _defaultHeaderDict = [[NSMutableDictionary alloc] init];
     }
 }
 
 - (void)setDefaultHeader:(NSString *)field value:(NSString *)value {
-    defaultHeaderDict[field] = value;
+    _defaultHeaderDict[field] = value;
 }
 
 - (dispatch_queue_t)routeQueue {
-    return routeQueue;
+    return _routeQueue;
 }
 
 - (void)setRouteQueue:(dispatch_queue_t)queue {
-    routeQueue = queue;
+    _routeQueue = queue;
 }
 
 - (NSDictionary *)mimeTypes {
-    return mimeTypeDict;
+    return _mimeTypeDict;
 }
 
 - (void)setMIMETypes:(NSDictionary *)types {
@@ -55,7 +55,7 @@
         newTypes = [[NSMutableDictionary alloc] init];
     }
 
-    mimeTypeDict = newTypes;
+    _mimeTypeDict = newTypes;
 }
 
 - (void)setMIMEType:(NSString *)theType forExtension:(NSString *)ext {
@@ -63,7 +63,7 @@
         return;
     }
 
-    mimeTypeDict[ext] = theType;
+    _mimeTypeDict[ext] = theType;
 }
 
 - (NSString *)mimeTypeForPath:(NSString *)path {
@@ -71,7 +71,7 @@
     if (!ext || [ext length] < 1)
         return nil;
 
-    return mimeTypeDict[ext];
+    return _mimeTypeDict[ext];
 }
 
 - (void)get:(NSString *)path withHandler:(VVRequestHandler)handler {
@@ -107,10 +107,10 @@
 
 - (void)addRoute:(VVRoute *)route forMethod:(NSString *)method {
     method = [method uppercaseString];
-    NSMutableArray *methodRoutes = routeDict[method];
+    NSMutableArray *methodRoutes = _routeDict[method];
     if (!methodRoutes) {
         methodRoutes = [NSMutableArray array];
-        routeDict[method] = methodRoutes;
+        _routeDict[method] = methodRoutes;
     }
 
     [methodRoutes addObject:route];
@@ -173,7 +173,7 @@
 }
 
 - (BOOL)supportsMethod:(NSString *)method {
-    return routeDict[method] != nil;
+    return _routeDict[method] != nil;
 }
 
 - (void)handleRoute:(VVRoute *)route withRequest:(VVRouteRequest *)request response:(VVRouteResponse *)response {
@@ -192,7 +192,7 @@
                       parameters:(NSDictionary *)params
                          request:(VVHTTPMessage *)httpMessage
                       connection:(VVHTTPConnection *)connection {
-    NSMutableArray *methodRoutes = routeDict[method];
+    NSMutableArray *methodRoutes = _routeDict[method];
     if (methodRoutes == nil)
         return nil;
 
@@ -242,11 +242,11 @@
 
         VVRouteRequest *request = [[VVRouteRequest alloc] initWithHTTPMessage:httpMessage parameters:params];
         VVRouteResponse *response = [[VVRouteResponse alloc] initWithConnection:connection];
-        if (!routeQueue) {
+        if (!_routeQueue) {
             [self handleRoute:route withRequest:request response:response];
         } else {
             // Process the route on the specified queue
-            dispatch_sync(routeQueue, ^{
+            dispatch_sync(_routeQueue, ^{
                 @autoreleasepool {
                     [self handleRoute:route withRequest:request response:response];
                 }
@@ -259,7 +259,7 @@
 }
 
 - (void)setupMIMETypes {
-    mimeTypeDict = [@{@"js": @"application/x-javascript",
+    _mimeTypeDict = [@{@"js": @"application/x-javascript",
             @"gif": @"image/gif",
             @"jpg": @"image/jpeg",
             @"jpeg": @"image/jpeg",

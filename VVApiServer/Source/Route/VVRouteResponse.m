@@ -7,48 +7,45 @@
 #import "VVHTTPResponseProxy.h"
 
 @implementation VVRouteResponse {
-    NSMutableDictionary *headers;
-    VVHTTPResponseProxy *proxy;
+    NSMutableDictionary *_headers;
+    VVHTTPResponseProxy *_proxy;
 }
-
-@synthesize connection;
-@synthesize headers;
 
 - (id)initWithConnection:(VVHTTPConnection *)theConnection {
     if (self = [super init]) {
-        connection = theConnection;
-        headers = [[NSMutableDictionary alloc] init];
-        proxy = [[VVHTTPResponseProxy alloc] init];
+        _connection = theConnection;
+        _headers = [[NSMutableDictionary alloc] init];
+        _proxy = [[VVHTTPResponseProxy alloc] init];
     }
     return self;
 }
 
 - (NSObject <VVHTTPResponse> *)response {
-    return proxy.response;
+    return _proxy.response;
 }
 
 - (void)setResponse:(NSObject <VVHTTPResponse> *)response {
-    proxy.response = response;
+    _proxy.response = response;
 }
 
 - (NSObject <VVHTTPResponse> *)proxiedResponse {
-    if (proxy.response != nil || proxy.customStatus != 0 || [headers count] > 0) {
-        return proxy;
+    if (_proxy.response != nil || _proxy.customStatus != 0 || [_headers count] > 0) {
+        return _proxy;
     }
 
     return nil;
 }
 
 - (NSInteger)statusCode {
-    return proxy.status;
+    return _proxy.status;
 }
 
 - (void)setStatusCode:(NSInteger)status {
-    proxy.status = status;
+    _proxy.status = status;
 }
 
 - (void)setHeader:(NSString *)field value:(NSString *)value {
-    headers[field] = value;
+    _headers[field] = value;
 }
 
 - (void)respondWithString:(NSString *)string {
