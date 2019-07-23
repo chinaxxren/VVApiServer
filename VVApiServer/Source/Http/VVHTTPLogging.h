@@ -1,7 +1,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define VV_HTTP_Logging(level, frmt, ...) [HTTPLogging vv_log:level format:frmt, ##__VA_ARGS__]
+#define VV_HTTP_Logging(level, frmt, ...) [VVHTTPLogging vv_log:level format:frmt, ##__VA_ARGS__]
 
 #define VV_THIS_FILE   self
 #define VV_THIS_METHOD NSStringFromSelector(_cmd)
@@ -28,8 +28,9 @@
 #define VVHTTPLogWarn(frmt, ...)     VV_HTTP_Logging(VV_HTTP_LOG_WARN,    frmt, ##__VA_ARGS__)
 #define VVHTTPLogInfo(frmt, ...)     VV_HTTP_Logging(VV_HTTP_LOG_INFO,    frmt, ##__VA_ARGS__)
 #define VVHTTPLogVerbose(frmt, ...)  VV_HTTP_Logging(VV_HTTP_LOG_VERBOSE, frmt, ##__VA_ARGS__)
-#define VVHTTPLogTrace()             VV_HTTP_Logging(VV_HTTP_LOG_TRACE,   @"%@ : %@", VV_THIS_FILE, VV_THIS_METHOD)
 #define VVHTTPLogTrace2(frmt, ...)   VV_HTTP_Logging(VV_HTTP_LOG_TRACE,   frmt, ##__VA_ARGS__)
+
+#define VVHTTPLogTrace()             VV_HTTP_Logging(VV_HTTP_LOG_TRACE,   @"%@ : %@", VV_THIS_FILE, VV_THIS_METHOD)
 
 
 @interface VVHTTPLogging : NSObject
