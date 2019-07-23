@@ -1,8 +1,8 @@
 #import <Foundation/Foundation.h>
-#import "HTTPResponse.h"
+#import "VVHTTPResponse.h"
 
 
-@interface HTTPDataResponse : NSObject <HTTPResponse> {
+@interface VVHTTPDataResponse : NSObject <VVHTTPResponse> {
     NSUInteger offset;
     NSData *data;
 }

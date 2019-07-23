@@ -1,6 +1,6 @@
 #import "VVRoutingConnection.h"
 #import "VVRoutingHTTPServer.h"
-#import "HTTPMessage.h"
+#import "VVHTTPMessage.h"
 #import "VVHTTPResponseProxy.h"
 
 @implementation VVRoutingConnection {
@@ -42,7 +42,7 @@
     }
 }
 
-- (NSObject <HTTPResponse> *)httpResponseForMethod:(NSString *)method URI:(NSString *)path {
+- (NSObject <VVHTTPResponse> *)httpResponseForMethod:(NSString *)method URI:(NSString *)path {
     NSURL *url = [request url];
     NSString *query = nil;
     NSDictionary *params = [NSDictionary dictionary];
@@ -63,7 +63,7 @@
     }
 
     // Set a MIME type for static files if possible
-    NSObject <HTTPResponse> *staticResponse = [super httpResponseForMethod:method URI:path];
+    NSObject <VVHTTPResponse> *staticResponse = [super httpResponseForMethod:method URI:path];
     if (staticResponse && [staticResponse respondsToSelector:@selector(filePath)]) {
         NSString *mimeType = [http mimeTypeForPath:[staticResponse performSelector:@selector(filePath)]];
         if (mimeType) {
@@ -74,21 +74,21 @@
     return staticResponse;
 }
 
-- (void)responseHasAvailableData:(NSObject <HTTPResponse> *)sender {
+- (void)responseHasAvailableData:(NSObject <VVHTTPResponse> *)sender {
     VVHTTPResponseProxy *proxy = (VVHTTPResponseProxy *) httpResponse;
     if (proxy.response == sender) {
         [super responseHasAvailableData:httpResponse];
     }
 }
 
-- (void)responseDidAbort:(NSObject <HTTPResponse> *)sender {
+- (void)responseDidAbort:(NSObject <VVHTTPResponse> *)sender {
     VVHTTPResponseProxy *proxy = (VVHTTPResponseProxy *) httpResponse;
     if (proxy.response == sender) {
         [super responseDidAbort:httpResponse];
     }
 }
 
-- (void)setHeadersForResponse:(HTTPMessage *)response isError:(BOOL)isError {
+- (void)setHeadersForResponse:(VVHTTPMessage *)response isError:(BOOL)isError {
     [http.defaultHeaders enumerateKeysAndObjectsUsingBlock:^(id field, id value, BOOL *stop) {
         [response setHeaderField:field value:value];
     }];
@@ -107,12 +107,12 @@
     }
 }
 
-- (NSData *)preprocessResponse:(HTTPMessage *)response {
+- (NSData *)preprocessResponse:(VVHTTPMessage *)response {
     [self setHeadersForResponse:response isError:NO];
     return [super preprocessResponse:response];
 }
 
-- (NSData *)preprocessErrorResponse:(HTTPMessage *)response {
+- (NSData *)preprocessErrorResponse:(VVHTTPMessage *)response {
     [self setHeadersForResponse:response isError:YES];
     return [super preprocessErrorResponse:response];
 }

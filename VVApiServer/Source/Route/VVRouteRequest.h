@@ -1,13 +1,13 @@
 #import <Foundation/Foundation.h>
 
-@class HTTPMessage;
+@class VVHTTPMessage;
 
 @interface VVRouteRequest : NSObject
 
 @property(nonatomic, readonly) NSDictionary *headers;
 @property(nonatomic, readonly) NSDictionary *params;
 
-- (id)initWithHTTPMessage:(HTTPMessage *)msg parameters:(NSDictionary *)params;
+- (id)initWithHTTPMessage:(VVHTTPMessage *)msg parameters:(NSDictionary *)params;
 
 - (NSString *)header:(NSString *)field;
 

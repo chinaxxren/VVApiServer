@@ -23,7 +23,7 @@
     return status;
 }
 
-// Implement the required HTTPResponse methods
+// Implement the required VVHTTPResponse methods
 - (UInt64)contentLength {
     if (response) {
         return [response contentLength];

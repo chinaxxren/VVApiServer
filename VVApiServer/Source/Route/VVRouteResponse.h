@@ -1,18 +1,18 @@
 #import <Foundation/Foundation.h>
-#import "HTTPResponse.h"
+#import "VVHTTPResponse.h"
 
-@class HTTPConnection;
+@class VVHTTPConnection;
 @class VVHTTPResponseProxy;
 
 @interface VVRouteResponse : NSObject
 
-@property(nonatomic, assign, readonly) HTTPConnection *connection;
+@property(nonatomic, assign, readonly) VVHTTPConnection *connection;
 @property(nonatomic, readonly) NSDictionary *headers;
-@property(nonatomic, strong) NSObject <HTTPResponse> *response;
-@property(nonatomic, readonly) NSObject <HTTPResponse> *proxiedResponse;
+@property(nonatomic, strong) NSObject <VVHTTPResponse> *response;
+@property(nonatomic, readonly) NSObject <VVHTTPResponse> *proxiedResponse;
 @property(nonatomic) NSInteger statusCode;
 
-- (id)initWithConnection:(HTTPConnection *)theConnection;
+- (id)initWithConnection:(VVHTTPConnection *)theConnection;
 
 - (void)setHeader:(NSString *)field value:(NSString *)value;
 

@@ -1,8 +1,8 @@
 #import <Foundation/Foundation.h>
-#import "HTTPConnection.h"
+#import "VVHTTPConnection.h"
 
 @class VVRoutingHTTPServer;
 
-@interface VVRoutingConnection : HTTPConnection
+@interface VVRoutingConnection : VVHTTPConnection
 
 @end

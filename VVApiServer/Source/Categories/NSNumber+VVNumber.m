@@ -1,7 +1,7 @@
-#import "NSNumber+DDNumber.h"
+#import "NSNumber+VVNumber.h"
 
 
-@implementation NSNumber (DDNumber)
+@implementation NSNumber (VVNumber)
 
 + (BOOL)parseString:(NSString *)str intoSInt64:(SInt64 *)pNum {
     if (str == nil) {

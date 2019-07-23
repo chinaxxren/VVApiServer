@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface NSNumber (DDNumber)
+@interface NSNumber (VVNumber)
 
 + (BOOL)parseString:(NSString *)str intoSInt64:(SInt64 *)pNum;
 

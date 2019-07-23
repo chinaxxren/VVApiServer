@@ -1,13 +1,13 @@
 #import "VVRouteRequest.h"
-#import "HTTPMessage.h"
+#import "VVHTTPMessage.h"
 
 @implementation VVRouteRequest {
-    HTTPMessage *message;
+    VVHTTPMessage *message;
 }
 
 @synthesize params;
 
-- (id)initWithHTTPMessage:(HTTPMessage *)msg parameters:(NSDictionary *)parameters {
+- (id)initWithHTTPMessage:(VVHTTPMessage *)msg parameters:(NSDictionary *)parameters {
     if (self = [super init]) {
         params = parameters;
         message = msg;

@@ -181,7 +181,7 @@
     }
 }
 
-- (VVRouteResponse *)routeMethod:(NSString *)method withPath:(NSString *)path parameters:(NSDictionary *)params request:(HTTPMessage *)httpMessage connection:(HTTPConnection *)connection {
+- (VVRouteResponse *)routeMethod:(NSString *)method withPath:(NSString *)path parameters:(NSDictionary *)params request:(VVHTTPMessage *)httpMessage connection:(VVHTTPConnection *)connection {
     NSMutableArray *methodRoutes = routes[method];
     if (methodRoutes == nil)
         return nil;

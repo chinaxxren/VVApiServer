@@ -1,9 +1,9 @@
 #import "VVRouteResponse.h"
 
-#import "HTTPConnection.h"
-#import "HTTPDataResponse.h"
-#import "HTTPFileResponse.h"
-#import "HTTPAsyncFileResponse.h"
+#import "VVHTTPConnection.h"
+#import "VVHTTPDataResponse.h"
+#import "VVHTTPFileResponse.h"
+#import "VVHTTPAsyncFileResponse.h"
 #import "VVHTTPResponseProxy.h"
 
 @implementation VVRouteResponse {
@@ -14,7 +14,7 @@
 @synthesize connection;
 @synthesize headers;
 
-- (id)initWithConnection:(HTTPConnection *)theConnection {
+- (id)initWithConnection:(VVHTTPConnection *)theConnection {
     if (self = [super init]) {
         connection = theConnection;
         headers = [[NSMutableDictionary alloc] init];
@@ -23,15 +23,15 @@
     return self;
 }
 
-- (NSObject <HTTPResponse> *)response {
+- (NSObject <VVHTTPResponse> *)response {
     return proxy.response;
 }
 
-- (void)setResponse:(NSObject <HTTPResponse> *)response {
+- (void)setResponse:(NSObject <VVHTTPResponse> *)response {
     proxy.response = response;
 }
 
-- (NSObject <HTTPResponse> *)proxiedResponse {
+- (NSObject <VVHTTPResponse> *)proxiedResponse {
     if (proxy.response != nil || proxy.customStatus != 0 || [headers count] > 0) {
         return proxy;
     }
@@ -60,7 +60,7 @@
 }
 
 - (void)respondWithData:(NSData *)data {
-    self.response = [[HTTPDataResponse alloc] initWithData:data];
+    self.response = [[VVHTTPDataResponse alloc] initWithData:data];
 }
 
 - (void)respondWithFile:(NSString *)path {
@@ -69,9 +69,9 @@
 
 - (void)respondWithFile:(NSString *)path async:(BOOL)async {
     if (async) {
-        self.response = [[HTTPAsyncFileResponse alloc] initWithFilePath:path forConnection:connection];
+        self.response = [[VVHTTPAsyncFileResponse alloc] initWithFilePath:path forConnection:connection];
     } else {
-        self.response = [[HTTPFileResponse alloc] initWithFilePath:path forConnection:connection];
+        self.response = [[VVHTTPFileResponse alloc] initWithFilePath:path forConnection:connection];
     }
 }
 

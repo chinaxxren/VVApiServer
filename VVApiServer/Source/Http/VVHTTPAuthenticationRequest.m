@@ -1,11 +1,11 @@
-#import "HTTPAuthenticationRequest.h"
-#import "HTTPMessage.h"
+#import "VVHTTPAuthenticationRequest.h"
+#import "VVHTTPMessage.h"
 
 #if !__has_feature(objc_arc)
 #warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
 #endif
 
-@interface HTTPAuthenticationRequest (PrivateAPI)
+@interface VVHTTPAuthenticationRequest (PrivateAPI)
 
 - (NSString *)quotedSubHeaderFieldValue:(NSString *)param fromHeaderFieldValue:(NSString *)header;
 
@@ -14,9 +14,9 @@
 @end
 
 
-@implementation HTTPAuthenticationRequest
+@implementation VVHTTPAuthenticationRequest
 
-- (id)initWithRequest:(HTTPMessage *)request {
+- (id)initWithRequest:(VVHTTPMessage *)request {
     if ((self = [super init])) {
         NSString *authInfo = [request headerField:@"Authorization"];
 

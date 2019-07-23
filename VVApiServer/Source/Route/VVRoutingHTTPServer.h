@@ -1,11 +1,11 @@
 #import <Foundation/Foundation.h>
-#import "HTTPServer.h"
+#import "VVHTTPServer.h"
 #import "VVRouteRequest.h"
 #import "VVRouteResponse.h"
 
 typedef void (^VVRequestHandler)(VVRouteRequest *request, VVRouteResponse *response);
 
-@interface VVRoutingHTTPServer : HTTPServer
+@interface VVRoutingHTTPServer : VVHTTPServer
 
 @property(nonatomic, readonly) NSDictionary *defaultHeaders;
 
@@ -48,6 +48,6 @@ typedef void (^VVRequestHandler)(VVRouteRequest *request, VVRouteResponse *respo
 
 - (BOOL)supportsMethod:(NSString *)method;
 
-- (VVRouteResponse *)routeMethod:(NSString *)method withPath:(NSString *)path parameters:(NSDictionary *)params request:(HTTPMessage *)request connection:(HTTPConnection *)connection;
+- (VVRouteResponse *)routeMethod:(NSString *)method withPath:(NSString *)path parameters:(NSDictionary *)params request:(VVHTTPMessage *)request connection:(VVHTTPConnection *)connection;
 
 @end

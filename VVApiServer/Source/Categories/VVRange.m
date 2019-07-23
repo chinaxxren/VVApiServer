@@ -1,5 +1,5 @@
-#import "DDRange.h"
-#import "NSNumber+DDNumber.h"
+#import "VVRange.h"
+#import "NSNumber+VVNumber.h"
 
 DDRange DDUnionRange(DDRange range1, DDRange range2) {
     DDRange result;

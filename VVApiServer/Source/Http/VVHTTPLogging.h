@@ -32,7 +32,7 @@
 #define HTTPLogTrace2(frmt, ...)   HTTP_Logging(HTTP_LOG_TRACE,   frmt, ##__VA_ARGS__)
 
 
-@interface HTTPLogging : NSObject
+@interface VVHTTPLogging : NSObject
 
 + (void)log:(int)level format:(NSString *)format, ...;
 

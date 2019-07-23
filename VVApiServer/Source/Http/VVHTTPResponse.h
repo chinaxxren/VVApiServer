@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 
 
-@protocol HTTPResponse
+@protocol VVHTTPResponse
 
 /**
  * Returns the length of the data in bytes.

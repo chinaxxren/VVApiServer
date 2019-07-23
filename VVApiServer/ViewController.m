@@ -9,7 +9,7 @@
 
 #import "ViewController.h"
 
-#import "HTTPMessage.h"
+#import "VVHTTPMessage.h"
 
 #import "VVRoutingHTTPServer.h"
 
@@ -91,7 +91,7 @@
 - (void)testRoutes {
     VVRouteResponse *response;
     NSDictionary *params = [NSDictionary dictionary];
-    HTTPMessage *request = [[HTTPMessage alloc] initEmptyRequest];
+    VVHTTPMessage *request = [[VVHTTPMessage alloc] initEmptyRequest];
 
     response = [http routeMethod:@"GET" withPath:@"/null" parameters:params request:request connection:nil];
 
@@ -146,7 +146,7 @@
 - (void)verifyRouteWithMethod:(NSString *)method path:(NSString *)path {
     VVRouteResponse *response;
     NSDictionary *params = [NSDictionary dictionary];
-    HTTPMessage *request = [[HTTPMessage alloc] initEmptyRequest];
+    VVHTTPMessage *request = [[VVHTTPMessage alloc] initEmptyRequest];
 
     response = [http routeMethod:method withPath:path parameters:params request:request connection:nil];
     //STAssertNotNil(response.proxiedResponse, @"Proxied response is nil for %@ %@", method, path);
@@ -160,7 +160,7 @@
 - (void)verifyRouteNotFoundWithMethod:(NSString *)method path:(NSString *)path {
     VVRouteResponse *response;
     NSDictionary *params = [NSDictionary dictionary];
-    HTTPMessage *request = [[HTTPMessage alloc] initEmptyRequest];
+    VVHTTPMessage *request = [[VVHTTPMessage alloc] initEmptyRequest];
 
     response = [http routeMethod:method withPath:path parameters:params request:request connection:nil];
     NSLog(@"Response should have been nil for %@ %@", method, path);

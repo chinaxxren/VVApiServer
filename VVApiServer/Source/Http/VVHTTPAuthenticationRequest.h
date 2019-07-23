@@ -6,10 +6,10 @@
 
 #endif
 
-@class HTTPMessage;
+@class VVHTTPMessage;
 
 
-@interface HTTPAuthenticationRequest : NSObject {
+@interface VVHTTPAuthenticationRequest : NSObject {
     BOOL isBasic;
     BOOL isDigest;
 
@@ -24,7 +24,7 @@
     NSString *cnonce;
     NSString *response;
 }
-- (id)initWithRequest:(HTTPMessage *)request;
+- (id)initWithRequest:(VVHTTPMessage *)request;
 
 - (BOOL)isBasic;
 

@@ -1,6 +1,6 @@
-#import "HTTPAsyncFileResponse.h"
-#import "HTTPConnection.h"
-#import "HTTPLogging.h"
+#import "VVHTTPAsyncFileResponse.h"
+#import "VVHTTPConnection.h"
+#import "VVHTTPLogging.h"
 
 #import <unistd.h>
 #import <fcntl.h>
@@ -32,9 +32,9 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
  * we don't open the file until we have to (until the connection starts requesting data).
 **/
 
-@implementation HTTPAsyncFileResponse
+@implementation VVHTTPAsyncFileResponse
 
-- (id)initWithFilePath:(NSString *)fpath forConnection:(HTTPConnection *)parent {
+- (id)initWithFilePath:(NSString *)fpath forConnection:(VVHTTPConnection *)parent {
     if ((self = [super init])) {
         HTTPLogTrace();
 
@@ -135,7 +135,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 
     HTTPLogVerbose(@"%@[%p]: Open fd[%i] -> %@", THIS_FILE, self, fileFD, filePath);
 
-    readQueue = dispatch_queue_create("HTTPAsyncFileResponse", NULL);
+    readQueue = dispatch_queue_create("VVHTTPAsyncFileResponse", NULL);
     readSource = dispatch_source_create(DISPATCH_SOURCE_TYPE_READ, fileFD, 0, readQueue);
 
 
@@ -299,7 +299,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 
         dispatch_sync(readQueue, ^{
 
-            NSAssert(readSourceSuspended, @"Invalid logic - perhaps HTTPConnection has changed.");
+            NSAssert(readSourceSuspended, @"Invalid logic - perhaps VVHTTPConnection has changed.");
 
             readRequestLength = length;
             [self resumeReadSource];

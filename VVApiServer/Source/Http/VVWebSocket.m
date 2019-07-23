@@ -1,9 +1,9 @@
-#import "WebSocket.h"
-#import "HTTPMessage.h"
+#import "VVWebSocket.h"
+#import "VVHTTPMessage.h"
 #import "GCDAsyncSocket.h"
-#import "NSData+DDData.h"
-#import "NSNumber+DDNumber.h"
-#import "HTTPLogging.h"
+#import "NSData+VVData.h"
+#import "NSNumber+VVNumber.h"
+#import "VVHTTPLogging.h"
 
 #if !__has_feature(objc_arc)
 #warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
@@ -48,7 +48,7 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame) {
     return frame & 0x7F;
 }
 
-@interface WebSocket (PrivateAPI)
+@interface VVWebSocket (PrivateAPI)
 
 - (void)readRequestBody;
 
@@ -62,34 +62,34 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame) {
 #pragma mark -
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-@implementation WebSocket {
+@implementation VVWebSocket {
     BOOL isRFC6455;
     BOOL nextFrameMasked;
     NSUInteger nextOpCode;
     NSData *maskingKey;
 }
 
-+ (BOOL)isWebSocketRequest:(HTTPMessage *)request {
++ (BOOL)isWebSocketRequest:(VVHTTPMessage *)request {
     // Request (Draft 75):
     //
     // GET /demo HTTP/1.1
-    // Upgrade: WebSocket
+    // Upgrade: VVWebSocket
     // Connection: Upgrade
     // Host: example.com
     // Origin: http://example.com
-    // WebSocket-Protocol: sample
+    // VVWebSocket-Protocol: sample
     //
     //
     // Request (Draft 76):
     //
     // GET /demo HTTP/1.1
-    // Upgrade: WebSocket
+    // Upgrade: VVWebSocket
     // Connection: Upgrade
     // Host: example.com
     // Origin: http://example.com
-    // Sec-WebSocket-Protocol: sample
-    // Sec-WebSocket-Key1: 4 @1  46546xW%0l 1 5
-    // Sec-WebSocket-Key2: 12998 5 Y3 1  .P00
+    // Sec-VVWebSocket-Protocol: sample
+    // Sec-VVWebSocket-Key1: 4 @1  46546xW%0l 1 5
+    // Sec-VVWebSocket-Key2: 12998 5 Y3 1  .P00
     //
     // ^n:ds[4U
 
@@ -104,7 +104,7 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame) {
 
     if (!upgradeHeaderValue || !connectionHeaderValue) {
         isWebSocket = NO;
-    } else if (![upgradeHeaderValue caseInsensitiveCompare:@"WebSocket"] == NSOrderedSame) {
+    } else if (![upgradeHeaderValue caseInsensitiveCompare:@"VVWebSocket"] == NSOrderedSame) {
         isWebSocket = NO;
     } else if ([connectionHeaderValue rangeOfString:@"Upgrade" options:NSCaseInsensitiveSearch].location == NSNotFound) {
         isWebSocket = NO;
@@ -115,9 +115,9 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame) {
     return isWebSocket;
 }
 
-+ (BOOL)isVersion76Request:(HTTPMessage *)request {
-    NSString *key1 = [request headerField:@"Sec-WebSocket-Key1"];
-    NSString *key2 = [request headerField:@"Sec-WebSocket-Key2"];
++ (BOOL)isVersion76Request:(VVHTTPMessage *)request {
+    NSString *key1 = [request headerField:@"Sec-VVWebSocket-Key1"];
+    NSString *key2 = [request headerField:@"Sec-VVWebSocket-Key2"];
 
     BOOL isVersion76;
 
@@ -132,8 +132,8 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame) {
     return isVersion76;
 }
 
-+ (BOOL)isRFC6455Request:(HTTPMessage *)request {
-    NSString *key = [request headerField:@"Sec-WebSocket-Key"];
++ (BOOL)isRFC6455Request:(VVHTTPMessage *)request {
+    NSString *key = [request headerField:@"Sec-VVWebSocket-Key"];
     BOOL isRFC6455 = (key != nil);
 
     HTTPLogTrace2(@"%@: %@ - %@", THIS_FILE, THIS_METHOD, (isRFC6455 ? @"YES" : @"NO"));
@@ -147,7 +147,7 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame) {
 
 @synthesize websocketQueue;
 
-- (id)initWithRequest:(HTTPMessage *)aRequest socket:(GCDAsyncSocket *)socket {
+- (id)initWithRequest:(VVHTTPMessage *)aRequest socket:(GCDAsyncSocket *)socket {
     HTTPLogTrace();
 
     if (aRequest == nil) {
@@ -162,7 +162,7 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame) {
             HTTPLogVerbose(@"%@[%p] Request Headers:\n%@", THIS_FILE, self, temp);
         }
 
-        websocketQueue = dispatch_queue_create("WebSocket", NULL);
+        websocketQueue = dispatch_queue_create("VVWebSocket", NULL);
         request = aRequest;
 
         asyncSocket = socket;
@@ -251,7 +251,7 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame) {
 - (void)readRequestBody {
     HTTPLogTrace();
 
-    NSAssert(isVersion76, @"WebSocket version 75 doesn't contain a request body");
+    NSAssert(isVersion76, @"VVWebSocket version 75 doesn't contain a request body");
 
     [asyncSocket readDataToLength:8 withTimeout:TIMEOUT_NONE tag:TAG_HTTP_REQUEST_BODY];
 }
@@ -292,7 +292,7 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame) {
 }
 
 - (NSString *)secWebSocketKeyResponseHeaderValue {
-    NSString *key = [request headerField:@"Sec-WebSocket-Key"];
+    NSString *key = [request headerField:@"Sec-VVWebSocket-Key"];
     NSString *guid = @"258EAFA5-E914-47DA-95CA-C5AB0DC85B11";
     return [[key stringByAppendingString:guid] dataUsingEncoding:NSUTF8StringEncoding].sha1Digest.base64Encoded;
 }
@@ -303,23 +303,23 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame) {
     // Request (Draft 75):
     //
     // GET /demo HTTP/1.1
-    // Upgrade: WebSocket
+    // Upgrade: VVWebSocket
     // Connection: Upgrade
     // Host: example.com
     // Origin: http://example.com
-    // WebSocket-Protocol: sample
+    // VVWebSocket-Protocol: sample
     //
     //
     // Request (Draft 76):
     //
     // GET /demo HTTP/1.1
-    // Upgrade: WebSocket
+    // Upgrade: VVWebSocket
     // Connection: Upgrade
     // Host: example.com
     // Origin: http://example.com
-    // Sec-WebSocket-Protocol: sample
-    // Sec-WebSocket-Key2: 12998 5 Y3 1  .P00
-    // Sec-WebSocket-Key1: 4 @1  46546xW%0l 1 5
+    // Sec-VVWebSocket-Protocol: sample
+    // Sec-VVWebSocket-Key2: 12998 5 Y3 1  .P00
+    // Sec-VVWebSocket-Key1: 4 @1  46546xW%0l 1 5
     //
     // ^n:ds[4U
 
@@ -327,53 +327,53 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame) {
     // Response (Draft 75):
     //
     // HTTP/1.1 101 Web Socket Protocol Handshake
-    // Upgrade: WebSocket
+    // Upgrade: VVWebSocket
     // Connection: Upgrade
-    // WebSocket-Origin: http://example.com
-    // WebSocket-Location: ws://example.com/demo
-    // WebSocket-Protocol: sample
+    // VVWebSocket-Origin: http://example.com
+    // VVWebSocket-Location: ws://example.com/demo
+    // VVWebSocket-Protocol: sample
     //
     //
     // Response (Draft 76):
     //
-    // HTTP/1.1 101 WebSocket Protocol Handshake
-    // Upgrade: WebSocket
+    // HTTP/1.1 101 VVWebSocket Protocol Handshake
+    // Upgrade: VVWebSocket
     // Connection: Upgrade
-    // Sec-WebSocket-Origin: http://example.com
-    // Sec-WebSocket-Location: ws://example.com/demo
-    // Sec-WebSocket-Protocol: sample
+    // Sec-VVWebSocket-Origin: http://example.com
+    // Sec-VVWebSocket-Location: ws://example.com/demo
+    // Sec-VVWebSocket-Protocol: sample
     //
     // 8jKS'y:G*Co,Wxa-
 
 
-    HTTPMessage *wsResponse = [[HTTPMessage alloc] initResponseWithStatusCode:101
+    VVHTTPMessage *wsResponse = [[VVHTTPMessage alloc] initResponseWithStatusCode:101
                                                                   description:@"Web Socket Protocol Handshake"
                                                                       version:HTTPVersion1_1];
 
-    [wsResponse setHeaderField:@"Upgrade" value:@"WebSocket"];
+    [wsResponse setHeaderField:@"Upgrade" value:@"VVWebSocket"];
     [wsResponse setHeaderField:@"Connection" value:@"Upgrade"];
 
-    // Note: It appears that WebSocket-Origin and WebSocket-Location
+    // Note: It appears that VVWebSocket-Origin and VVWebSocket-Location
     // are required for Google's Chrome implementation to work properly.
     //
-    // If we don't send either header, Chrome will never report the WebSocket as open.
-    // If we only send one of the two, Chrome will immediately close the WebSocket.
+    // If we don't send either header, Chrome will never report the VVWebSocket as open.
+    // If we only send one of the two, Chrome will immediately close the VVWebSocket.
     //
     // In addition to this it appears that Chrome's implementation is very picky of the values of the headers.
-    // They have to match exactly with what Chrome sent us or it will close the WebSocket.
+    // They have to match exactly with what Chrome sent us or it will close the VVWebSocket.
 
     NSString *originValue = [self originResponseHeaderValue];
     NSString *locationValue = [self locationResponseHeaderValue];
 
-    NSString *originField = isVersion76 ? @"Sec-WebSocket-Origin" : @"WebSocket-Origin";
-    NSString *locationField = isVersion76 ? @"Sec-WebSocket-Location" : @"WebSocket-Location";
+    NSString *originField = isVersion76 ? @"Sec-VVWebSocket-Origin" : @"VVWebSocket-Origin";
+    NSString *locationField = isVersion76 ? @"Sec-VVWebSocket-Location" : @"VVWebSocket-Location";
 
     [wsResponse setHeaderField:originField value:originValue];
     [wsResponse setHeaderField:locationField value:locationValue];
 
     NSString *acceptValue = [self secWebSocketKeyResponseHeaderValue];
     if (acceptValue) {
-        [wsResponse setHeaderField:@"Sec-WebSocket-Accept" value:acceptValue];
+        [wsResponse setHeaderField:@"Sec-VVWebSocket-Accept" value:acceptValue];
     }
 
     NSData *responseHeaders = [wsResponse messageData];
@@ -432,11 +432,11 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame) {
 - (void)sendResponseBody:(NSData *)d3 {
     HTTPLogTrace();
 
-    NSAssert(isVersion76, @"WebSocket version 75 doesn't contain a response body");
+    NSAssert(isVersion76, @"VVWebSocket version 75 doesn't contain a response body");
     NSAssert([d3 length] == 8, @"Invalid requestBody length");
 
-    NSString *key1 = [request headerField:@"Sec-WebSocket-Key1"];
-    NSString *key2 = [request headerField:@"Sec-WebSocket-Key2"];
+    NSString *key1 = [request headerField:@"Sec-VVWebSocket-Key1"];
+    NSString *key2 = [request headerField:@"Sec-VVWebSocket-Key2"];
 
     NSData *d1 = [self processKey:key1];
     NSData *d2 = [self processKey:key2];
@@ -479,7 +479,7 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame) {
 - (void)didOpen {
     HTTPLogTrace();
 
-    // Override me to perform any custom actions once the WebSocket has been opened.
+    // Override me to perform any custom actions once the VVWebSocket has been opened.
     // This method is invoked on the websocketQueue.
     //
     // Don't forget to invoke [super didOpen] in your method.
@@ -564,7 +564,7 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame) {
         [delegate webSocketDidClose:self];
     }
 
-    // Notify HTTPServer
+    // Notify VVHTTPServer
     [[NSNotificationCenter defaultCenter] postNotificationName:WebSocketDidDieNotification object:self];
 }
 

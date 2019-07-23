@@ -1,8 +1,8 @@
-#import "HTTPServer.h"
+#import "VVHTTPServer.h"
 #import "GCDAsyncSocket.h"
-#import "HTTPConnection.h"
-#import "WebSocket.h"
-#import "HTTPLogging.h"
+#import "VVHTTPConnection.h"
+#import "VVWebSocket.h"
+#import "VVHTTPLogging.h"
 
 #if !__has_feature(objc_arc)
 #warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
@@ -12,7 +12,7 @@
 // Other flags: trace
 static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 
-@interface HTTPServer (PrivateAPI)
+@interface VVHTTPServer (PrivateAPI)
 
 - (void)unpublishBonjour;
 
@@ -28,7 +28,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 #pragma mark -
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-@implementation HTTPServer
+@implementation VVHTTPServer
 
 /**
  * Standard Constructor.
@@ -39,8 +39,8 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
         HTTPLogTrace();
 
         // Setup underlying dispatch queues
-        serverQueue = dispatch_queue_create("HTTPServer", NULL);
-        connectionQueue = dispatch_queue_create("HTTPConnection", NULL);
+        serverQueue = dispatch_queue_create("VVHTTPServer", NULL);
+        connectionQueue = dispatch_queue_create("VVHTTPConnection", NULL);
 
         IsOnServerQueueKey = &IsOnServerQueueKey;
         IsOnConnectionQueueKey = &IsOnConnectionQueueKey;
@@ -53,8 +53,8 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
         // Initialize underlying GCD based tcp socket
         asyncSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:serverQueue];
 
-        // Use default connection class of HTTPConnection
-        connectionClass = [HTTPConnection class];
+        // Use default connection class of VVHTTPConnection
+        connectionClass = [VVHTTPConnection class];
 
         // By default bind on all available interfaces, en1, wifi etc
         interface = nil;
@@ -414,15 +414,15 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
             if (!keepExistingConnections) {
                 // Stop all HTTP connections the server owns
                 [connectionsLock lock];
-                for (HTTPConnection *connection in connections) {
+                for (VVHTTPConnection *connection in connections) {
                     [connection stop];
                 }
                 [connections removeAllObjects];
                 [connectionsLock unlock];
 
-                // Stop all WebSocket connections the server owns
+                // Stop all VVWebSocket connections the server owns
                 [webSocketsLock lock];
-                for (WebSocket *webSocket in webSockets) {
+                for (VVWebSocket *webSocket in webSockets) {
                     [webSocket stop];
                 }
                 [webSockets removeAllObjects];
@@ -442,7 +442,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
     return result;
 }
 
-- (void)addWebSocket:(WebSocket *)ws {
+- (void)addWebSocket:(VVWebSocket *)ws {
     [webSocketsLock lock];
 
     HTTPLogTrace();
@@ -501,7 +501,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didAcceptNewSocket:(GCDAsyncSocket *)newSocket {
-    HTTPConnection *newConnection = (HTTPConnection *) [[connectionClass alloc] initWithAsyncSocket:newSocket
+    VVHTTPConnection *newConnection = (VVHTTPConnection *) [[connectionClass alloc] initWithAsyncSocket:newSocket
                                                                                       configuration:[self config]];
     [connectionsLock lock];
     [connections addObject:newConnection];

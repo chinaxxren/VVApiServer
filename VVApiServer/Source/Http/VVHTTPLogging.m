@@ -3,10 +3,10 @@
 // Copyright (c) 2019 Tank. All rights reserved.
 //
 
-#import "HTTPLogging.h"
+#import "VVHTTPLogging.h"
 
 
-@implementation HTTPLogging
+@implementation VVHTTPLogging
 
 + (void)log:(int)level format:(NSString *)format, ... {
 

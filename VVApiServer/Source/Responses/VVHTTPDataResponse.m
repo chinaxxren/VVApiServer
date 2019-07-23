@@ -1,5 +1,5 @@
-#import "HTTPDataResponse.h"
-#import "HTTPLogging.h"
+#import "VVHTTPDataResponse.h"
+#import "VVHTTPLogging.h"
 
 #if !__has_feature(objc_arc)
 #warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
@@ -10,7 +10,7 @@
 static const int httpLogLevel = HTTP_LOG_LEVEL_OFF; // | HTTP_LOG_FLAG_TRACE;
 
 
-@implementation HTTPDataResponse
+@implementation VVHTTPDataResponse
 
 - (id)initWithData:(NSData *)dataParam {
     if ((self = [super init])) {
