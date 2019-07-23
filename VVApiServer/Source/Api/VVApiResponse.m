@@ -1,4 +1,4 @@
-#import "VVRouteResponse.h"
+#import "VVApiResponse.h"
 
 #import "VVHTTPConnection.h"
 #import "VVHTTPDataResponse.h"
@@ -6,7 +6,7 @@
 #import "VVHTTPAsyncFileResponse.h"
 #import "VVHTTPResponseProxy.h"
 
-@implementation VVRouteResponse {
+@implementation VVApiResponse {
     NSMutableDictionary *_headers;
     VVHTTPResponseProxy *_proxy;
 }

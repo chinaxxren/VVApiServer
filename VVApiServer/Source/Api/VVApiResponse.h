@@ -4,7 +4,7 @@
 @class VVHTTPConnection;
 @class VVHTTPResponseProxy;
 
-@interface VVRouteResponse : NSObject
+@interface VVApiResponse : NSObject
 
 @property(nonatomic, assign, readonly) VVHTTPConnection *connection;
 @property(nonatomic, readonly) NSDictionary *headers;

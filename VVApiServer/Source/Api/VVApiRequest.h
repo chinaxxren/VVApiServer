@@ -2,7 +2,7 @@
 
 @class VVHTTPMessage;
 
-@interface VVRouteRequest : NSObject
+@interface VVApiRequest : NSObject
 
 @property(nonatomic, readonly) NSDictionary *headers;
 @property(nonatomic, readonly) NSDictionary *params;

@@ -1,16 +1,16 @@
 #import <Foundation/Foundation.h>
 
 #import "VVHTTPServer.h"
-#import "VVRouteRequest.h"
-#import "VVRouteResponse.h"
+#import "VVApiRequest.h"
+#import "VVApiResponse.h"
 
-typedef void (^VVRequestHandler)(VVRouteRequest *request, VVRouteResponse *response);
+typedef void (^VVRequestHandler)(VVApiRequest *request, VVApiResponse *response);
 
-@class VVRoute;
+@class VVApi;
 
-@interface VVRouteHTTPServer : VVHTTPServer
+@interface VVApiHTTPServer : VVHTTPServer
 
-@property(nonatomic, assign) BOOL route;
+@property(nonatomic, assign) BOOL openApi;
 @property(nonatomic, readonly) NSDictionary *defaultHeaderDict;
 
 + (instancetype)share;
@@ -21,13 +21,9 @@ typedef void (^VVRequestHandler)(VVRouteRequest *request, VVRouteResponse *respo
 
 - (void)setDefaultHeader:(NSString *)field value:(NSString *)value;
 
-// Returns the dispatch queue on which routes are processed.
-// By default this is NULL and routes are processed on CocoaHTTPServer's
-// connection queue. You can specify a queue to process routes on, such as
-// dispatch_get_main_queue() to process all routes on the main thread.
-- (dispatch_queue_t)routeQueue;
+- (dispatch_queue_t)apiQueue;
 
-- (void)setRouteQueue:(dispatch_queue_t)queue;
+- (void)setApiQueue:(dispatch_queue_t)queue;
 
 - (NSDictionary *)mimeTypes;
 
@@ -62,12 +58,12 @@ typedef void (^VVRequestHandler)(VVRouteRequest *request, VVRouteResponse *respo
 
 - (BOOL)supportsMethod:(NSString *)method;
 
-- (VVRoute *)findRouteWithPath:(NSString *)path;
+- (VVApi *)findApiWithPath:(NSString *)path;
 
-- (VVRouteResponse *)routeMethod:(NSString *)method
-                        withPath:(NSString *)path
-                      parameters:(NSDictionary *)params
-                         request:(VVHTTPMessage *)httpMessage
-                      connection:(VVHTTPConnection *)connection;
+- (VVApiResponse *)apiMethod:(NSString *)method
+                    withPath:(NSString *)path
+                  parameters:(NSDictionary *)params
+                     request:(VVHTTPMessage *)httpMessage
+                  connection:(VVHTTPConnection *)connection;
 
 @end

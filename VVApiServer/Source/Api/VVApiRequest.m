@@ -1,8 +1,8 @@
-#import "VVRouteRequest.h"
+#import "VVApiRequest.h"
 
 #import "VVHTTPMessage.h"
 
-@implementation VVRouteRequest {
+@implementation VVApiRequest {
     VVHTTPMessage *_message;
 }
 

@@ -1,20 +1,20 @@
-#import "VVRouteConnection.h"
+#import "VVApiConnection.h"
 
-#import "VVRouteHTTPServer.h"
+#import "VVApiHTTPServer.h"
 #import "VVHTTPMessage.h"
 #import "VVHTTPResponseProxy.h"
 
-@implementation VVRouteConnection {
-    __weak VVRouteHTTPServer *_httpServer;
+@implementation VVApiConnection {
+    __weak VVApiHTTPServer *_httpServer;
     NSDictionary *_headerDict;
 }
 
 - (id)initWithAsyncSocket:(GCDAsyncSocket *)newSocket configuration:(HTTPConfig *)aConfig {
     if (self = [super initWithAsyncSocket:newSocket configuration:aConfig]) {
-        NSAssert([config.server isKindOfClass:[VVRouteHTTPServer class]],
-                @"A VVRouteConnection is being used with a server that is not a VVRouteHTTPServer");
+        NSAssert([config.server isKindOfClass:[VVApiHTTPServer class]],
+                @"A VVApiConnection is being used with a server that is not a VVApiHTTPServer");
 
-        _httpServer = (VVRouteHTTPServer *) config.server;
+        _httpServer = (VVApiHTTPServer *) config.server;
     }
     return self;
 }
@@ -30,7 +30,7 @@
     // The default implementation is strict about the use of Content-Length. Either
     // a given method + path combination must *always* include data or *never*
     // include data. The routing connection is lenient, a POST that sometimes does
-    // not include data or a GET that sometimes does is fine. It is up to the route
+    // not include data or a GET that sometimes does is fine. It is up to the api
     // implementations to decide how to handle these situations.
     return YES;
 }
@@ -56,7 +56,7 @@
         }
     }
 
-    VVRouteResponse *response = [_httpServer routeMethod:method withPath:path parameters:params request:request connection:self];
+    VVApiResponse *response = [_httpServer apiMethod:method withPath:path parameters:params request:request connection:self];
     if (response != nil) {
         _headerDict = response.headers;
         return response.proxyResponse;

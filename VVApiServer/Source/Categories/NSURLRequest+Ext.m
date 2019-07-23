@@ -8,8 +8,8 @@
 
 #import <objc/runtime.h>
 
-#import "VVRouteHTTPServer.h"
-#import "VVRoute.h"
+#import "VVApiHTTPServer.h"
+#import "VVApi.h"
 
 @implementation NSURLRequest (Ext)
 
@@ -36,9 +36,9 @@
         return nil;
     }
 
-    VVRouteHTTPServer *httpServer = [VVRouteHTTPServer share];
-    if (httpServer.route) {
-        VVRoute *route = [httpServer findRouteWithPath:URL.path];
+    VVApiHTTPServer *httpServer = [VVApiHTTPServer share];
+    if (httpServer.openApi) {
+        VVApi *route = [httpServer findApiWithPath:URL.path];
         if (route) {
             NSString *replace;
             if (route.port) {

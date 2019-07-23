@@ -12,22 +12,21 @@
 		12CDA1C2905E15F10E00AE8055C601EA /* VVRange.m in Sources */ = {isa = PBXBuildFile; fileRef = AA381E81B76ED214968124E6139B5326 /* VVRange.m */; };
 		131462C2DBD0255C9666FFC8B869A6BA /* VVApiServerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E82EC3DC071EB10D44324A1506802021 /* VVApiServerTests.m */; };
 		1BCD7ED9C97ED78F8CCC64D862E47585 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 00DD4362168115925505A7AB8C65AA84 /* Podfile */; };
-		1DD8360CF57DE98390138E8F6FAEA242 /* VVRouteRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A50D15D8D10612C4A1013813970EEA8 /* VVRouteRequest.m */; };
+		1DD8360CF57DE98390138E8F6FAEA242 /* VVApiRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A50D15D8D10612C4A1013813970EEA8 /* VVApiRequest.m */; };
 		3CA5351F73E18C474E9ADC501E874E9F /* NSNumber+VVNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = D3DA34FC769D63981C716ED347AD4455 /* NSNumber+VVNumber.m */; };
-		40A4B03E54A69D644D7053F2B81ACFA3 /* VVRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D3332FB828FC15E2BBBC91B3C86244 /* VVRoute.m */; };
+		40A4B03E54A69D644D7053F2B81ACFA3 /* VVApi.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D3332FB828FC15E2BBBC91B3C86244 /* VVApi.m */; };
 		4C7E5B205A83873929D2DC0FACEEED50 /* VVHTTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA96D614CF2DBA0E494D8DA0DD4C104 /* VVHTTPConnection.m */; };
 		4CDAAD1D63E4F7863637471F7BD3735B /* VVHTTPResponseProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E1AE039A820E572F0FE5ECDAC00C098 /* VVHTTPResponseProxy.m */; };
-		4CF245583222C52464E6CB75097A0B4F /* VVRouteHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = FBCA37AC3186037FBC8BA901D9B38F8A /* VVRouteHTTPServer.m */; };
+		4CF245583222C52464E6CB75097A0B4F /* VVApiHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = FBCA37AC3186037FBC8BA901D9B38F8A /* VVApiHTTPServer.m */; };
 		4E7FAEE556C32F8A4913D72CEF008724 /* VVHTTPFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B0A77B30B9A98FB0DE868D31157E154F /* VVHTTPFileResponse.m */; };
 		735A89BA97AFAF6C2EADC7AB1698423F /* VVHTTPLogging.m in Sources */ = {isa = PBXBuildFile; fileRef = A3E78F4B8B05689F029E4DF2B3BF8B3A /* VVHTTPLogging.m */; };
-		800278573384056D85E8B33309C1742F /* VVRouteConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = BB77CC63F3AAFBD1C55C7AB79C0D2B68 /* VVRouteConnection.m */; };
+		800278573384056D85E8B33309C1742F /* VVApiConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = BB77CC63F3AAFBD1C55C7AB79C0D2B68 /* VVApiConnection.m */; };
 		894D4DE0FFB5959BA09AA30A815D40A8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4BE0398F3A469F1668847FAE37508DF /* Main.storyboard */; };
 		8B37E061E67DE5407B6F857385370E01 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D57C697D9060C31ADCAA5B95F9A3FA6 /* LaunchScreen.storyboard */; };
 		AAFF8D3BFE7B068F6E4702E5E7E39A16 /* VVHTTPAuthenticationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE7D19D1E18350CC7CBCD91982ABB3B /* VVHTTPAuthenticationRequest.m */; };
 		B56EE66D23D7EAC2A0E4E4D7A0052BE1 /* VVHTTPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A4D2CD086E924784CB4D866349F70F /* VVHTTPMessage.m */; };
-		B6389672729BFA3C7131BDDCE35D5B2D /* VVRouteResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5F82E20487603E8E69CDD5967F8644 /* VVRouteResponse.m */; };
+		B6389672729BFA3C7131BDDCE35D5B2D /* VVApiResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5F82E20487603E8E69CDD5967F8644 /* VVApiResponse.m */; };
 		BBC8F20D749310FADC3FAE94EF78552E /* VVApiServerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7545736340A9B6DAF479B03AF5F78E60 /* VVApiServerUITests.m */; };
-		C3AE62F47BF92703DE96242A /* NSString+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE689627696046B14BD83D /* NSString+Ext.m */; };
 		C3AE66FB13D3BE5D3F69AF60 /* NSURLRequest+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE6A969102CA7AF64B52E2 /* NSURLRequest+Ext.m */; };
 		C4BA1EBDBEAC82F7CBBE20012D3D276D /* VVWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A69BE146E329B0FB2CE270C7D887C06A /* VVWebSocket.m */; };
 		C8BB8220CAE2071BDE1D972028C90E11 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 448E60B330362E60A4AA6D6ABB75275F /* AppDelegate.m */; };
@@ -66,11 +65,11 @@
 		1F5A7DB231678CDA8FAF47C2A5EFE3CC /* NSData+VVData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+VVData.m"; sourceTree = "<group>"; };
 		2849399BDE13B7D5A093F1DF1DE48C1F /* VVHTTPResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVHTTPResponse.h; sourceTree = "<group>"; };
 		29DF23C76E3C7C6F75A124E32A88B4FA /* VVHTTPDataResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVHTTPDataResponse.h; sourceTree = "<group>"; };
-		2D5F82E20487603E8E69CDD5967F8644 /* VVRouteResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVRouteResponse.m; sourceTree = "<group>"; };
+		2D5F82E20487603E8E69CDD5967F8644 /* VVApiResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVApiResponse.m; sourceTree = "<group>"; };
 		322754EE49ACC52330CFFCF7E61DE8B8 /* VVWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVWebSocket.h; sourceTree = "<group>"; };
 		344152DBB3B08FFF8232F4FCC11A6451 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		349D70A256386A7218F27417BB1275C4 /* VVHTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVHTTPServer.m; sourceTree = "<group>"; };
-		385D3150FFE3FF58B84077D8F6CC8738 /* VVRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVRoute.h; sourceTree = "<group>"; };
+		385D3150FFE3FF58B84077D8F6CC8738 /* VVApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVApi.h; sourceTree = "<group>"; };
 		448E60B330362E60A4AA6D6ABB75275F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		460BC0B47987B8E911682D2701268ACB /* VVHTTPAsyncFileResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVHTTPAsyncFileResponse.h; sourceTree = "<group>"; };
 		4ACF95CF401B55FD9F983647701A22EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -82,12 +81,12 @@
 		6502CF1F8D4C4F3902C49AF159BD185E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7429E1C7E14795592D52A550F57685FE /* VVApiServer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VVApiServer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7545736340A9B6DAF479B03AF5F78E60 /* VVApiServerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VVApiServerUITests.m; sourceTree = "<group>"; };
-		7A50D15D8D10612C4A1013813970EEA8 /* VVRouteRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVRouteRequest.m; sourceTree = "<group>"; };
+		7A50D15D8D10612C4A1013813970EEA8 /* VVApiRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVApiRequest.m; sourceTree = "<group>"; };
 		7CE7D19D1E18350CC7CBCD91982ABB3B /* VVHTTPAuthenticationRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVHTTPAuthenticationRequest.m; sourceTree = "<group>"; };
 		8631109911BF3576DE806814BCE3BA3A /* VVApiServerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VVApiServerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		87EE8E21A39FC4719FF073EC169C8A24 /* VVRouteRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVRouteRequest.h; sourceTree = "<group>"; };
+		87EE8E21A39FC4719FF073EC169C8A24 /* VVApiRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVApiRequest.h; sourceTree = "<group>"; };
 		88AF1D31DE9AB4778F0F84997B5343B0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		8DA09E6E6F54C34F0E4AEFAAF29F774F /* VVRouteResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVRouteResponse.h; sourceTree = "<group>"; };
+		8DA09E6E6F54C34F0E4AEFAAF29F774F /* VVApiResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVApiResponse.h; sourceTree = "<group>"; };
 		8E66DB76E63C1D06EF6CC057588966F4 /* VVHTTPAsyncFileResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVHTTPAsyncFileResponse.m; sourceTree = "<group>"; };
 		9535202AD9D0734A9C9C9D2541D6C77C /* libPods-VVApiServer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VVApiServer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BAEF73CE035D5DAF169A83D5F3FC22D /* VVHTTPLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVHTTPLogging.h; sourceTree = "<group>"; };
@@ -101,23 +100,21 @@
 		B0A77B30B9A98FB0DE868D31157E154F /* VVHTTPFileResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVHTTPFileResponse.m; sourceTree = "<group>"; };
 		B736AFF638E831971C755E783D8582C3 /* Pods-VVApiServer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VVApiServer.debug.xcconfig"; path = "Target Support Files/Pods-VVApiServer/Pods-VVApiServer.debug.xcconfig"; sourceTree = "<group>"; };
 		BA1834BA50669A53B88F07BA39452491 /* VVRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVRange.h; sourceTree = "<group>"; };
-		BB77CC63F3AAFBD1C55C7AB79C0D2B68 /* VVRouteConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVRouteConnection.m; sourceTree = "<group>"; };
-		C2D3332FB828FC15E2BBBC91B3C86244 /* VVRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVRoute.m; sourceTree = "<group>"; };
-		C3AE689627696046B14BD83D /* NSString+Ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Ext.m"; sourceTree = "<group>"; };
+		BB77CC63F3AAFBD1C55C7AB79C0D2B68 /* VVApiConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVApiConnection.m; sourceTree = "<group>"; };
+		C2D3332FB828FC15E2BBBC91B3C86244 /* VVApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVApi.m; sourceTree = "<group>"; };
 		C3AE6A969102CA7AF64B52E2 /* NSURLRequest+Ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLRequest+Ext.m"; sourceTree = "<group>"; };
 		C3AE6BAFB31345EFA019611E /* NSURLRequest+Ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLRequest+Ext.h"; sourceTree = "<group>"; };
-		C3AE6CE5A313DF089F7A30BE /* NSString+Ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Ext.h"; sourceTree = "<group>"; };
-		CD8F324EBD87780D631D6FD85C99F6B5 /* VVRouteHTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVRouteHTTPServer.h; sourceTree = "<group>"; };
+		CD8F324EBD87780D631D6FD85C99F6B5 /* VVApiHTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVApiHTTPServer.h; sourceTree = "<group>"; };
 		D3DA34FC769D63981C716ED347AD4455 /* NSNumber+VVNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+VVNumber.m"; sourceTree = "<group>"; };
 		D402755D392BC58098CF953F763B3314 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		E53A389ACFE141146C2FDD26C47B692D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		E603744A8FCFE99F91F6F397C915307B /* VVRouteConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVRouteConnection.h; sourceTree = "<group>"; };
+		E603744A8FCFE99F91F6F397C915307B /* VVApiConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVApiConnection.h; sourceTree = "<group>"; };
 		E82EC3DC071EB10D44324A1506802021 /* VVApiServerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VVApiServerTests.m; sourceTree = "<group>"; };
 		F1EC19D56F6CDB7F3E7A9CE57553D19A /* NSNumber+VVNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+VVNumber.h"; sourceTree = "<group>"; };
 		F2D81BDBBEE5E2CB4DE481F5E69D87E8 /* VVHTTPFileResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVHTTPFileResponse.h; sourceTree = "<group>"; };
 		F3D666721B556479EEB02D9366EAAD73 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		F8F19B7FAB930385457F2FA6508038AA /* VVHTTPConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVHTTPConnection.h; sourceTree = "<group>"; };
-		FBCA37AC3186037FBC8BA901D9B38F8A /* VVRouteHTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVRouteHTTPServer.m; sourceTree = "<group>"; };
+		FBCA37AC3186037FBC8BA901D9B38F8A /* VVApiHTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVApiHTTPServer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,7 +191,7 @@
 				6F54CEDDD83251F50650BC058765B5F9 /* Categories */,
 				407E79863419A488960F9D684C041DF3 /* Http */,
 				4012CB2AA9CBB584267DBC7898D1F599 /* Responses */,
-				9BA3056ECE0DE40931DDC4DECDC41025 /* Route */,
+				9BA3056ECE0DE40931DDC4DECDC41025 /* Api */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -219,8 +216,6 @@
 				AA381E81B76ED214968124E6139B5326 /* VVRange.m */,
 				C3AE6A969102CA7AF64B52E2 /* NSURLRequest+Ext.m */,
 				C3AE6BAFB31345EFA019611E /* NSURLRequest+Ext.h */,
-				C3AE689627696046B14BD83D /* NSString+Ext.m */,
-				C3AE6CE5A313DF089F7A30BE /* NSString+Ext.h */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -238,23 +233,23 @@
 			);
 			sourceTree = "<group>";
 		};
-		9BA3056ECE0DE40931DDC4DECDC41025 /* Route */ = {
+		9BA3056ECE0DE40931DDC4DECDC41025 /* Api */ = {
 			isa = PBXGroup;
 			children = (
 				1546EA1268AB9B4353A51120F07965B0 /* VVHTTPResponseProxy.h */,
 				4E1AE039A820E572F0FE5ECDAC00C098 /* VVHTTPResponseProxy.m */,
-				385D3150FFE3FF58B84077D8F6CC8738 /* VVRoute.h */,
-				C2D3332FB828FC15E2BBBC91B3C86244 /* VVRoute.m */,
-				87EE8E21A39FC4719FF073EC169C8A24 /* VVRouteRequest.h */,
-				7A50D15D8D10612C4A1013813970EEA8 /* VVRouteRequest.m */,
-				8DA09E6E6F54C34F0E4AEFAAF29F774F /* VVRouteResponse.h */,
-				2D5F82E20487603E8E69CDD5967F8644 /* VVRouteResponse.m */,
-				E603744A8FCFE99F91F6F397C915307B /* VVRouteConnection.h */,
-				BB77CC63F3AAFBD1C55C7AB79C0D2B68 /* VVRouteConnection.m */,
-				CD8F324EBD87780D631D6FD85C99F6B5 /* VVRouteHTTPServer.h */,
-				FBCA37AC3186037FBC8BA901D9B38F8A /* VVRouteHTTPServer.m */,
+				385D3150FFE3FF58B84077D8F6CC8738 /* VVApi.h */,
+				C2D3332FB828FC15E2BBBC91B3C86244 /* VVApi.m */,
+				87EE8E21A39FC4719FF073EC169C8A24 /* VVApiRequest.h */,
+				7A50D15D8D10612C4A1013813970EEA8 /* VVApiRequest.m */,
+				8DA09E6E6F54C34F0E4AEFAAF29F774F /* VVApiResponse.h */,
+				2D5F82E20487603E8E69CDD5967F8644 /* VVApiResponse.m */,
+				E603744A8FCFE99F91F6F397C915307B /* VVApiConnection.h */,
+				BB77CC63F3AAFBD1C55C7AB79C0D2B68 /* VVApiConnection.m */,
+				CD8F324EBD87780D631D6FD85C99F6B5 /* VVApiHTTPServer.h */,
+				FBCA37AC3186037FBC8BA901D9B38F8A /* VVApiHTTPServer.m */,
 			);
-			path = Route;
+			path = Api;
 			sourceTree = "<group>";
 		};
 		B33FB0DE6BA45851DE5A743A08A7561E /* Products */ = {
@@ -487,16 +482,15 @@
 				4CDAAD1D63E4F7863637471F7BD3735B /* VVHTTPResponseProxy.m in Sources */,
 				0C5176ED1634EC3FC804403AB4E64703 /* VVHTTPServer.m in Sources */,
 				12CDA1C2905E15F10E00AE8055C601EA /* VVRange.m in Sources */,
-				40A4B03E54A69D644D7053F2B81ACFA3 /* VVRoute.m in Sources */,
-				1DD8360CF57DE98390138E8F6FAEA242 /* VVRouteRequest.m in Sources */,
-				B6389672729BFA3C7131BDDCE35D5B2D /* VVRouteResponse.m in Sources */,
-				800278573384056D85E8B33309C1742F /* VVRouteConnection.m in Sources */,
-				4CF245583222C52464E6CB75097A0B4F /* VVRouteHTTPServer.m in Sources */,
+				40A4B03E54A69D644D7053F2B81ACFA3 /* VVApi.m in Sources */,
+				1DD8360CF57DE98390138E8F6FAEA242 /* VVApiRequest.m in Sources */,
+				B6389672729BFA3C7131BDDCE35D5B2D /* VVApiResponse.m in Sources */,
+				800278573384056D85E8B33309C1742F /* VVApiConnection.m in Sources */,
+				4CF245583222C52464E6CB75097A0B4F /* VVApiHTTPServer.m in Sources */,
 				C4BA1EBDBEAC82F7CBBE20012D3D276D /* VVWebSocket.m in Sources */,
 				EF695A7697C76247AC50025BFDA1B98E /* ViewController.m in Sources */,
 				D06BBDAE3FC9CDCC91F776537A640C8A /* main.m in Sources */,
 				C3AE66FB13D3BE5D3F69AF60 /* NSURLRequest+Ext.m in Sources */,
-				C3AE62F47BF92703DE96242A /* NSString+Ext.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

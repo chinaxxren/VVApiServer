@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
-#import "VVRouteHTTPServer.h"
+#import "VVApiHTTPServer.h"
 
-@interface VVRoute : NSObject
+@interface VVApi : NSObject
 
 @property(nonatomic, copy) NSString *path;
 @property(nonatomic, copy) NSString *port;

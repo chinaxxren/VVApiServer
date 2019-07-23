@@ -1,22 +1,22 @@
 
-#import "VVRouteHTTPServer.h"
+#import "VVApiHTTPServer.h"
 
-#import "VVRouteConnection.h"
-#import "VVRoute.h"
+#import "VVApiConnection.h"
+#import "VVApi.h"
 
-@implementation VVRouteHTTPServer {
-    NSMutableDictionary *_routeDict;
+@implementation VVApiHTTPServer {
+    NSMutableDictionary *_apiDict;
     NSMutableDictionary *_defaultHeaderDict;
     NSMutableDictionary *_mimeTypeDict;
-    dispatch_queue_t _routeQueue;
+    dispatch_queue_t _apiQueue;
 }
 
 - (instancetype)init {
     if (self = [super init]) {
-        connectionClass = [VVRouteConnection class];
-        _routeDict = [[NSMutableDictionary alloc] init];
+        connectionClass = [VVApiConnection class];
+        _apiDict = [[NSMutableDictionary alloc] init];
         _defaultHeaderDict = [[NSMutableDictionary alloc] init];
-        _route = YES;
+        _openApi = YES;
 
         [self setupMIMETypes];
     }
@@ -25,10 +25,10 @@
 }
 
 + (instancetype)share {
-    static VVRouteHTTPServer *httpServer;
+    static VVApiHTTPServer *httpServer;
     static dispatch_once_t token;
     dispatch_once(&token, ^{
-        httpServer = [VVRouteHTTPServer new];
+        httpServer = [VVApiHTTPServer new];
     });
 
     return httpServer;
@@ -46,12 +46,12 @@
     _defaultHeaderDict[field] = value;
 }
 
-- (dispatch_queue_t)routeQueue {
-    return _routeQueue;
+- (dispatch_queue_t)apiQueue {
+    return _apiQueue;
 }
 
-- (void)setRouteQueue:(dispatch_queue_t)queue {
-    _routeQueue = queue;
+- (void)setApiQueue:(dispatch_queue_t)queue {
+    _apiQueue = queue;
 }
 
 - (NSDictionary *)mimeTypes {
@@ -122,40 +122,40 @@
 }
 
 - (void)handleMethod:(NSString *)method port:(NSString *)port withPath:(NSString *)path withHandler:(VVRequestHandler)handler {
-    VVRoute *route = [self routeWithPath:path];
-    route.handler = handler;
-    route.port = port;
+    VVApi *api = [self apiWithPath:path];
+    api.handler = handler;
+    api.port = port;
 
-    [self addRoute:route forMethod:method];
+    [self addApi:api forMethod:method];
 }
 
 - (void)handleMethod:(NSString *)method withPath:(NSString *)path target:(id)target selector:(SEL)selector {
-    VVRoute *route = [self routeWithPath:path];
-    route.target = target;
-    route.selector = selector;
+    VVApi *api = [self apiWithPath:path];
+    api.target = target;
+    api.selector = selector;
 
-    [self addRoute:route forMethod:method];
+    [self addApi:api forMethod:method];
 }
 
-- (void)addRoute:(VVRoute *)route forMethod:(NSString *)method {
+- (void)addApi:(VVApi *)api forMethod:(NSString *)method {
     method = [method uppercaseString];
-    NSMutableArray *methodRoutes = _routeDict[method];
-    if (!methodRoutes) {
-        methodRoutes = [NSMutableArray array];
-        _routeDict[method] = methodRoutes;
+    NSMutableArray *methodApis = _apiDict[method];
+    if (!methodApis) {
+        methodApis = [NSMutableArray array];
+        _apiDict[method] = methodApis;
     }
 
-    [methodRoutes addObject:route];
+    [methodApis addObject:api];
 
-    // Define a HEAD route for all GET routes
+    // Define a HEAD api for all GET apis
     if ([method isEqualToString:@"GET"]) {
-        [self addRoute:route forMethod:@"HEAD"];
+        [self addApi:api forMethod:@"HEAD"];
     }
 }
 
-- (VVRoute *)routeWithPath:(NSString *)path {
-    VVRoute *route = [[VVRoute alloc] init];
-    route.path = path;
+- (VVApi *)apiWithPath:(NSString *)path {
+    VVApi *api = [VVApi new];
+    api.path = path;
 
     NSMutableArray *keys = [NSMutableArray array];
     if ([path length] > 2 && [path characterAtIndex:0] == '{') {
@@ -196,35 +196,35 @@
         path = [NSString stringWithFormat:@"^%@$", regexPath];
     }
 
-    route.regex = [NSRegularExpression regularExpressionWithPattern:path options:NSRegularExpressionCaseInsensitive error:nil];
+    api.regex = [NSRegularExpression regularExpressionWithPattern:path options:NSRegularExpressionCaseInsensitive error:nil];
     if ([keys count] > 0) {
-        route.keys = keys;
+        api.keys = keys;
     }
 
-    return route;
+    return api;
 }
 
 - (BOOL)supportsMethod:(NSString *)method {
-    return _routeDict[method] != nil;
+    return _apiDict[method] != nil;
 }
 
-- (void)handleRoute:(VVRoute *)route withRequest:(VVRouteRequest *)request response:(VVRouteResponse *)response {
-    if (route.handler) {
-        route.handler(request, response);
+- (void)handleApi:(VVApi *)api withRequest:(VVApiRequest *)request response:(VVApiResponse *)response {
+    if (api.handler) {
+        api.handler(request, response);
     } else {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-        [route.target performSelector:route.selector withObject:request withObject:response];
+        [api.target performSelector:api.selector withObject:request withObject:response];
 #pragma clang diagnostic pop
     }
 }
 
-- (VVRoute *)findRouteWithPath:(NSString *)path {
-    for (NSString *key in [_routeDict allKeys]) {
-        for (VVRoute *route in _routeDict[key]) {
-            NSTextCheckingResult *result = [route.regex firstMatchInString:path options:0 range:NSMakeRange(0, path.length)];
+- (VVApi *)findApiWithPath:(NSString *)path {
+    for (NSString *key in [_apiDict allKeys]) {
+        for (VVApi *api in _apiDict[key]) {
+            NSTextCheckingResult *result = [api.regex firstMatchInString:path options:0 range:NSMakeRange(0, path.length)];
             if (result) {
-                return route;
+                return api;
             }
         }
     }
@@ -232,31 +232,31 @@
     return nil;
 }
 
-- (VVRouteResponse *)routeMethod:(NSString *)method
-                        withPath:(NSString *)path
-                      parameters:(NSDictionary *)params
-                         request:(VVHTTPMessage *)httpMessage
-                      connection:(VVHTTPConnection *)connection {
-    NSMutableArray *methodRoutes = _routeDict[method];
-    if (methodRoutes == nil)
+- (VVApiResponse *)apiMethod:(NSString *)method
+                    withPath:(NSString *)path
+                  parameters:(NSDictionary *)params
+                     request:(VVHTTPMessage *)httpMessage
+                  connection:(VVHTTPConnection *)connection {
+    NSMutableArray *methodApis = _apiDict[method];
+    if (methodApis == nil)
         return nil;
 
-    for (VVRoute *route in methodRoutes) {
-        NSTextCheckingResult *result = [route.regex firstMatchInString:path options:0 range:NSMakeRange(0, path.length)];
+    for (VVApi *api in methodApis) {
+        NSTextCheckingResult *result = [api.regex firstMatchInString:path options:0 range:NSMakeRange(0, path.length)];
         if (!result)
             continue;
 
         // The first range is all of the text matched by the regex.
         NSUInteger captureCount = [result numberOfRanges];
 
-        if (route.keys) {
-            // Add the route's parameters to the parameter dictionary, accounting for
+        if (api.keys) {
+            // Add the api's parameters to the parameter dictionary, accounting for
             // the first range containing the matched text.
-            if (captureCount == [route.keys count] + 1) {
+            if (captureCount == [api.keys count] + 1) {
                 NSMutableDictionary *newParams = [params mutableCopy];
                 NSUInteger index = 1;
                 BOOL firstWildcard = YES;
-                for (NSString *key in route.keys) {
+                for (NSString *key in api.keys) {
                     NSString *capture = [path substringWithRange:[result rangeAtIndex:index]];
                     if ([key isEqualToString:@"wildcards"]) {
                         NSMutableArray *wildcards = newParams[key];
@@ -285,15 +285,15 @@
             params = newParams;
         }
 
-        VVRouteRequest *request = [[VVRouteRequest alloc] initWithHTTPMessage:httpMessage parameters:params];
-        VVRouteResponse *response = [[VVRouteResponse alloc] initWithConnection:connection];
-        if (!_routeQueue) {
-            [self handleRoute:route withRequest:request response:response];
+        VVApiRequest *request = [[VVApiRequest alloc] initWithHTTPMessage:httpMessage parameters:params];
+        VVApiResponse *response = [[VVApiResponse alloc] initWithConnection:connection];
+        if (!_apiQueue) {
+            [self handleApi:api withRequest:request response:response];
         } else {
-            // Process the route on the specified queue
-            dispatch_sync(_routeQueue, ^{
+            // Process the api on the specified queue
+            dispatch_sync(_apiQueue, ^{
                 @autoreleasepool {
-                    [self handleRoute:route withRequest:request response:response];
+                    [self handleApi:api withRequest:request response:response];
                 }
             });
         }
