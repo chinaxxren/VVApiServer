@@ -11,10 +11,10 @@
 
 #import "VVHTTPMessage.h"
 
-#import "VVRoutingHTTPServer.h"
+#import "VVRouteHTTPServer.h"
 
 @interface ViewController () {
-    VVRoutingHTTPServer *http;
+    VVRouteHTTPServer *http;
 }
 
 @end
@@ -24,8 +24,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    http = [[VVRoutingHTTPServer alloc] init];
+    http = [[VVRouteHTTPServer alloc] init];
     [http setPort:80];
+    NSError *error = nil;
+    if (![http start:&error]) {
+        NSLog(@"HTTP server failed to start");
+    }
     [self setupRoutes];
 }
 
@@ -112,11 +116,6 @@
 }
 
 - (void)testPost {
-    NSError *error = nil;
-    if (![http start:&error]) {
-        NSLog(@"HTTP server failed to start");
-    }
-
     NSString *xmlString = @"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                           "<greenLevel>supergreen</greenLevel>";
 
@@ -124,11 +123,6 @@
 }
 
 - (void)testGet {
-    NSError *error = nil;
-    if (![http start:&error]) {
-        NSLog(@"HTTP server failed to start");
-    }
-
     NSString *baseURLString = [NSString stringWithFormat:@"http://127.0.0.1:%d", [http listeningPort]];
 
     NSString *urlString = [baseURLString stringByAppendingString:@"/hello"];

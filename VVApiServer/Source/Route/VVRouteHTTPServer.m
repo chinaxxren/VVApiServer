@@ -1,22 +1,23 @@
-#import "VVRoutingHTTPServer.h"
+#import "VVRouteHTTPServer.h"
 
-#import "VVRoutingConnection.h"
+#import "VVRouteConnection.h"
 #import "VVRoute.h"
 
-@implementation VVRoutingHTTPServer {
-    NSMutableDictionary *routes;
-    NSMutableDictionary *defaultHeaders;
-    NSMutableDictionary *mimeTypes;
+@implementation VVRouteHTTPServer {
+    NSMutableDictionary *routeDict;
+    NSMutableDictionary *defaultHeaderDict;
+    NSMutableDictionary *mimeTypeDict;
     dispatch_queue_t routeQueue;
 }
 
-@synthesize defaultHeaders;
+@synthesize defaultHeaderDict;
 
 - (id)init {
     if (self = [super init]) {
-        connectionClass = [VVRoutingConnection class];
-        routes = [[NSMutableDictionary alloc] init];
-        defaultHeaders = [[NSMutableDictionary alloc] init];
+        connectionClass = [VVRouteConnection class];
+        routeDict = [[NSMutableDictionary alloc] init];
+        defaultHeaderDict = [[NSMutableDictionary alloc] init];
+
         [self setupMIMETypes];
     }
     return self;
@@ -24,14 +25,14 @@
 
 - (void)setDefaultHeaders:(NSDictionary *)headers {
     if (headers) {
-        defaultHeaders = [headers mutableCopy];
+        defaultHeaderDict = [headers mutableCopy];
     } else {
-        defaultHeaders = [[NSMutableDictionary alloc] init];
+        defaultHeaderDict = [[NSMutableDictionary alloc] init];
     }
 }
 
 - (void)setDefaultHeader:(NSString *)field value:(NSString *)value {
-    defaultHeaders[field] = value;
+    defaultHeaderDict[field] = value;
 }
 
 - (dispatch_queue_t)routeQueue {
@@ -43,7 +44,7 @@
 }
 
 - (NSDictionary *)mimeTypes {
-    return mimeTypes;
+    return mimeTypeDict;
 }
 
 - (void)setMIMETypes:(NSDictionary *)types {
@@ -54,11 +55,15 @@
         newTypes = [[NSMutableDictionary alloc] init];
     }
 
-    mimeTypes = newTypes;
+    mimeTypeDict = newTypes;
 }
 
 - (void)setMIMEType:(NSString *)theType forExtension:(NSString *)ext {
-    mimeTypes[ext] = theType;
+    if (!ext || !theType) {
+        return;
+    }
+
+    mimeTypeDict[ext] = theType;
 }
 
 - (NSString *)mimeTypeForPath:(NSString *)path {
@@ -66,7 +71,7 @@
     if (!ext || [ext length] < 1)
         return nil;
 
-    return mimeTypes[ext];
+    return mimeTypeDict[ext];
 }
 
 - (void)get:(NSString *)path withHandler:(VVRequestHandler)handler {
@@ -102,10 +107,10 @@
 
 - (void)addRoute:(VVRoute *)route forMethod:(NSString *)method {
     method = [method uppercaseString];
-    NSMutableArray *methodRoutes = routes[method];
+    NSMutableArray *methodRoutes = routeDict[method];
     if (methodRoutes == nil) {
         methodRoutes = [NSMutableArray array];
-        routes[method] = methodRoutes;
+        routeDict[method] = methodRoutes;
     }
 
     [methodRoutes addObject:route];
@@ -134,8 +139,8 @@
         regex = [NSRegularExpression regularExpressionWithPattern:@"(:(\\w+)|\\*)"
                                                           options:0
                                                             error:nil];
-        NSMutableString *regexPath = [NSMutableString stringWithString:path];
         __block NSInteger diff = 0;
+        NSMutableString *regexPath = [NSMutableString stringWithString:path];
         [regex enumerateMatchesInString:path options:0 range:NSMakeRange(0, path.length)
                              usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
                                  NSRange replacementRange = NSMakeRange(diff + result.range.location, result.range.length);
@@ -167,7 +172,7 @@
 }
 
 - (BOOL)supportsMethod:(NSString *)method {
-    return (routes[method] != nil);
+    return (routeDict[method] != nil);
 }
 
 - (void)handleRoute:(VVRoute *)route withRequest:(VVRouteRequest *)request response:(VVRouteResponse *)response {
@@ -182,7 +187,7 @@
 }
 
 - (VVRouteResponse *)routeMethod:(NSString *)method withPath:(NSString *)path parameters:(NSDictionary *)params request:(VVHTTPMessage *)httpMessage connection:(VVHTTPConnection *)connection {
-    NSMutableArray *methodRoutes = routes[method];
+    NSMutableArray *methodRoutes = routeDict[method];
     if (methodRoutes == nil)
         return nil;
 
@@ -249,7 +254,7 @@
 }
 
 - (void)setupMIMETypes {
-    mimeTypes = [@{@"js": @"application/x-javascript",
+    mimeTypeDict = [@{@"js": @"application/x-javascript",
             @"gif": @"image/gif",
             @"jpg": @"image/jpeg",
             @"jpeg": @"image/jpeg",

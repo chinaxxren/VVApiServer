@@ -1,19 +1,19 @@
-#import "VVRoutingConnection.h"
-#import "VVRoutingHTTPServer.h"
+#import "VVRouteConnection.h"
+#import "VVRouteHTTPServer.h"
 #import "VVHTTPMessage.h"
 #import "VVHTTPResponseProxy.h"
 
-@implementation VVRoutingConnection {
-    __unsafe_unretained VVRoutingHTTPServer *http;
+@implementation VVRouteConnection {
+    __unsafe_unretained VVRouteHTTPServer *http;
     NSDictionary *headers;
 }
 
 - (id)initWithAsyncSocket:(GCDAsyncSocket *)newSocket configuration:(HTTPConfig *)aConfig {
     if (self = [super initWithAsyncSocket:newSocket configuration:aConfig]) {
-        NSAssert([config.server isKindOfClass:[VVRoutingHTTPServer class]],
-                @"A VVRoutingConnection is being used with a server that is not a VVRoutingHTTPServer");
+        NSAssert([config.server isKindOfClass:[VVRouteHTTPServer class]],
+                @"A VVRouteConnection is being used with a server that is not a VVRouteHTTPServer");
 
-        http = (VVRoutingHTTPServer *) config.server;
+        http = (VVRouteHTTPServer *) config.server;
     }
     return self;
 }
@@ -89,7 +89,7 @@
 }
 
 - (void)setHeadersForResponse:(VVHTTPMessage *)response isError:(BOOL)isError {
-    [http.defaultHeaders enumerateKeysAndObjectsUsingBlock:^(id field, id value, BOOL *stop) {
+    [http.defaultHeaderDict enumerateKeysAndObjectsUsingBlock:^(id field, id value, BOOL *stop) {
         [response setHeaderField:field value:value];
     }];
 

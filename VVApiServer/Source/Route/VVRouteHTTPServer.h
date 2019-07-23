@@ -1,13 +1,14 @@
 #import <Foundation/Foundation.h>
+
 #import "VVHTTPServer.h"
 #import "VVRouteRequest.h"
 #import "VVRouteResponse.h"
 
 typedef void (^VVRequestHandler)(VVRouteRequest *request, VVRouteResponse *response);
 
-@interface VVRoutingHTTPServer : VVHTTPServer
+@interface VVRouteHTTPServer : VVHTTPServer
 
-@property(nonatomic, readonly) NSDictionary *defaultHeaders;
+@property(nonatomic, readonly) NSDictionary *defaultHeaderDict;
 
 // Specifies headers that will be set on every response.
 // These headers can be overridden by RouteResponses.

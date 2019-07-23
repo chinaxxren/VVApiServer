@@ -7,130 +7,130 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A15613FC5E29D726314AB7EA /* libPods-VVApiServer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD1A50891A2FB8AFCEAC0D1 /* libPods-VVApiServer.a */; };
-		B90F868022E559E4008586B6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B90F867F22E559E4008586B6 /* AppDelegate.m */; };
-		B90F868322E559E4008586B6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B90F868222E559E4008586B6 /* ViewController.m */; };
-		B90F868622E559E4008586B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B90F868422E559E4008586B6 /* Main.storyboard */; };
-		B90F868822E559E5008586B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B90F868722E559E5008586B6 /* Assets.xcassets */; };
-		B90F868B22E559E5008586B6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B90F868922E559E5008586B6 /* LaunchScreen.storyboard */; };
-		B90F868E22E559E5008586B6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B90F868D22E559E5008586B6 /* main.m */; };
-		B90F869822E559E6008586B6 /* VVApiServerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B90F869722E559E6008586B6 /* VVApiServerTests.m */; };
-		B90F86A322E559E6008586B6 /* VVApiServerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B90F86A222E559E6008586B6 /* VVApiServerUITests.m */; };
-		B90F86B122E55A01008586B6 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = B90F86B022E55A01008586B6 /* Podfile */; };
-		C3AE6014A47566BE27E72C85 /* NSData+VVData.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE6B35652DBC92AD3EDAD7 /* NSData+VVData.m */; };
-		C3AE6046ABD7E9A5F1ED13D4 /* VVRouteRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE63A1C83A0B4D180DC10C /* VVRouteRequest.m */; };
-		C3AE6141C0597F892B75A02E /* VVHTTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE63FE67B3BE49125010F4 /* VVHTTPConnection.m */; };
-		C3AE64AE5DADC3F0A5914762 /* VVWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE6F21EEA7CC060DBD8B40 /* VVWebSocket.m */; };
-		C3AE64EBA41889CE82A8E017 /* VVHTTPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE67FA79529E8F85377F47 /* VVHTTPMessage.m */; };
-		C3AE6554623B5EE30503B145 /* VVHTTPFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE60CF9BDCD8A8D6B5909E /* VVHTTPFileResponse.m */; };
-		C3AE657E635EF9F0B8485ACA /* VVHTTPResponseProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE69654C43C0CFE4D0D8EA /* VVHTTPResponseProxy.m */; };
-		C3AE661FD5E3208897163D75 /* NSNumber+VVNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE6533EF9205400AD6709C /* NSNumber+VVNumber.m */; };
-		C3AE668446C3352877212366 /* VVRange.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE6326B2AF5D8B5294B02E /* VVRange.m */; };
-		C3AE695964AA25B6EE793525 /* VVHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE60BBFE38168B25C78AFB /* VVHTTPServer.m */; };
-		C3AE69C390921C229435B9F0 /* VVRoutingConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE6E7B4C3B29A02590AC88 /* VVRoutingConnection.m */; };
-		C3AE69CD7C4F2CDBC1E79360 /* VVHTTPAuthenticationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE6CEC8C21CF9694025065 /* VVHTTPAuthenticationRequest.m */; };
-		C3AE6CF97E038B27355D6E28 /* VVHTTPAsyncFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE6B0A2AE412376E2A1C1F /* VVHTTPAsyncFileResponse.m */; };
-		C3AE6D4C201B72D059EC312D /* VVRouteResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE685668143372DFE08BED /* VVRouteResponse.m */; };
-		C3AE6DABAFAA3C0B39528C7C /* VVRoutingHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE66C5FB649FEF00C1F12C /* VVRoutingHTTPServer.m */; };
-		C3AE6DF5C7B220ED54A38B0F /* VVRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE625F173548533E4B90F5 /* VVRoute.m */; };
-		C3AE6E29CA9F38B0EEF812DC /* VVHTTPLogging.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE6409F4746F10A6BAC779 /* VVHTTPLogging.m */; };
-		C3AE6FFA19B0E9FE7107AA90 /* VVHTTPDataResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE6FB7BA382BBA23995AD8 /* VVHTTPDataResponse.m */; };
+		08922E398818570D2017974D717A4234 /* NSData+VVData.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5A7DB231678CDA8FAF47C2A5EFE3CC /* NSData+VVData.m */; };
+		0C5176ED1634EC3FC804403AB4E64703 /* VVHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 349D70A256386A7218F27417BB1275C4 /* VVHTTPServer.m */; };
+		12CDA1C2905E15F10E00AE8055C601EA /* VVRange.m in Sources */ = {isa = PBXBuildFile; fileRef = AA381E81B76ED214968124E6139B5326 /* VVRange.m */; };
+		131462C2DBD0255C9666FFC8B869A6BA /* VVApiServerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E82EC3DC071EB10D44324A1506802021 /* VVApiServerTests.m */; };
+		1BCD7ED9C97ED78F8CCC64D862E47585 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 00DD4362168115925505A7AB8C65AA84 /* Podfile */; };
+		1DD8360CF57DE98390138E8F6FAEA242 /* VVRouteRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A50D15D8D10612C4A1013813970EEA8 /* VVRouteRequest.m */; };
+		3CA5351F73E18C474E9ADC501E874E9F /* NSNumber+VVNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = D3DA34FC769D63981C716ED347AD4455 /* NSNumber+VVNumber.m */; };
+		40A4B03E54A69D644D7053F2B81ACFA3 /* VVRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D3332FB828FC15E2BBBC91B3C86244 /* VVRoute.m */; };
+		4C7E5B205A83873929D2DC0FACEEED50 /* VVHTTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA96D614CF2DBA0E494D8DA0DD4C104 /* VVHTTPConnection.m */; };
+		4CDAAD1D63E4F7863637471F7BD3735B /* VVHTTPResponseProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E1AE039A820E572F0FE5ECDAC00C098 /* VVHTTPResponseProxy.m */; };
+		4CF245583222C52464E6CB75097A0B4F /* VVRouteHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = FBCA37AC3186037FBC8BA901D9B38F8A /* VVRouteHTTPServer.m */; };
+		4E7FAEE556C32F8A4913D72CEF008724 /* VVHTTPFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B0A77B30B9A98FB0DE868D31157E154F /* VVHTTPFileResponse.m */; };
+		735A89BA97AFAF6C2EADC7AB1698423F /* VVHTTPLogging.m in Sources */ = {isa = PBXBuildFile; fileRef = A3E78F4B8B05689F029E4DF2B3BF8B3A /* VVHTTPLogging.m */; };
+		800278573384056D85E8B33309C1742F /* VVRouteConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = BB77CC63F3AAFBD1C55C7AB79C0D2B68 /* VVRouteConnection.m */; };
+		894D4DE0FFB5959BA09AA30A815D40A8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4BE0398F3A469F1668847FAE37508DF /* Main.storyboard */; };
+		8B37E061E67DE5407B6F857385370E01 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D57C697D9060C31ADCAA5B95F9A3FA6 /* LaunchScreen.storyboard */; };
+		AAFF8D3BFE7B068F6E4702E5E7E39A16 /* VVHTTPAuthenticationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE7D19D1E18350CC7CBCD91982ABB3B /* VVHTTPAuthenticationRequest.m */; };
+		B56EE66D23D7EAC2A0E4E4D7A0052BE1 /* VVHTTPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A4D2CD086E924784CB4D866349F70F /* VVHTTPMessage.m */; };
+		B6389672729BFA3C7131BDDCE35D5B2D /* VVRouteResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5F82E20487603E8E69CDD5967F8644 /* VVRouteResponse.m */; };
+		BBC8F20D749310FADC3FAE94EF78552E /* VVApiServerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7545736340A9B6DAF479B03AF5F78E60 /* VVApiServerUITests.m */; };
+		C4BA1EBDBEAC82F7CBBE20012D3D276D /* VVWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A69BE146E329B0FB2CE270C7D887C06A /* VVWebSocket.m */; };
+		C8BB8220CAE2071BDE1D972028C90E11 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 448E60B330362E60A4AA6D6ABB75275F /* AppDelegate.m */; };
+		CA82BEAB4349A96A678DB1657AA35CA2 /* VVHTTPAsyncFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E66DB76E63C1D06EF6CC057588966F4 /* VVHTTPAsyncFileResponse.m */; };
+		D06BBDAE3FC9CDCC91F776537A640C8A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 88AF1D31DE9AB4778F0F84997B5343B0 /* main.m */; };
+		D0980EA3F713DBC18714C7467BF2A467 /* libPods-VVApiServer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9535202AD9D0734A9C9C9D2541D6C77C /* libPods-VVApiServer.a */; };
+		D63D2CBD594D30FF3B89FC58FF844125 /* VVHTTPDataResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 59A5301622395C4918ECD043A47F5073 /* VVHTTPDataResponse.m */; };
+		EF695A7697C76247AC50025BFDA1B98E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D402755D392BC58098CF953F763B3314 /* ViewController.m */; };
+		F08996694E174D4C260D01DAACABD0FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 344152DBB3B08FFF8232F4FCC11A6451 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		B90F869422E559E6008586B6 /* PBXContainerItemProxy */ = {
+		6B347B1327EB92643D87456B3DCB8A72 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = B90F867322E559E4008586B6 /* Project object */;
+			containerPortal = 93F72F5491C6AEDDAF48FE51664ED19D /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = B90F867A22E559E4008586B6;
+			remoteGlobalIDString = E1A89FF74B5E81177E4E81385664C518;
 			remoteInfo = VVApiServer;
 		};
-		B90F869F22E559E6008586B6 /* PBXContainerItemProxy */ = {
+		6EE550D88117C3146396D3BD54C632E7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = B90F867322E559E4008586B6 /* Project object */;
+			containerPortal = 93F72F5491C6AEDDAF48FE51664ED19D /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = B90F867A22E559E4008586B6;
+			remoteGlobalIDString = E1A89FF74B5E81177E4E81385664C518;
 			remoteInfo = VVApiServer;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		07AFF8CB561CF8DFA714AD62 /* Pods-VVApiServer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VVApiServer.debug.xcconfig"; path = "Target Support Files/Pods-VVApiServer/Pods-VVApiServer.debug.xcconfig"; sourceTree = "<group>"; };
-		2499EB36F05C5D55C779396F /* Pods-VVApiServer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VVApiServer.release.xcconfig"; path = "Target Support Files/Pods-VVApiServer/Pods-VVApiServer.release.xcconfig"; sourceTree = "<group>"; };
-		B90F867B22E559E4008586B6 /* VVApiServer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VVApiServer.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		B90F867E22E559E4008586B6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		B90F867F22E559E4008586B6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		B90F868122E559E4008586B6 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		B90F868222E559E4008586B6 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		B90F868522E559E4008586B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		B90F868722E559E5008586B6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		B90F868A22E559E5008586B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		B90F868C22E559E5008586B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B90F868D22E559E5008586B6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		B90F869322E559E6008586B6 /* VVApiServerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VVApiServerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B90F869722E559E6008586B6 /* VVApiServerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VVApiServerTests.m; sourceTree = "<group>"; };
-		B90F869922E559E6008586B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B90F869E22E559E6008586B6 /* VVApiServerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VVApiServerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B90F86A222E559E6008586B6 /* VVApiServerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VVApiServerUITests.m; sourceTree = "<group>"; };
-		B90F86A422E559E6008586B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B90F86B022E55A01008586B6 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
-		C3AE609BABB876DA87BAB2FF /* VVHTTPMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVHTTPMessage.h; sourceTree = "<group>"; };
-		C3AE60BBFE38168B25C78AFB /* VVHTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVHTTPServer.m; sourceTree = "<group>"; };
-		C3AE60CF9BDCD8A8D6B5909E /* VVHTTPFileResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVHTTPFileResponse.m; sourceTree = "<group>"; };
-		C3AE625F173548533E4B90F5 /* VVRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVRoute.m; sourceTree = "<group>"; };
-		C3AE626797BC568713E72883 /* VVHTTPAuthenticationRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVHTTPAuthenticationRequest.h; sourceTree = "<group>"; };
-		C3AE62A0B90BA8FE6C8000D9 /* NSData+VVData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+VVData.h"; sourceTree = "<group>"; };
-		C3AE6326B2AF5D8B5294B02E /* VVRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVRange.m; sourceTree = "<group>"; };
-		C3AE6335AE916819BDEAC86E /* VVRouteRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVRouteRequest.h; sourceTree = "<group>"; };
-		C3AE6398B683E90E2C7FACAB /* VVRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVRange.h; sourceTree = "<group>"; };
-		C3AE63A1C83A0B4D180DC10C /* VVRouteRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVRouteRequest.m; sourceTree = "<group>"; };
-		C3AE63EA1385C186A3B8E708 /* VVWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVWebSocket.h; sourceTree = "<group>"; };
-		C3AE63FE67B3BE49125010F4 /* VVHTTPConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVHTTPConnection.m; sourceTree = "<group>"; };
-		C3AE6409F4746F10A6BAC779 /* VVHTTPLogging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVHTTPLogging.m; sourceTree = "<group>"; };
-		C3AE64651ECC43A1185B8852 /* VVRoutingConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVRoutingConnection.h; sourceTree = "<group>"; };
-		C3AE649BB9F627A30CF1154B /* VVHTTPLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVHTTPLogging.h; sourceTree = "<group>"; };
-		C3AE64B706EAA797308E9AA6 /* VVRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVRoute.h; sourceTree = "<group>"; };
-		C3AE6533EF9205400AD6709C /* NSNumber+VVNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+VVNumber.m"; sourceTree = "<group>"; };
-		C3AE6682580F7DDA85F2DF78 /* VVRoutingHTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVRoutingHTTPServer.h; sourceTree = "<group>"; };
-		C3AE66C5FB649FEF00C1F12C /* VVRoutingHTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVRoutingHTTPServer.m; sourceTree = "<group>"; };
-		C3AE67458E4A24608B70BAD8 /* VVHTTPConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVHTTPConnection.h; sourceTree = "<group>"; };
-		C3AE67FA79529E8F85377F47 /* VVHTTPMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVHTTPMessage.m; sourceTree = "<group>"; };
-		C3AE6816BF565248C3BE851B /* NSNumber+VVNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+VVNumber.h"; sourceTree = "<group>"; };
-		C3AE685668143372DFE08BED /* VVRouteResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVRouteResponse.m; sourceTree = "<group>"; };
-		C3AE6864410C08ED66CB4CE9 /* VVHTTPFileResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVHTTPFileResponse.h; sourceTree = "<group>"; };
-		C3AE689F17CEECB72438311E /* VVHTTPResponseProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVHTTPResponseProxy.h; sourceTree = "<group>"; };
-		C3AE69654C43C0CFE4D0D8EA /* VVHTTPResponseProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVHTTPResponseProxy.m; sourceTree = "<group>"; };
-		C3AE69BAFC69F7EF465EBA84 /* VVHTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVHTTPServer.h; sourceTree = "<group>"; };
-		C3AE6A95C825F88C366F8384 /* VVHTTPAsyncFileResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVHTTPAsyncFileResponse.h; sourceTree = "<group>"; };
-		C3AE6B0A2AE412376E2A1C1F /* VVHTTPAsyncFileResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVHTTPAsyncFileResponse.m; sourceTree = "<group>"; };
-		C3AE6B35652DBC92AD3EDAD7 /* NSData+VVData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+VVData.m"; sourceTree = "<group>"; };
-		C3AE6B430AB00A5C5EA6EF5B /* VVHTTPDataResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVHTTPDataResponse.h; sourceTree = "<group>"; };
-		C3AE6CEC8C21CF9694025065 /* VVHTTPAuthenticationRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVHTTPAuthenticationRequest.m; sourceTree = "<group>"; };
-		C3AE6E7B4C3B29A02590AC88 /* VVRoutingConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVRoutingConnection.m; sourceTree = "<group>"; };
-		C3AE6F21EEA7CC060DBD8B40 /* VVWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVWebSocket.m; sourceTree = "<group>"; };
-		C3AE6FB14FB277ED67566D5C /* VVRouteResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVRouteResponse.h; sourceTree = "<group>"; };
-		C3AE6FB7BA382BBA23995AD8 /* VVHTTPDataResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVHTTPDataResponse.m; sourceTree = "<group>"; };
-		C3AE6FFC2467003E31F092D7 /* VVHTTPResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVHTTPResponse.h; sourceTree = "<group>"; };
-		CDD1A50891A2FB8AFCEAC0D1 /* libPods-VVApiServer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VVApiServer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		00DD4362168115925505A7AB8C65AA84 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		1546EA1268AB9B4353A51120F07965B0 /* VVHTTPResponseProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVHTTPResponseProxy.h; sourceTree = "<group>"; };
+		17E885A05C30796457693BF846E5458E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		198D502A2E4C4EE8E83C7F32E6AB9D03 /* Pods-VVApiServer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VVApiServer.release.xcconfig"; path = "Target Support Files/Pods-VVApiServer/Pods-VVApiServer.release.xcconfig"; sourceTree = "<group>"; };
+		1B85E500C559EE143EC323899F34EF5B /* VVApiServerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VVApiServerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E4C6E156A3C93E77AEFCD04A16DA7E2 /* VVHTTPAuthenticationRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVHTTPAuthenticationRequest.h; sourceTree = "<group>"; };
+		1F5A7DB231678CDA8FAF47C2A5EFE3CC /* NSData+VVData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+VVData.m"; sourceTree = "<group>"; };
+		2849399BDE13B7D5A093F1DF1DE48C1F /* VVHTTPResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVHTTPResponse.h; sourceTree = "<group>"; };
+		29DF23C76E3C7C6F75A124E32A88B4FA /* VVHTTPDataResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVHTTPDataResponse.h; sourceTree = "<group>"; };
+		2D5F82E20487603E8E69CDD5967F8644 /* VVRouteResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVRouteResponse.m; sourceTree = "<group>"; };
+		322754EE49ACC52330CFFCF7E61DE8B8 /* VVWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVWebSocket.h; sourceTree = "<group>"; };
+		344152DBB3B08FFF8232F4FCC11A6451 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		349D70A256386A7218F27417BB1275C4 /* VVHTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVHTTPServer.m; sourceTree = "<group>"; };
+		385D3150FFE3FF58B84077D8F6CC8738 /* VVRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVRoute.h; sourceTree = "<group>"; };
+		448E60B330362E60A4AA6D6ABB75275F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		460BC0B47987B8E911682D2701268ACB /* VVHTTPAsyncFileResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVHTTPAsyncFileResponse.h; sourceTree = "<group>"; };
+		4ACF95CF401B55FD9F983647701A22EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4BA96D614CF2DBA0E494D8DA0DD4C104 /* VVHTTPConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVHTTPConnection.m; sourceTree = "<group>"; };
+		4E1AE039A820E572F0FE5ECDAC00C098 /* VVHTTPResponseProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVHTTPResponseProxy.m; sourceTree = "<group>"; };
+		50A4D2CD086E924784CB4D866349F70F /* VVHTTPMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVHTTPMessage.m; sourceTree = "<group>"; };
+		550DB7E6CDAB96687385ED1417081B45 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		59A5301622395C4918ECD043A47F5073 /* VVHTTPDataResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVHTTPDataResponse.m; sourceTree = "<group>"; };
+		6502CF1F8D4C4F3902C49AF159BD185E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		7429E1C7E14795592D52A550F57685FE /* VVApiServer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VVApiServer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7545736340A9B6DAF479B03AF5F78E60 /* VVApiServerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VVApiServerUITests.m; sourceTree = "<group>"; };
+		7A50D15D8D10612C4A1013813970EEA8 /* VVRouteRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVRouteRequest.m; sourceTree = "<group>"; };
+		7CE7D19D1E18350CC7CBCD91982ABB3B /* VVHTTPAuthenticationRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVHTTPAuthenticationRequest.m; sourceTree = "<group>"; };
+		8631109911BF3576DE806814BCE3BA3A /* VVApiServerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VVApiServerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		87EE8E21A39FC4719FF073EC169C8A24 /* VVRouteRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVRouteRequest.h; sourceTree = "<group>"; };
+		88AF1D31DE9AB4778F0F84997B5343B0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		8DA09E6E6F54C34F0E4AEFAAF29F774F /* VVRouteResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVRouteResponse.h; sourceTree = "<group>"; };
+		8E66DB76E63C1D06EF6CC057588966F4 /* VVHTTPAsyncFileResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVHTTPAsyncFileResponse.m; sourceTree = "<group>"; };
+		9535202AD9D0734A9C9C9D2541D6C77C /* libPods-VVApiServer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VVApiServer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9BAEF73CE035D5DAF169A83D5F3FC22D /* VVHTTPLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVHTTPLogging.h; sourceTree = "<group>"; };
+		9D8D90A9C2E69DDE046F3027C19CFD85 /* NSData+VVData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+VVData.h"; sourceTree = "<group>"; };
+		A309E984DE9E8BE34BF130B8F0A93ACA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A3E78F4B8B05689F029E4DF2B3BF8B3A /* VVHTTPLogging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVHTTPLogging.m; sourceTree = "<group>"; };
+		A69BE146E329B0FB2CE270C7D887C06A /* VVWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVWebSocket.m; sourceTree = "<group>"; };
+		AA381E81B76ED214968124E6139B5326 /* VVRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVRange.m; sourceTree = "<group>"; };
+		ADDED3BDA767E3417DDE2A2B24D38D97 /* VVHTTPMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVHTTPMessage.h; sourceTree = "<group>"; };
+		B03991B5DDD15724DEEDD91DF23AB940 /* VVHTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVHTTPServer.h; sourceTree = "<group>"; };
+		B0A77B30B9A98FB0DE868D31157E154F /* VVHTTPFileResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVHTTPFileResponse.m; sourceTree = "<group>"; };
+		B736AFF638E831971C755E783D8582C3 /* Pods-VVApiServer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VVApiServer.debug.xcconfig"; path = "Target Support Files/Pods-VVApiServer/Pods-VVApiServer.debug.xcconfig"; sourceTree = "<group>"; };
+		BA1834BA50669A53B88F07BA39452491 /* VVRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVRange.h; sourceTree = "<group>"; };
+		BB77CC63F3AAFBD1C55C7AB79C0D2B68 /* VVRouteConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVRouteConnection.m; sourceTree = "<group>"; };
+		C2D3332FB828FC15E2BBBC91B3C86244 /* VVRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVRoute.m; sourceTree = "<group>"; };
+		CD8F324EBD87780D631D6FD85C99F6B5 /* VVRouteHTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVRouteHTTPServer.h; sourceTree = "<group>"; };
+		D3DA34FC769D63981C716ED347AD4455 /* NSNumber+VVNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+VVNumber.m"; sourceTree = "<group>"; };
+		D402755D392BC58098CF953F763B3314 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		E53A389ACFE141146C2FDD26C47B692D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		E603744A8FCFE99F91F6F397C915307B /* VVRouteConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVRouteConnection.h; sourceTree = "<group>"; };
+		E82EC3DC071EB10D44324A1506802021 /* VVApiServerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VVApiServerTests.m; sourceTree = "<group>"; };
+		F1EC19D56F6CDB7F3E7A9CE57553D19A /* NSNumber+VVNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+VVNumber.h"; sourceTree = "<group>"; };
+		F2D81BDBBEE5E2CB4DE481F5E69D87E8 /* VVHTTPFileResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVHTTPFileResponse.h; sourceTree = "<group>"; };
+		F3D666721B556479EEB02D9366EAAD73 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		F8F19B7FAB930385457F2FA6508038AA /* VVHTTPConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVHTTPConnection.h; sourceTree = "<group>"; };
+		FBCA37AC3186037FBC8BA901D9B38F8A /* VVRouteHTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVRouteHTTPServer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		B90F867822E559E4008586B6 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A15613FC5E29D726314AB7EA /* libPods-VVApiServer.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B90F869022E559E6008586B6 /* Frameworks */ = {
+		0F110D83F0D7B917BB8B978A876D3C25 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B90F869B22E559E6008586B6 /* Frameworks */ = {
+		B96927EB50609E6BB6499CFD3FB5836E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D0980EA3F713DBC18714C7467BF2A467 /* libPods-VVApiServer.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE6E0BB71286171F0952B5A872075325 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -140,168 +140,204 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B90F867222E559E4008586B6 = {
+		2C67EBA996CE700459644FC10DD48F13 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				B90F86B022E55A01008586B6 /* Podfile */,
-				B90F867D22E559E4008586B6 /* VVApiServer */,
-				B90F869622E559E6008586B6 /* VVApiServerTests */,
-				B90F86A122E559E6008586B6 /* VVApiServerUITests */,
-				B90F867C22E559E4008586B6 /* Products */,
-				DB6AEA0A3B821C49CF542751 /* Pods */,
-				CA7D1E4E9D0FCE14A084FDCD /* Frameworks */,
+				B736AFF638E831971C755E783D8582C3 /* Pods-VVApiServer.debug.xcconfig */,
+				198D502A2E4C4EE8E83C7F32E6AB9D03 /* Pods-VVApiServer.release.xcconfig */,
 			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
-		B90F867C22E559E4008586B6 /* Products */ = {
+		4012CB2AA9CBB584267DBC7898D1F599 /* Responses */ = {
 			isa = PBXGroup;
 			children = (
-				B90F867B22E559E4008586B6 /* VVApiServer.app */,
-				B90F869322E559E6008586B6 /* VVApiServerTests.xctest */,
-				B90F869E22E559E6008586B6 /* VVApiServerUITests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		B90F867D22E559E4008586B6 /* VVApiServer */ = {
-			isa = PBXGroup;
-			children = (
-				B90F86B222E55B80008586B6 /* Source */,
-				B90F867E22E559E4008586B6 /* AppDelegate.h */,
-				B90F867F22E559E4008586B6 /* AppDelegate.m */,
-				B90F868122E559E4008586B6 /* ViewController.h */,
-				B90F868222E559E4008586B6 /* ViewController.m */,
-				B90F868422E559E4008586B6 /* Main.storyboard */,
-				B90F868722E559E5008586B6 /* Assets.xcassets */,
-				B90F868922E559E5008586B6 /* LaunchScreen.storyboard */,
-				B90F868C22E559E5008586B6 /* Info.plist */,
-				B90F868D22E559E5008586B6 /* main.m */,
-			);
-			path = VVApiServer;
-			sourceTree = "<group>";
-		};
-		B90F869622E559E6008586B6 /* VVApiServerTests */ = {
-			isa = PBXGroup;
-			children = (
-				B90F869722E559E6008586B6 /* VVApiServerTests.m */,
-				B90F869922E559E6008586B6 /* Info.plist */,
-			);
-			path = VVApiServerTests;
-			sourceTree = "<group>";
-		};
-		B90F86A122E559E6008586B6 /* VVApiServerUITests */ = {
-			isa = PBXGroup;
-			children = (
-				B90F86A222E559E6008586B6 /* VVApiServerUITests.m */,
-				B90F86A422E559E6008586B6 /* Info.plist */,
-			);
-			path = VVApiServerUITests;
-			sourceTree = "<group>";
-		};
-		B90F86B222E55B80008586B6 /* Source */ = {
-			isa = PBXGroup;
-			children = (
-				C3AE6E6EE74016647CB0413A /* Route */,
-				C3AE691DB7A0B92AB2144020 /* Http */,
-				C3AE681367DB258C868502BC /* Categories */,
-				C3AE6C78CD7CBF0EC5BF0C22 /* Responses */,
-			);
-			path = Source;
-			sourceTree = "<group>";
-		};
-		C3AE681367DB258C868502BC /* Categories */ = {
-			isa = PBXGroup;
-			children = (
-				C3AE6B35652DBC92AD3EDAD7 /* NSData+VVData.m */,
-				C3AE62A0B90BA8FE6C8000D9 /* NSData+VVData.h */,
-				C3AE6533EF9205400AD6709C /* NSNumber+VVNumber.m */,
-				C3AE6816BF565248C3BE851B /* NSNumber+VVNumber.h */,
-				C3AE6326B2AF5D8B5294B02E /* VVRange.m */,
-				C3AE6398B683E90E2C7FACAB /* VVRange.h */,
-			);
-			path = Categories;
-			sourceTree = "<group>";
-		};
-		C3AE691DB7A0B92AB2144020 /* Http */ = {
-			isa = PBXGroup;
-			children = (
-				C3AE60BBFE38168B25C78AFB /* VVHTTPServer.m */,
-				C3AE69BAFC69F7EF465EBA84 /* VVHTTPServer.h */,
-				C3AE6409F4746F10A6BAC779 /* VVHTTPLogging.m */,
-				C3AE649BB9F627A30CF1154B /* VVHTTPLogging.h */,
-				C3AE63FE67B3BE49125010F4 /* VVHTTPConnection.m */,
-				C3AE67458E4A24608B70BAD8 /* VVHTTPConnection.h */,
-				C3AE6CEC8C21CF9694025065 /* VVHTTPAuthenticationRequest.m */,
-				C3AE626797BC568713E72883 /* VVHTTPAuthenticationRequest.h */,
-				C3AE67FA79529E8F85377F47 /* VVHTTPMessage.m */,
-				C3AE609BABB876DA87BAB2FF /* VVHTTPMessage.h */,
-				C3AE6FFC2467003E31F092D7 /* VVHTTPResponse.h */,
-				C3AE6F21EEA7CC060DBD8B40 /* VVWebSocket.m */,
-				C3AE63EA1385C186A3B8E708 /* VVWebSocket.h */,
-			);
-			path = Http;
-			sourceTree = "<group>";
-		};
-		C3AE6C78CD7CBF0EC5BF0C22 /* Responses */ = {
-			isa = PBXGroup;
-			children = (
-				C3AE60CF9BDCD8A8D6B5909E /* VVHTTPFileResponse.m */,
-				C3AE6864410C08ED66CB4CE9 /* VVHTTPFileResponse.h */,
-				C3AE6B0A2AE412376E2A1C1F /* VVHTTPAsyncFileResponse.m */,
-				C3AE6A95C825F88C366F8384 /* VVHTTPAsyncFileResponse.h */,
-				C3AE6FB7BA382BBA23995AD8 /* VVHTTPDataResponse.m */,
-				C3AE6B430AB00A5C5EA6EF5B /* VVHTTPDataResponse.h */,
+				460BC0B47987B8E911682D2701268ACB /* VVHTTPAsyncFileResponse.h */,
+				8E66DB76E63C1D06EF6CC057588966F4 /* VVHTTPAsyncFileResponse.m */,
+				29DF23C76E3C7C6F75A124E32A88B4FA /* VVHTTPDataResponse.h */,
+				59A5301622395C4918ECD043A47F5073 /* VVHTTPDataResponse.m */,
+				F2D81BDBBEE5E2CB4DE481F5E69D87E8 /* VVHTTPFileResponse.h */,
+				B0A77B30B9A98FB0DE868D31157E154F /* VVHTTPFileResponse.m */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
 		};
-		C3AE6E6EE74016647CB0413A /* Route */ = {
+		407E79863419A488960F9D684C041DF3 /* Http */ = {
 			isa = PBXGroup;
 			children = (
-				C3AE6682580F7DDA85F2DF78 /* VVRoutingHTTPServer.h */,
-				C3AE6E7B4C3B29A02590AC88 /* VVRoutingConnection.m */,
-				C3AE689F17CEECB72438311E /* VVHTTPResponseProxy.h */,
-				C3AE6335AE916819BDEAC86E /* VVRouteRequest.h */,
-				C3AE63A1C83A0B4D180DC10C /* VVRouteRequest.m */,
-				C3AE685668143372DFE08BED /* VVRouteResponse.m */,
-				C3AE69654C43C0CFE4D0D8EA /* VVHTTPResponseProxy.m */,
-				C3AE64B706EAA797308E9AA6 /* VVRoute.h */,
-				C3AE625F173548533E4B90F5 /* VVRoute.m */,
-				C3AE6FB14FB277ED67566D5C /* VVRouteResponse.h */,
-				C3AE66C5FB649FEF00C1F12C /* VVRoutingHTTPServer.m */,
-				C3AE64651ECC43A1185B8852 /* VVRoutingConnection.h */,
+				1E4C6E156A3C93E77AEFCD04A16DA7E2 /* VVHTTPAuthenticationRequest.h */,
+				7CE7D19D1E18350CC7CBCD91982ABB3B /* VVHTTPAuthenticationRequest.m */,
+				F8F19B7FAB930385457F2FA6508038AA /* VVHTTPConnection.h */,
+				4BA96D614CF2DBA0E494D8DA0DD4C104 /* VVHTTPConnection.m */,
+				9BAEF73CE035D5DAF169A83D5F3FC22D /* VVHTTPLogging.h */,
+				A3E78F4B8B05689F029E4DF2B3BF8B3A /* VVHTTPLogging.m */,
+				ADDED3BDA767E3417DDE2A2B24D38D97 /* VVHTTPMessage.h */,
+				50A4D2CD086E924784CB4D866349F70F /* VVHTTPMessage.m */,
+				2849399BDE13B7D5A093F1DF1DE48C1F /* VVHTTPResponse.h */,
+				B03991B5DDD15724DEEDD91DF23AB940 /* VVHTTPServer.h */,
+				349D70A256386A7218F27417BB1275C4 /* VVHTTPServer.m */,
+				322754EE49ACC52330CFFCF7E61DE8B8 /* VVWebSocket.h */,
+				A69BE146E329B0FB2CE270C7D887C06A /* VVWebSocket.m */,
+			);
+			path = Http;
+			sourceTree = "<group>";
+		};
+		4677614B8236C9BA24DB4A833CF34BE8 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				6F54CEDDD83251F50650BC058765B5F9 /* Categories */,
+				407E79863419A488960F9D684C041DF3 /* Http */,
+				4012CB2AA9CBB584267DBC7898D1F599 /* Responses */,
+				9BA3056ECE0DE40931DDC4DECDC41025 /* Route */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		477111027DCA30182BB77E2276FE9EDA /* VVApiServerTests */ = {
+			isa = PBXGroup;
+			children = (
+				17E885A05C30796457693BF846E5458E /* Info.plist */,
+				E82EC3DC071EB10D44324A1506802021 /* VVApiServerTests.m */,
+			);
+			path = VVApiServerTests;
+			sourceTree = "<group>";
+		};
+		6F54CEDDD83251F50650BC058765B5F9 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				9D8D90A9C2E69DDE046F3027C19CFD85 /* NSData+VVData.h */,
+				1F5A7DB231678CDA8FAF47C2A5EFE3CC /* NSData+VVData.m */,
+				F1EC19D56F6CDB7F3E7A9CE57553D19A /* NSNumber+VVNumber.h */,
+				D3DA34FC769D63981C716ED347AD4455 /* NSNumber+VVNumber.m */,
+				BA1834BA50669A53B88F07BA39452491 /* VVRange.h */,
+				AA381E81B76ED214968124E6139B5326 /* VVRange.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		9367CBFED1616D4EF9E4C840057A4A61 = {
+			isa = PBXGroup;
+			children = (
+				EDC8034CBA6C7B8E99AD66A538D85BFD /* Frameworks */,
+				00DD4362168115925505A7AB8C65AA84 /* Podfile */,
+				2C67EBA996CE700459644FC10DD48F13 /* Pods */,
+				B33FB0DE6BA45851DE5A743A08A7561E /* Products */,
+				CBB0486625052BD76C0CF8D0907CE788 /* VVApiServer */,
+				477111027DCA30182BB77E2276FE9EDA /* VVApiServerTests */,
+				CA3C97257B6EA8D81E682DC3D0925106 /* VVApiServerUITests */,
+			);
+			sourceTree = "<group>";
+		};
+		9BA3056ECE0DE40931DDC4DECDC41025 /* Route */ = {
+			isa = PBXGroup;
+			children = (
+				1546EA1268AB9B4353A51120F07965B0 /* VVHTTPResponseProxy.h */,
+				4E1AE039A820E572F0FE5ECDAC00C098 /* VVHTTPResponseProxy.m */,
+				385D3150FFE3FF58B84077D8F6CC8738 /* VVRoute.h */,
+				C2D3332FB828FC15E2BBBC91B3C86244 /* VVRoute.m */,
+				87EE8E21A39FC4719FF073EC169C8A24 /* VVRouteRequest.h */,
+				7A50D15D8D10612C4A1013813970EEA8 /* VVRouteRequest.m */,
+				8DA09E6E6F54C34F0E4AEFAAF29F774F /* VVRouteResponse.h */,
+				2D5F82E20487603E8E69CDD5967F8644 /* VVRouteResponse.m */,
+				E603744A8FCFE99F91F6F397C915307B /* VVRouteConnection.h */,
+				BB77CC63F3AAFBD1C55C7AB79C0D2B68 /* VVRouteConnection.m */,
+				CD8F324EBD87780D631D6FD85C99F6B5 /* VVRouteHTTPServer.h */,
+				FBCA37AC3186037FBC8BA901D9B38F8A /* VVRouteHTTPServer.m */,
 			);
 			path = Route;
 			sourceTree = "<group>";
 		};
-		CA7D1E4E9D0FCE14A084FDCD /* Frameworks */ = {
+		B33FB0DE6BA45851DE5A743A08A7561E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CDD1A50891A2FB8AFCEAC0D1 /* libPods-VVApiServer.a */,
+				7429E1C7E14795592D52A550F57685FE /* VVApiServer.app */,
+				8631109911BF3576DE806814BCE3BA3A /* VVApiServerTests.xctest */,
+				1B85E500C559EE143EC323899F34EF5B /* VVApiServerUITests.xctest */,
 			);
-			name = Frameworks;
+			name = Products;
 			sourceTree = "<group>";
 		};
-		DB6AEA0A3B821C49CF542751 /* Pods */ = {
+		CA3C97257B6EA8D81E682DC3D0925106 /* VVApiServerUITests */ = {
 			isa = PBXGroup;
 			children = (
-				07AFF8CB561CF8DFA714AD62 /* Pods-VVApiServer.debug.xcconfig */,
-				2499EB36F05C5D55C779396F /* Pods-VVApiServer.release.xcconfig */,
+				550DB7E6CDAB96687385ED1417081B45 /* Info.plist */,
+				7545736340A9B6DAF479B03AF5F78E60 /* VVApiServerUITests.m */,
 			);
-			path = Pods;
+			path = VVApiServerUITests;
+			sourceTree = "<group>";
+		};
+		CBB0486625052BD76C0CF8D0907CE788 /* VVApiServer */ = {
+			isa = PBXGroup;
+			children = (
+				4677614B8236C9BA24DB4A833CF34BE8 /* Source */,
+				E53A389ACFE141146C2FDD26C47B692D /* AppDelegate.h */,
+				448E60B330362E60A4AA6D6ABB75275F /* AppDelegate.m */,
+				344152DBB3B08FFF8232F4FCC11A6451 /* Assets.xcassets */,
+				A309E984DE9E8BE34BF130B8F0A93ACA /* Info.plist */,
+				2D57C697D9060C31ADCAA5B95F9A3FA6 /* LaunchScreen.storyboard */,
+				D4BE0398F3A469F1668847FAE37508DF /* Main.storyboard */,
+				F3D666721B556479EEB02D9366EAAD73 /* ViewController.h */,
+				D402755D392BC58098CF953F763B3314 /* ViewController.m */,
+				88AF1D31DE9AB4778F0F84997B5343B0 /* main.m */,
+			);
+			path = VVApiServer;
+			sourceTree = "<group>";
+		};
+		EDC8034CBA6C7B8E99AD66A538D85BFD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9535202AD9D0734A9C9C9D2541D6C77C /* libPods-VVApiServer.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B90F867A22E559E4008586B6 /* VVApiServer */ = {
+		369418F54B70494DDC15C38DE68FAB82 /* VVApiServerTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B90F86A722E559E6008586B6 /* Build configuration list for PBXNativeTarget "VVApiServer" */;
+			buildConfigurationList = A7A0CDB92F7F5361A09F48C9EA2D748F /* Build configuration list for PBXNativeTarget "VVApiServerTests" */;
 			buildPhases = (
-				BC7C69E579BAA8AADDB6D772 /* [CP] Check Pods Manifest.lock */,
-				B90F867722E559E4008586B6 /* Sources */,
-				B90F867822E559E4008586B6 /* Frameworks */,
-				B90F867922E559E4008586B6 /* Resources */,
+				D321E9781BE604AE13E612A9C94951CF /* Sources */,
+				BE6E0BB71286171F0952B5A872075325 /* Frameworks */,
+				3096677821511110A9BACF12BF6DCE9C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C5842A6A5B336960FCE33805AC586954 /* PBXTargetDependency */,
+			);
+			name = VVApiServerTests;
+			productName = VVApiServerTests;
+			productReference = 8631109911BF3576DE806814BCE3BA3A /* VVApiServerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		6E2C78B4ECDD6A0E54FCA8B099561347 /* VVApiServerUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 034F61B634D613F0732155AEBF757961 /* Build configuration list for PBXNativeTarget "VVApiServerUITests" */;
+			buildPhases = (
+				6A04949733EE4807BEDF39D85BF4F30D /* Sources */,
+				0F110D83F0D7B917BB8B978A876D3C25 /* Frameworks */,
+				FDEC6F911028DCDCCD3A0BC0BCC7D06E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9833B851B8208B944D31400AD374CDF1 /* PBXTargetDependency */,
+			);
+			name = VVApiServerUITests;
+			productName = VVApiServerUITests;
+			productReference = 1B85E500C559EE143EC323899F34EF5B /* VVApiServerUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		E1A89FF74B5E81177E4E81385664C518 /* VVApiServer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E652389D8264709CF49AFB06BD85AAEA /* Build configuration list for PBXNativeTarget "VVApiServer" */;
+			buildPhases = (
+				11D8C3B24CF43FE950F24DDE01A677DD /* [CP] Check Pods Manifest.lock */,
+				DA77F8C0DB02F1F980E32B37649BE1C3 /* Sources */,
+				B96927EB50609E6BB6499CFD3FB5836E /* Frameworks */,
+				FA3D2011BC3F70D394F0AE5D03B0E80D /* Resources */,
 			);
 			buildRules = (
 			);
@@ -309,68 +345,32 @@
 			);
 			name = VVApiServer;
 			productName = VVApiServer;
-			productReference = B90F867B22E559E4008586B6 /* VVApiServer.app */;
+			productReference = 7429E1C7E14795592D52A550F57685FE /* VVApiServer.app */;
 			productType = "com.apple.product-type.application";
-		};
-		B90F869222E559E6008586B6 /* VVApiServerTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B90F86AA22E559E6008586B6 /* Build configuration list for PBXNativeTarget "VVApiServerTests" */;
-			buildPhases = (
-				B90F868F22E559E6008586B6 /* Sources */,
-				B90F869022E559E6008586B6 /* Frameworks */,
-				B90F869122E559E6008586B6 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				B90F869522E559E6008586B6 /* PBXTargetDependency */,
-			);
-			name = VVApiServerTests;
-			productName = VVApiServerTests;
-			productReference = B90F869322E559E6008586B6 /* VVApiServerTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		B90F869D22E559E6008586B6 /* VVApiServerUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B90F86AD22E559E6008586B6 /* Build configuration list for PBXNativeTarget "VVApiServerUITests" */;
-			buildPhases = (
-				B90F869A22E559E6008586B6 /* Sources */,
-				B90F869B22E559E6008586B6 /* Frameworks */,
-				B90F869C22E559E6008586B6 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				B90F86A022E559E6008586B6 /* PBXTargetDependency */,
-			);
-			name = VVApiServerUITests;
-			productName = VVApiServerUITests;
-			productReference = B90F869E22E559E6008586B6 /* VVApiServerUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		B90F867322E559E4008586B6 /* Project object */ = {
+		93F72F5491C6AEDDAF48FE51664ED19D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = Tank;
 				TargetAttributes = {
-					B90F867A22E559E4008586B6 = {
+					369418F54B70494DDC15C38DE68FAB82 = {
 						CreatedOnToolsVersion = 10.2.1;
+						TestTargetID = E1A89FF74B5E81177E4E81385664C518;
 					};
-					B90F869222E559E6008586B6 = {
+					6E2C78B4ECDD6A0E54FCA8B099561347 = {
 						CreatedOnToolsVersion = 10.2.1;
-						TestTargetID = B90F867A22E559E4008586B6;
+						TestTargetID = E1A89FF74B5E81177E4E81385664C518;
 					};
-					B90F869D22E559E6008586B6 = {
+					E1A89FF74B5E81177E4E81385664C518 = {
 						CreatedOnToolsVersion = 10.2.1;
-						TestTargetID = B90F867A22E559E4008586B6;
 					};
 				};
 			};
-			buildConfigurationList = B90F867622E559E4008586B6 /* Build configuration list for PBXProject "VVApiServer" */;
+			buildConfigurationList = 525F2529319CF787B3B924088C871C80 /* Build configuration list for PBXProject "VVApiServer" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -378,38 +378,38 @@
 				en,
 				Base,
 			);
-			mainGroup = B90F867222E559E4008586B6;
-			productRefGroup = B90F867C22E559E4008586B6 /* Products */;
+			mainGroup = 9367CBFED1616D4EF9E4C840057A4A61;
+			productRefGroup = B33FB0DE6BA45851DE5A743A08A7561E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B90F867A22E559E4008586B6 /* VVApiServer */,
-				B90F869222E559E6008586B6 /* VVApiServerTests */,
-				B90F869D22E559E6008586B6 /* VVApiServerUITests */,
+				E1A89FF74B5E81177E4E81385664C518 /* VVApiServer */,
+				369418F54B70494DDC15C38DE68FAB82 /* VVApiServerTests */,
+				6E2C78B4ECDD6A0E54FCA8B099561347 /* VVApiServerUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		B90F867922E559E4008586B6 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B90F868B22E559E5008586B6 /* LaunchScreen.storyboard in Resources */,
-				B90F868822E559E5008586B6 /* Assets.xcassets in Resources */,
-				B90F86B122E55A01008586B6 /* Podfile in Resources */,
-				B90F868622E559E4008586B6 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B90F869122E559E6008586B6 /* Resources */ = {
+		3096677821511110A9BACF12BF6DCE9C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B90F869C22E559E6008586B6 /* Resources */ = {
+		FA3D2011BC3F70D394F0AE5D03B0E80D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F08996694E174D4C260D01DAACABD0FC /* Assets.xcassets in Resources */,
+				8B37E061E67DE5407B6F857385370E01 /* LaunchScreen.storyboard in Resources */,
+				894D4DE0FFB5959BA09AA30A815D40A8 /* Main.storyboard in Resources */,
+				1BCD7ED9C97ED78F8CCC64D862E47585 /* Podfile in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FDEC6F911028DCDCCD3A0BC0BCC7D06E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -419,7 +419,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		BC7C69E579BAA8AADDB6D772 /* [CP] Check Pods Manifest.lock */ = {
+		11D8C3B24CF43FE950F24DDE01A677DD /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -444,86 +444,226 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		B90F867722E559E4008586B6 /* Sources */ = {
+		6A04949733EE4807BEDF39D85BF4F30D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B90F868322E559E4008586B6 /* ViewController.m in Sources */,
-				B90F868E22E559E5008586B6 /* main.m in Sources */,
-				B90F868022E559E4008586B6 /* AppDelegate.m in Sources */,
-				C3AE69C390921C229435B9F0 /* VVRoutingConnection.m in Sources */,
-				C3AE6046ABD7E9A5F1ED13D4 /* VVRouteRequest.m in Sources */,
-				C3AE6D4C201B72D059EC312D /* VVRouteResponse.m in Sources */,
-				C3AE657E635EF9F0B8485ACA /* VVHTTPResponseProxy.m in Sources */,
-				C3AE6DF5C7B220ED54A38B0F /* VVRoute.m in Sources */,
-				C3AE6DABAFAA3C0B39528C7C /* VVRoutingHTTPServer.m in Sources */,
-				C3AE695964AA25B6EE793525 /* VVHTTPServer.m in Sources */,
-				C3AE6E29CA9F38B0EEF812DC /* VVHTTPLogging.m in Sources */,
-				C3AE6141C0597F892B75A02E /* VVHTTPConnection.m in Sources */,
-				C3AE69CD7C4F2CDBC1E79360 /* VVHTTPAuthenticationRequest.m in Sources */,
-				C3AE64EBA41889CE82A8E017 /* VVHTTPMessage.m in Sources */,
-				C3AE64AE5DADC3F0A5914762 /* VVWebSocket.m in Sources */,
-				C3AE6014A47566BE27E72C85 /* NSData+VVData.m in Sources */,
-				C3AE661FD5E3208897163D75 /* NSNumber+VVNumber.m in Sources */,
-				C3AE668446C3352877212366 /* VVRange.m in Sources */,
-				C3AE6554623B5EE30503B145 /* VVHTTPFileResponse.m in Sources */,
-				C3AE6CF97E038B27355D6E28 /* VVHTTPAsyncFileResponse.m in Sources */,
-				C3AE6FFA19B0E9FE7107AA90 /* VVHTTPDataResponse.m in Sources */,
+				BBC8F20D749310FADC3FAE94EF78552E /* VVApiServerUITests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B90F868F22E559E6008586B6 /* Sources */ = {
+		D321E9781BE604AE13E612A9C94951CF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B90F869822E559E6008586B6 /* VVApiServerTests.m in Sources */,
+				131462C2DBD0255C9666FFC8B869A6BA /* VVApiServerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B90F869A22E559E6008586B6 /* Sources */ = {
+		DA77F8C0DB02F1F980E32B37649BE1C3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B90F86A322E559E6008586B6 /* VVApiServerUITests.m in Sources */,
+				C8BB8220CAE2071BDE1D972028C90E11 /* AppDelegate.m in Sources */,
+				08922E398818570D2017974D717A4234 /* NSData+VVData.m in Sources */,
+				3CA5351F73E18C474E9ADC501E874E9F /* NSNumber+VVNumber.m in Sources */,
+				CA82BEAB4349A96A678DB1657AA35CA2 /* VVHTTPAsyncFileResponse.m in Sources */,
+				AAFF8D3BFE7B068F6E4702E5E7E39A16 /* VVHTTPAuthenticationRequest.m in Sources */,
+				4C7E5B205A83873929D2DC0FACEEED50 /* VVHTTPConnection.m in Sources */,
+				D63D2CBD594D30FF3B89FC58FF844125 /* VVHTTPDataResponse.m in Sources */,
+				4E7FAEE556C32F8A4913D72CEF008724 /* VVHTTPFileResponse.m in Sources */,
+				735A89BA97AFAF6C2EADC7AB1698423F /* VVHTTPLogging.m in Sources */,
+				B56EE66D23D7EAC2A0E4E4D7A0052BE1 /* VVHTTPMessage.m in Sources */,
+				4CDAAD1D63E4F7863637471F7BD3735B /* VVHTTPResponseProxy.m in Sources */,
+				0C5176ED1634EC3FC804403AB4E64703 /* VVHTTPServer.m in Sources */,
+				12CDA1C2905E15F10E00AE8055C601EA /* VVRange.m in Sources */,
+				40A4B03E54A69D644D7053F2B81ACFA3 /* VVRoute.m in Sources */,
+				1DD8360CF57DE98390138E8F6FAEA242 /* VVRouteRequest.m in Sources */,
+				B6389672729BFA3C7131BDDCE35D5B2D /* VVRouteResponse.m in Sources */,
+				800278573384056D85E8B33309C1742F /* VVRouteConnection.m in Sources */,
+				4CF245583222C52464E6CB75097A0B4F /* VVRouteHTTPServer.m in Sources */,
+				C4BA1EBDBEAC82F7CBBE20012D3D276D /* VVWebSocket.m in Sources */,
+				EF695A7697C76247AC50025BFDA1B98E /* ViewController.m in Sources */,
+				D06BBDAE3FC9CDCC91F776537A640C8A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		B90F869522E559E6008586B6 /* PBXTargetDependency */ = {
+		9833B851B8208B944D31400AD374CDF1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B90F867A22E559E4008586B6 /* VVApiServer */;
-			targetProxy = B90F869422E559E6008586B6 /* PBXContainerItemProxy */;
+			target = E1A89FF74B5E81177E4E81385664C518 /* VVApiServer */;
+			targetProxy = 6EE550D88117C3146396D3BD54C632E7 /* PBXContainerItemProxy */;
 		};
-		B90F86A022E559E6008586B6 /* PBXTargetDependency */ = {
+		C5842A6A5B336960FCE33805AC586954 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B90F867A22E559E4008586B6 /* VVApiServer */;
-			targetProxy = B90F869F22E559E6008586B6 /* PBXContainerItemProxy */;
+			target = E1A89FF74B5E81177E4E81385664C518 /* VVApiServer */;
+			targetProxy = 6B347B1327EB92643D87456B3DCB8A72 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		B90F868422E559E4008586B6 /* Main.storyboard */ = {
+		2D57C697D9060C31ADCAA5B95F9A3FA6 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				B90F868522E559E4008586B6 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		B90F868922E559E5008586B6 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B90F868A22E559E5008586B6 /* Base */,
+				6502CF1F8D4C4F3902C49AF159BD185E /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		D4BE0398F3A469F1668847FAE37508DF /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4ACF95CF401B55FD9F983647701A22EB /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		B90F86A522E559E6008586B6 /* Debug */ = {
+		273FB2093C9757EC35724F239358D7FD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = VVApiServerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.waqu.httpserver.VVApiServerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VVApiServer.app/VVApiServer";
+			};
+			name = Debug;
+		};
+		44A81AB0D2541B53F5458A3BFABE60A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = VVApiServerUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.waqu.httpserver.VVApiServerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = VVApiServer;
+			};
+			name = Release;
+		};
+		6806FC4A5ACA99AB79687622D616E8D1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = VVApiServerUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.waqu.httpserver.VVApiServerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = VVApiServer;
+			};
+			name = Debug;
+		};
+		73D28D0C44537E7C18D37873578E0502 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 198D502A2E4C4EE8E83C7F32E6AB9D03 /* Pods-VVApiServer.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = VVApiServer/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.waqu.httpserver.VVApiServer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		882C05FAF36945FDE639B5385F026FD2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = VVApiServerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.waqu.httpserver.VVApiServerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VVApiServer.app/VVApiServer";
+			};
+			name = Release;
+		};
+		96C686A0F526888CDDBF1760F26981C6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		9C2586A8187BBD914768BB4394664CFD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -582,62 +722,9 @@
 			};
 			name = Debug;
 		};
-		B90F86A622E559E6008586B6 /* Release */ = {
+		E3ED4B576EB12A39AF476373542B1DDE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				MTL_FAST_MATH = YES;
-				SDKROOT = iphoneos;
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		B90F86A822E559E6008586B6 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 07AFF8CB561CF8DFA714AD62 /* Pods-VVApiServer.debug.xcconfig */;
+			baseConfigurationReference = B736AFF638E831971C755E783D8582C3 /* Pods-VVApiServer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -651,134 +738,47 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
-		};
-		B90F86A922E559E6008586B6 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2499EB36F05C5D55C779396F /* Pods-VVApiServer.release.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = VVApiServer/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.waqu.httpserver.VVApiServer;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		B90F86AB22E559E6008586B6 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = VVApiServerTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.waqu.httpserver.VVApiServerTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VVApiServer.app/VVApiServer";
-			};
-			name = Debug;
-		};
-		B90F86AC22E559E6008586B6 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = VVApiServerTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.waqu.httpserver.VVApiServerTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VVApiServer.app/VVApiServer";
-			};
-			name = Release;
-		};
-		B90F86AE22E559E6008586B6 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = VVApiServerUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.waqu.httpserver.VVApiServerUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = VVApiServer;
-			};
-			name = Debug;
-		};
-		B90F86AF22E559E6008586B6 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = VVApiServerUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.waqu.httpserver.VVApiServerUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = VVApiServer;
-			};
-			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B90F867622E559E4008586B6 /* Build configuration list for PBXProject "VVApiServer" */ = {
+		034F61B634D613F0732155AEBF757961 /* Build configuration list for PBXNativeTarget "VVApiServerUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B90F86A522E559E6008586B6 /* Debug */,
-				B90F86A622E559E6008586B6 /* Release */,
+				6806FC4A5ACA99AB79687622D616E8D1 /* Debug */,
+				44A81AB0D2541B53F5458A3BFABE60A1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B90F86A722E559E6008586B6 /* Build configuration list for PBXNativeTarget "VVApiServer" */ = {
+		525F2529319CF787B3B924088C871C80 /* Build configuration list for PBXProject "VVApiServer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B90F86A822E559E6008586B6 /* Debug */,
-				B90F86A922E559E6008586B6 /* Release */,
+				9C2586A8187BBD914768BB4394664CFD /* Debug */,
+				96C686A0F526888CDDBF1760F26981C6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B90F86AA22E559E6008586B6 /* Build configuration list for PBXNativeTarget "VVApiServerTests" */ = {
+		A7A0CDB92F7F5361A09F48C9EA2D748F /* Build configuration list for PBXNativeTarget "VVApiServerTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B90F86AB22E559E6008586B6 /* Debug */,
-				B90F86AC22E559E6008586B6 /* Release */,
+				273FB2093C9757EC35724F239358D7FD /* Debug */,
+				882C05FAF36945FDE639B5385F026FD2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B90F86AD22E559E6008586B6 /* Build configuration list for PBXNativeTarget "VVApiServerUITests" */ = {
+		E652389D8264709CF49AFB06BD85AAEA /* Build configuration list for PBXNativeTarget "VVApiServer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B90F86AE22E559E6008586B6 /* Debug */,
-				B90F86AF22E559E6008586B6 /* Release */,
+				E3ED4B576EB12A39AF476373542B1DDE /* Debug */,
+				73D28D0C44537E7C18D37873578E0502 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = B90F867322E559E4008586B6 /* Project object */;
+	rootObject = 93F72F5491C6AEDDAF48FE51664ED19D /* Project object */;
 }
