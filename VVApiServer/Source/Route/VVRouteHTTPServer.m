@@ -108,7 +108,7 @@
 - (void)addRoute:(VVRoute *)route forMethod:(NSString *)method {
     method = [method uppercaseString];
     NSMutableArray *methodRoutes = routeDict[method];
-    if (methodRoutes == nil) {
+    if (!methodRoutes) {
         methodRoutes = [NSMutableArray array];
         routeDict[method] = methodRoutes;
     }
@@ -123,8 +123,9 @@
 
 - (VVRoute *)routeWithPath:(NSString *)path {
     VVRoute *route = [[VVRoute alloc] init];
-    NSMutableArray *keys = [NSMutableArray array];
+    route.path = path;
 
+    NSMutableArray *keys = [NSMutableArray array];
     if ([path length] > 2 && [path characterAtIndex:0] == '{') {
         // This is a custom regular expression, just remove the {}
         path = [path substringWithRange:NSMakeRange(1, [path length] - 2)];
@@ -172,7 +173,7 @@
 }
 
 - (BOOL)supportsMethod:(NSString *)method {
-    return (routeDict[method] != nil);
+    return routeDict[method] != nil;
 }
 
 - (void)handleRoute:(VVRoute *)route withRequest:(VVRouteRequest *)request response:(VVRouteResponse *)response {
@@ -186,7 +187,11 @@
     }
 }
 
-- (VVRouteResponse *)routeMethod:(NSString *)method withPath:(NSString *)path parameters:(NSDictionary *)params request:(VVHTTPMessage *)httpMessage connection:(VVHTTPConnection *)connection {
+- (VVRouteResponse *)routeMethod:(NSString *)method
+                        withPath:(NSString *)path
+                      parameters:(NSDictionary *)params
+                         request:(VVHTTPMessage *)httpMessage
+                      connection:(VVHTTPConnection *)connection {
     NSMutableArray *methodRoutes = routeDict[method];
     if (methodRoutes == nil)
         return nil;

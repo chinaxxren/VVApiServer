@@ -14,7 +14,7 @@
 #import "VVRouteHTTPServer.h"
 
 @interface ViewController () {
-    VVRouteHTTPServer *http;
+    VVRouteHTTPServer *httpServer;
 }
 
 @end
@@ -24,53 +24,53 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    http = [[VVRouteHTTPServer alloc] init];
-    [http setPort:80];
+    httpServer = [[VVRouteHTTPServer alloc] init];
+    [httpServer setPort:80];
     NSError *error = nil;
-    if (![http start:&error]) {
+    if (![httpServer start:&error]) {
         NSLog(@"HTTP server failed to start");
     }
     [self setupRoutes];
 }
 
 - (void)setupRoutes {
-    [http get:@"/hello" withHandler:^(VVRouteRequest *request, VVRouteResponse *response) {
+    [httpServer get:@"/hello" withHandler:^(VVRouteRequest *request, VVRouteResponse *response) {
         [response respondWithString:@"hello wold !"];
     }];
 
-    [http get:@"/hello/:name" withHandler:^(VVRouteRequest *request, VVRouteResponse *response) {
+    [httpServer get:@"/hello/:name" withHandler:^(VVRouteRequest *request, VVRouteResponse *response) {
         [response respondWithString:[NSString stringWithFormat:@"/hello/%@", [request param:@"name"]]];
     }];
 
-    [http post:@"/form" withHandler:^(VVRouteRequest *request, VVRouteResponse *response) {
+    [httpServer post:@"/form" withHandler:^(VVRouteRequest *request, VVRouteResponse *response) {
         [response respondWithString:@"/form"];
     }];
 
-    [http post:@"/users/:name" withHandler:^(VVRouteRequest *request, VVRouteResponse *response) {
+    [httpServer post:@"/users/:name" withHandler:^(VVRouteRequest *request, VVRouteResponse *response) {
         [response respondWithString:[NSString stringWithFormat:@"/users/%@", [request param:@"name"]]];
     }];
 
-    [http post:@"/users/:name/:action" withHandler:^(VVRouteRequest *request, VVRouteResponse *response) {
+    [httpServer post:@"/users/:name/:action" withHandler:^(VVRouteRequest *request, VVRouteResponse *response) {
         [response respondWithString:[NSString stringWithFormat:@"/users/%@/%@",
                                                                [request param:@"name"],
                                                                [request param:@"action"]]];
     }];
 
-    [http get:@"{^/page/(\\d+)$}" withHandler:^(VVRouteRequest *request, VVRouteResponse *response) {
+    [httpServer get:@"{^/page/(\\d+)$}" withHandler:^(VVRouteRequest *request, VVRouteResponse *response) {
         [response respondWithString:[NSString stringWithFormat:@"/page/%@",
                                                                [[request param:@"captures"] objectAtIndex:0]]];
     }];
 
-    [http get:@"/files/*.*" withHandler:^(VVRouteRequest *request, VVRouteResponse *response) {
+    [httpServer get:@"/files/*.*" withHandler:^(VVRouteRequest *request, VVRouteResponse *response) {
         NSArray *wildcards = [request param:@"wildcards"];
         [response respondWithString:[NSString stringWithFormat:@"/files/%@.%@",
                                                                wildcards[0],
                                                                wildcards[1]]];
     }];
 
-    [http handleMethod:@"GET" withPath:@"/selector" target:self selector:@selector(handleSelectorRequest:withResponse:)];
+    [httpServer handleMethod:@"GET" withPath:@"/selector" target:self selector:@selector(handleSelectorRequest:withResponse:)];
 
-    [http post:@"/xml" withHandler:^(VVRouteRequest *request, VVRouteResponse *response) {
+    [httpServer post:@"/xml" withHandler:^(VVRouteRequest *request, VVRouteResponse *response) {
         NSData *bodyData = [request body];
         NSString *xml = [[NSString alloc] initWithBytes:[bodyData bytes] length:[bodyData length] encoding:NSUTF8StringEncoding];
 
@@ -97,7 +97,7 @@
     NSDictionary *params = [NSDictionary dictionary];
     VVHTTPMessage *request = [[VVHTTPMessage alloc] initEmptyRequest];
 
-    response = [http routeMethod:@"GET" withPath:@"/null" parameters:params request:request connection:nil];
+    response = [httpServer routeMethod:@"GET" withPath:@"/null" parameters:params request:request connection:nil];
 
     [self verifyRouteWithMethod:@"GET" path:@"/hello"];
     [self verifyRouteWithMethod:@"GET" path:@"/hello/you"];
@@ -123,7 +123,7 @@
 }
 
 - (void)testGet {
-    NSString *baseURLString = [NSString stringWithFormat:@"http://127.0.0.1:%d", [http listeningPort]];
+    NSString *baseURLString = [NSString stringWithFormat:@"http://127.0.0.1:%d", [httpServer listeningPort]];
 
     NSString *urlString = [baseURLString stringByAppendingString:@"/hello"];
     NSURL *url = [NSURL URLWithString:urlString];
@@ -142,7 +142,7 @@
     NSDictionary *params = [NSDictionary dictionary];
     VVHTTPMessage *request = [[VVHTTPMessage alloc] initEmptyRequest];
 
-    response = [http routeMethod:method withPath:path parameters:params request:request connection:nil];
+    response = [httpServer routeMethod:method withPath:path parameters:params request:request connection:nil];
     //STAssertNotNil(response.proxiedResponse, @"Proxied response is nil for %@ %@", method, path);
 
     NSUInteger length = [response.proxiedResponse contentLength];
@@ -156,7 +156,7 @@
     NSDictionary *params = [NSDictionary dictionary];
     VVHTTPMessage *request = [[VVHTTPMessage alloc] initEmptyRequest];
 
-    response = [http routeMethod:method withPath:path parameters:params request:request connection:nil];
+    response = [httpServer routeMethod:method withPath:path parameters:params request:request connection:nil];
     NSLog(@"Response should have been nil for %@ %@", method, path);
 }
 
@@ -164,7 +164,7 @@
     NSError *error = nil;
     NSData *data = [inputString dataUsingEncoding:NSUTF8StringEncoding];
 
-    NSString *baseURLString = [NSString stringWithFormat:@"http://127.0.0.1:%d", [http listeningPort]];
+    NSString *baseURLString = [NSString stringWithFormat:@"http://127.0.0.1:%d", [httpServer listeningPort]];
 
     NSString *urlString = [baseURLString stringByAppendingString:path];
     NSURL *url = [NSURL URLWithString:urlString];

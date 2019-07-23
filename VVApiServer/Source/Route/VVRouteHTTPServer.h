@@ -49,6 +49,10 @@ typedef void (^VVRequestHandler)(VVRouteRequest *request, VVRouteResponse *respo
 
 - (BOOL)supportsMethod:(NSString *)method;
 
-- (VVRouteResponse *)routeMethod:(NSString *)method withPath:(NSString *)path parameters:(NSDictionary *)params request:(VVHTTPMessage *)request connection:(VVHTTPConnection *)connection;
+- (VVRouteResponse *)routeMethod:(NSString *)method
+                        withPath:(NSString *)path
+                      parameters:(NSDictionary *)params
+                         request:(VVHTTPMessage *)httpMessage
+                      connection:(VVHTTPConnection *)connection;
 
 @end
