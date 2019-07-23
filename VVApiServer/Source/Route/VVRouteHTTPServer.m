@@ -16,9 +16,11 @@
         connectionClass = [VVRouteConnection class];
         _routeDict = [[NSMutableDictionary alloc] init];
         _defaultHeaderDict = [[NSMutableDictionary alloc] init];
+        _route = YES;
 
         [self setupMIMETypes];
     }
+
     return self;
 }
 

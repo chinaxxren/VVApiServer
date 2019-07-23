@@ -33,7 +33,11 @@
 }
 
 - (void)setupRoutes {
-    [httpServer get:@"/hello" withHandler:^(VVRouteRequest *request, VVRouteResponse *response) {
+//    [httpServer get:@"/hello" withHandler:^(VVRouteRequest *request, VVRouteResponse *response) {
+//        [response respondWithString:@"hello wold !"];
+//    }];
+
+    [httpServer get:@"/hello" port:@"80" withHandler:^(VVRouteRequest *request, VVRouteResponse *response) {
         [response respondWithString:@"hello wold !"];
     }];
 
@@ -145,7 +149,8 @@
     //    NSString *baseURLString = @"http://127.0.0.1";
     NSString *baseURLString = @"http://api.waqu.com";
 
-    NSString *urlString = [baseURLString stringByAppendingString:@"/users/bob/dosomething"];
+//    NSString *urlString = [baseURLString stringByAppendingString:@"/users/bob/dosomething"];
+    NSString *urlString = [baseURLString stringByAppendingString:@"/hello"];
     NSURL *url = [NSURL URLWithString:urlString];
 
     NSURLSession *session = [NSURLSession sharedSession];
