@@ -1,7 +1,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define VV_HTTP_Logging(level, frmt, ...) [HTTPLogging log:level format:frmt, ##__VA_ARGS__]
+#define VV_HTTP_Logging(level, frmt, ...) [HTTPLogging vv_log:level format:frmt, ##__VA_ARGS__]
 
 #define VV_THIS_FILE   self
 #define VV_THIS_METHOD NSStringFromSelector(_cmd)
