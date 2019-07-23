@@ -28,7 +28,7 @@
     _proxy.response = response;
 }
 
-- (NSObject <VVHTTPResponse> *)proxiedResponse {
+- (NSObject <VVHTTPResponse> *)proxyResponse {
     if (_proxy.response != nil || _proxy.customStatus != 0 || [_headers count] > 0) {
         return _proxy;
     }

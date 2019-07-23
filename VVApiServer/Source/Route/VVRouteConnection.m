@@ -59,7 +59,7 @@
     VVRouteResponse *response = [_httpServer routeMethod:method withPath:path parameters:params request:request connection:self];
     if (response != nil) {
         _headerDict = response.headers;
-        return response.proxiedResponse;
+        return response.proxyResponse;
     }
 
     // Set a MIME type for static files if possible
