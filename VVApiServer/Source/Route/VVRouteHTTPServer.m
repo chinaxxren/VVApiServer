@@ -1,3 +1,4 @@
+
 #import "VVRouteHTTPServer.h"
 
 #import "VVRouteConnection.h"
@@ -10,9 +11,7 @@
     dispatch_queue_t _routeQueue;
 }
 
-@synthesize _defaultHeaderDict;
-
-- (id)init {
+- (instancetype)init {
     if (self = [super init]) {
         connectionClass = [VVRouteConnection class];
         _routeDict = [[NSMutableDictionary alloc] init];
@@ -21,6 +20,16 @@
         [self setupMIMETypes];
     }
     return self;
+}
+
++ (instancetype)share {
+    static VVRouteHTTPServer *httpServer;
+    static dispatch_once_t token;
+    dispatch_once(&token, ^{
+        httpServer = [VVRouteHTTPServer new];
+    });
+
+    return httpServer;
 }
 
 - (void)setDefaultHeaders:(NSDictionary *)headers {
@@ -78,21 +87,42 @@
     [self handleMethod:@"GET" withPath:path withHandler:handler];
 }
 
+- (void)get:(NSString *)path port:(NSString *)port withHandler:(VVRequestHandler)handler {
+    [self handleMethod:@"GET" port:port withPath:path withHandler:handler];
+}
+
 - (void)post:(NSString *)path withHandler:(VVRequestHandler)handler {
     [self handleMethod:@"POST" withPath:path withHandler:handler];
+}
+
+- (void)post:(NSString *)path port:(NSString *)port withHandler:(VVRequestHandler)handler {
+    [self handleMethod:@"POST" port:port withPath:path withHandler:handler];
 }
 
 - (void)put:(NSString *)path withHandler:(VVRequestHandler)handler {
     [self handleMethod:@"PUT" withPath:path withHandler:handler];
 }
 
+- (void)put:(NSString *)path port:(NSString *)port withHandler:(VVRequestHandler)handler {
+    [self handleMethod:@"PUT" port:port withPath:path withHandler:handler];
+}
+
 - (void)delete:(NSString *)path withHandler:(VVRequestHandler)handler {
     [self handleMethod:@"DELETE" withPath:path withHandler:handler];
 }
 
+- (void)delete:(NSString *)path port:(NSString *)port withHandler:(VVRequestHandler)handler {
+    [self handleMethod:@"DELETE" port:port withPath:path withHandler:handler];
+}
+
 - (void)handleMethod:(NSString *)method withPath:(NSString *)path withHandler:(VVRequestHandler)handler {
+    [self handleMethod:method port:nil withPath:path withHandler:handler];
+}
+
+- (void)handleMethod:(NSString *)method port:(NSString *)port withPath:(NSString *)path withHandler:(VVRequestHandler)handler {
     VVRoute *route = [self routeWithPath:path];
     route.handler = handler;
+    route.port = port;
 
     [self addRoute:route forMethod:method];
 }
@@ -185,6 +215,19 @@
         [route.target performSelector:route.selector withObject:request withObject:response];
 #pragma clang diagnostic pop
     }
+}
+
+- (VVRoute *)findRouteWithPath:(NSString *)path {
+    for (NSString *key in [_routeDict allKeys]) {
+        for (VVRoute *route in _routeDict[key]) {
+            NSTextCheckingResult *result = [route.regex firstMatchInString:path options:0 range:NSMakeRange(0, path.length)];
+            if (result) {
+                return route;
+            }
+        }
+    }
+
+    return nil;
 }
 
 - (VVRouteResponse *)routeMethod:(NSString *)method

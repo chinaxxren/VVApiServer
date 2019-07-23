@@ -6,7 +6,6 @@
 //  Copyright © 2019 Tank. All rights reserved.
 //
 
-
 #import "ViewController.h"
 
 #import "VVHTTPMessage.h"
@@ -24,7 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    httpServer = [[VVRouteHTTPServer alloc] init];
+    httpServer = [VVRouteHTTPServer share];
     [httpServer setPort:80];
     NSError *error = nil;
     if (![httpServer start:&error]) {
@@ -122,7 +121,10 @@
 }
 
 - (void)testGet {
-    NSString *baseURLString = [NSString stringWithFormat:@"http://127.0.0.1:%d", [httpServer listeningPort]];
+//    NSString *baseURLString = [NSString stringWithFormat:@"http://127.0.0.1:%d", [httpServer listeningPort]];
+//    NSString *baseURLString = [NSString stringWithFormat:@"http://www.waqu.com:%d", [httpServer listeningPort]];
+//    NSString *baseURLString = @"http://127.0.0.1";
+    NSString *baseURLString = @"http://api.waqu.com";
 
     NSString *urlString = [baseURLString stringByAppendingString:@"/hello"];
     NSURL *url = [NSURL URLWithString:urlString];
@@ -132,9 +134,35 @@
         NSString *responseString = [[NSString alloc] initWithBytes:[responseData bytes] length:[responseData length] encoding:NSUTF8StringEncoding];
         NSLog(@"%@", responseString);
     }];
+    NSLog(@"%@", sessionDataTask.currentRequest.URL);
+
     [sessionDataTask resume];
 }
 
+- (void)testGet1 {
+    //    NSString *baseURLString = [NSString stringWithFormat:@"http://127.0.0.1:%d", [httpServer listeningPort]];
+    //    NSString *baseURLString = [NSString stringWithFormat:@"http://www.waqu.com:%d", [httpServer listeningPort]];
+    //    NSString *baseURLString = @"http://127.0.0.1";
+    NSString *baseURLString = @"http://api.waqu.com";
+
+    NSString *urlString = [baseURLString stringByAppendingString:@"/users/bob/dosomething"];
+    NSURL *url = [NSURL URLWithString:urlString];
+
+    NSURLSession *session = [NSURLSession sharedSession];
+//    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
+//    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+
+//    NSURLSessionDataTask *sessionDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *responseData, NSURLResponse *response, NSError *error) {
+
+    NSURLSessionDataTask *sessionDataTask = [session dataTaskWithURL:url completionHandler:^(NSData *responseData, NSURLResponse *response,
+            NSError *error) {
+        NSString *responseString = [[NSString alloc] initWithBytes:[responseData bytes] length:[responseData length] encoding:NSUTF8StringEncoding];
+        NSLog(@"%@", responseString);
+    }];
+    NSLog(@"%@", sessionDataTask.currentRequest.URL);
+
+    [sessionDataTask resume];
+}
 
 - (void)verifyRouteWithMethod:(NSString *)method path:(NSString *)path {
     VVRouteResponse *response;
@@ -184,7 +212,7 @@
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event {
-    [self testGet];
+    [self testGet1];
 }
 
 @end

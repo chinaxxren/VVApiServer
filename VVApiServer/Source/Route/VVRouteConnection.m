@@ -89,7 +89,7 @@
 }
 
 - (void)setHeadersForResponse:(VVHTTPMessage *)response isError:(BOOL)isError {
-    [_httpServer._defaultHeaderDict enumerateKeysAndObjectsUsingBlock:^(id field, id value, BOOL *stop) {
+    [_httpServer.defaultHeaderDict enumerateKeysAndObjectsUsingBlock:^(id field, id value, BOOL *stop) {
         [response setHeaderField:field value:value];
     }];
 

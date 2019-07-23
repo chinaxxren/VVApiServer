@@ -27,6 +27,8 @@
 		B56EE66D23D7EAC2A0E4E4D7A0052BE1 /* VVHTTPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A4D2CD086E924784CB4D866349F70F /* VVHTTPMessage.m */; };
 		B6389672729BFA3C7131BDDCE35D5B2D /* VVRouteResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5F82E20487603E8E69CDD5967F8644 /* VVRouteResponse.m */; };
 		BBC8F20D749310FADC3FAE94EF78552E /* VVApiServerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7545736340A9B6DAF479B03AF5F78E60 /* VVApiServerUITests.m */; };
+		C3AE62F47BF92703DE96242A /* NSString+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE689627696046B14BD83D /* NSString+Ext.m */; };
+		C3AE66FB13D3BE5D3F69AF60 /* NSURLRequest+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE6A969102CA7AF64B52E2 /* NSURLRequest+Ext.m */; };
 		C4BA1EBDBEAC82F7CBBE20012D3D276D /* VVWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A69BE146E329B0FB2CE270C7D887C06A /* VVWebSocket.m */; };
 		C8BB8220CAE2071BDE1D972028C90E11 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 448E60B330362E60A4AA6D6ABB75275F /* AppDelegate.m */; };
 		CA82BEAB4349A96A678DB1657AA35CA2 /* VVHTTPAsyncFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E66DB76E63C1D06EF6CC057588966F4 /* VVHTTPAsyncFileResponse.m */; };
@@ -101,6 +103,10 @@
 		BA1834BA50669A53B88F07BA39452491 /* VVRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVRange.h; sourceTree = "<group>"; };
 		BB77CC63F3AAFBD1C55C7AB79C0D2B68 /* VVRouteConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVRouteConnection.m; sourceTree = "<group>"; };
 		C2D3332FB828FC15E2BBBC91B3C86244 /* VVRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVRoute.m; sourceTree = "<group>"; };
+		C3AE689627696046B14BD83D /* NSString+Ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Ext.m"; sourceTree = "<group>"; };
+		C3AE6A969102CA7AF64B52E2 /* NSURLRequest+Ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLRequest+Ext.m"; sourceTree = "<group>"; };
+		C3AE6BAFB31345EFA019611E /* NSURLRequest+Ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLRequest+Ext.h"; sourceTree = "<group>"; };
+		C3AE6CE5A313DF089F7A30BE /* NSString+Ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Ext.h"; sourceTree = "<group>"; };
 		CD8F324EBD87780D631D6FD85C99F6B5 /* VVRouteHTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVRouteHTTPServer.h; sourceTree = "<group>"; };
 		D3DA34FC769D63981C716ED347AD4455 /* NSNumber+VVNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+VVNumber.m"; sourceTree = "<group>"; };
 		D402755D392BC58098CF953F763B3314 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
@@ -211,6 +217,10 @@
 				D3DA34FC769D63981C716ED347AD4455 /* NSNumber+VVNumber.m */,
 				BA1834BA50669A53B88F07BA39452491 /* VVRange.h */,
 				AA381E81B76ED214968124E6139B5326 /* VVRange.m */,
+				C3AE6A969102CA7AF64B52E2 /* NSURLRequest+Ext.m */,
+				C3AE6BAFB31345EFA019611E /* NSURLRequest+Ext.h */,
+				C3AE689627696046B14BD83D /* NSString+Ext.m */,
+				C3AE6CE5A313DF089F7A30BE /* NSString+Ext.h */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -485,6 +495,8 @@
 				C4BA1EBDBEAC82F7CBBE20012D3D276D /* VVWebSocket.m in Sources */,
 				EF695A7697C76247AC50025BFDA1B98E /* ViewController.m in Sources */,
 				D06BBDAE3FC9CDCC91F776537A640C8A /* main.m in Sources */,
+				C3AE66FB13D3BE5D3F69AF60 /* NSURLRequest+Ext.m in Sources */,
+				C3AE62F47BF92703DE96242A /* NSString+Ext.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

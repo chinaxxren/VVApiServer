@@ -6,9 +6,14 @@
 
 typedef void (^VVRequestHandler)(VVRouteRequest *request, VVRouteResponse *response);
 
+@class VVRoute;
+
 @interface VVRouteHTTPServer : VVHTTPServer
 
-@property(nonatomic, readonly) NSDictionary *_defaultHeaderDict;
+@property(nonatomic, assign) BOOL route;
+@property(nonatomic, readonly) NSDictionary *defaultHeaderDict;
+
++ (instancetype)share;
 
 // Specifies headers that will be set on every response.
 // These headers can be overridden by RouteResponses.
@@ -37,17 +42,27 @@ typedef void (^VVRequestHandler)(VVRouteRequest *request, VVRouteResponse *respo
 // elegant with the beauty and the poetry. These are just, you know, here.
 - (void)get:(NSString *)path withHandler:(VVRequestHandler)handler;
 
+- (void)get:(NSString *)path port:(NSString *)port withHandler:(VVRequestHandler)handler;
+
 - (void)post:(NSString *)path withHandler:(VVRequestHandler)handler;
+
+- (void)post:(NSString *)path port:(NSString *)port withHandler:(VVRequestHandler)handler;
 
 - (void)put:(NSString *)path withHandler:(VVRequestHandler)handler;
 
+- (void)put:(NSString *)path port:(NSString *)port withHandler:(VVRequestHandler)handler;
+
 - (void)delete:(NSString *)path withHandler:(VVRequestHandler)handler;
+
+- (void)delete:(NSString *)path port:(NSString *)port withHandler:(VVRequestHandler)handler;
 
 - (void)handleMethod:(NSString *)method withPath:(NSString *)path withHandler:(VVRequestHandler)handler;
 
 - (void)handleMethod:(NSString *)method withPath:(NSString *)path target:(id)target selector:(SEL)selector;
 
 - (BOOL)supportsMethod:(NSString *)method;
+
+- (VVRoute *)findRouteWithPath:(NSString *)path;
 
 - (VVRouteResponse *)routeMethod:(NSString *)method
                         withPath:(NSString *)path

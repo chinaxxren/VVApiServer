@@ -6,8 +6,7 @@
 
 #define WebSocketDidDieNotification  @"WebSocketDidDie"
 
-@interface VVWebSocket : NSObject
-{
+@interface VVWebSocket : NSObject {
     dispatch_queue_t websocketQueue;
 
     VVHTTPMessage *request;
@@ -32,14 +31,14 @@
  * In most cases it will be easier to subclass WebSocket,
  * but some circumstances may lead one to prefer standard delegate callbacks instead.
 **/
-@property (/* atomic */ unsafe_unretained) id delegate;
+@property(/* atomic */ unsafe_unretained) id delegate;
 
 /**
  * The WebSocket class is thread-safe, generally via it's GCD queue.
  * All public API methods are thread-safe,
  * and the subclass API methods are thread-safe as they are all invoked on the same GCD queue.
 **/
-@property (nonatomic, readonly) dispatch_queue_t websocketQueue;
+@property(nonatomic, readonly) dispatch_queue_t websocketQueue;
 
 /**
  * Public API
@@ -48,6 +47,7 @@
  * You may invoke the stop method yourself to close the WebSocket manually.
 **/
 - (void)start;
+
 - (void)stop;
 
 /**
@@ -72,7 +72,9 @@
  * These methods are designed to be overriden by subclasses.
 **/
 - (void)didOpen;
+
 - (void)didReceiveMessage:(NSString *)msg;
+
 - (void)didClose;
 
 @end
@@ -93,7 +95,8 @@
  * One such example, you're already subclassing another class, so subclassing WebSocket isn't an option.
 **/
 
-@protocol WebSocketDelegate
+@protocol VVWebSocketDelegate
+
 @optional
 
 - (void)webSocketDidOpen:(VVWebSocket *)ws;
