@@ -1,34 +1,34 @@
 #import "VVRange.h"
 #import "NSNumber+VVNumber.h"
 
-DDRange DDUnionRange(DDRange range1, DDRange range2) {
-    DDRange result;
+VVRange VVUnionRange(VVRange range1, VVRange range2) {
+    VVRange result;
 
     result.location = MIN(range1.location, range2.location);
-    result.length = MAX(DDMaxRange(range1), DDMaxRange(range2)) - result.location;
+    result.length = MAX(VVMaxRange(range1), VVMaxRange(range2)) - result.location;
 
     return result;
 }
 
-DDRange DDIntersectionRange(DDRange range1, DDRange range2) {
-    DDRange result;
+VVRange VVIntersectionRange(VVRange range1, VVRange range2) {
+    VVRange result;
 
-    if ((DDMaxRange(range1) < range2.location) || (DDMaxRange(range2) < range1.location)) {
+    if ((VVMaxRange(range1) < range2.location) || (VVMaxRange(range2) < range1.location)) {
         return DDMakeRange(0, 0);
     }
 
     result.location = MAX(range1.location, range2.location);
-    result.length = MIN(DDMaxRange(range1), DDMaxRange(range2)) - result.location;
+    result.length = MIN(VVMaxRange(range1), VVMaxRange(range2)) - result.location;
 
     return result;
 }
 
-NSString *DDStringFromRange(DDRange range) {
+NSString *VVStringFromRange(VVRange range) {
     return [NSString stringWithFormat:@"{%qu, %qu}", range.location, range.length];
 }
 
-DDRange DDRangeFromString(NSString *aString) {
-    DDRange result = DDMakeRange(0, 0);
+VVRange VVRangeFromString(NSString *aString) {
+    VVRange result = DDMakeRange(0, 0);
 
     // NSRange will ignore '-' characters, but not '+' characters
     NSCharacterSet *cset = [NSCharacterSet characterSetWithCharactersInString:@"+0123456789"];
@@ -48,7 +48,7 @@ DDRange DDRangeFromString(NSString *aString) {
     return result;
 }
 
-NSInteger DDRangeCompare(DDRangePointer pDDRange1, DDRangePointer pDDRange2) {
+NSInteger DDRangeCompare(VVRangePointer pDDRange1, VVRangePointer pDDRange2) {
     // Comparison basis:
     // Which range would you encouter first if you started at zero, and began walking towards infinity.
     // If you encouter both ranges at the same time, which range would end first.
@@ -69,21 +69,21 @@ NSInteger DDRangeCompare(DDRangePointer pDDRange1, DDRangePointer pDDRange2) {
     return NSOrderedSame;
 }
 
-@implementation NSValue (NSValueDDRangeExtensions)
+@implementation NSValue (NSValueVVRangeExtensions)
 
-+ (NSValue *)valueWithDDRange:(DDRange)range {
-    return [NSValue valueWithBytes:&range objCType:@encode(DDRange)];
++ (NSValue *)valueWithVVRange:(VVRange)range {
+    return [NSValue valueWithBytes:&range objCType:@encode(VVRange)];
 }
 
-- (DDRange)ddrangeValue {
-    DDRange result;
+- (VVRange)vvrangeValue {
+    VVRange result;
     [self getValue:&result];
     return result;
 }
 
-- (NSInteger)ddrangeCompare:(NSValue *)other {
-    DDRange r1 = [self ddrangeValue];
-    DDRange r2 = [other ddrangeValue];
+- (NSInteger)vvrangeCompare:(NSValue *)other {
+    VVRange r1 = [self vvrangeValue];
+    VVRange r2 = [other vvrangeValue];
 
     return DDRangeCompare(&r1, &r2);
 }

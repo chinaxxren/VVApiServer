@@ -75,7 +75,7 @@
                                                                wildcards[1]]];
     }];
 
-    [httpServer handleMethod:@"GET" withPath:@"/selector" target:self selector:@selector(handleSelectorRequest:withResponse:)];
+    [httpServer handleMethod:@"GET" withPath:@"/selector" target:self sel:@selector(handleSelectorRequest:withResponse:)];
 
     [httpServer post:@"/xml" withHandler:^(VVApiRequest *request, VVApiResponse *response) {
         NSData *bodyData = [request body];

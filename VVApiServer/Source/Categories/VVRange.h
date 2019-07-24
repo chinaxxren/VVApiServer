@@ -13,48 +13,48 @@
 
 @class NSString;
 
-typedef struct _DDRange {
+typedef struct _VVRange {
     UInt64 location;
     UInt64 length;
-} DDRange;
+} VVRange;
 
-typedef DDRange *DDRangePointer;
+typedef VVRange *VVRangePointer;
 
-NS_INLINE DDRange DDMakeRange(UInt64 loc, UInt64 len) {
-    DDRange r;
+NS_INLINE VVRange DDMakeRange(UInt64 loc, UInt64 len) {
+    VVRange r;
     r.location = loc;
     r.length = len;
     return r;
 }
 
-NS_INLINE UInt64 DDMaxRange(DDRange range) {
+NS_INLINE UInt64 VVMaxRange(VVRange range) {
     return (range.location + range.length);
 }
 
-NS_INLINE BOOL DDLocationInRange(UInt64 loc, DDRange range) {
+NS_INLINE BOOL VVLocationInRange(UInt64 loc, VVRange range) {
     return (loc - range.location < range.length);
 }
 
-NS_INLINE BOOL DDEqualRanges(DDRange range1, DDRange range2) {
+NS_INLINE BOOL VVEqualRanges(VVRange range1, VVRange range2) {
     return ((range1.location == range2.location) && (range1.length == range2.length));
 }
 
-FOUNDATION_EXPORT DDRange DDUnionRange(DDRange range1, DDRange range2);
+FOUNDATION_EXPORT VVRange VVUnionRange(VVRange range1, VVRange range2);
 
-FOUNDATION_EXPORT DDRange DDIntersectionRange(DDRange range1, DDRange range2);
+FOUNDATION_EXPORT VVRange VVIntersectionRange(VVRange range1, VVRange range2);
 
-FOUNDATION_EXPORT NSString *DDStringFromRange(DDRange range);
+FOUNDATION_EXPORT NSString *VVStringFromRange(VVRange range);
 
-FOUNDATION_EXPORT DDRange DDRangeFromString(NSString *aString);
+FOUNDATION_EXPORT VVRange VVRangeFromString(NSString *aString);
 
-NSInteger DDRangeCompare(DDRangePointer pDDRange1, DDRangePointer pDDRange2);
+NSInteger DDRangeCompare(VVRangePointer pDDRange1, VVRangePointer pDDRange2);
 
-@interface NSValue (NSValueDDRangeExtensions)
+@interface NSValue (NSValueVVRangeExtensions)
 
-+ (NSValue *)valueWithDDRange:(DDRange)range;
++ (NSValue *)valueWithVVRange:(VVRange)range;
 
-- (DDRange)ddrangeValue;
+- (VVRange)vvrangeValue;
 
-- (NSInteger)ddrangeCompare:(NSValue *)ddrangeValue;
+- (NSInteger)vvrangeCompare:(NSValue *)other;
 
 @end

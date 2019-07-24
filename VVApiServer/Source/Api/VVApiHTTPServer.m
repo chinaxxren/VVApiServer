@@ -43,6 +43,10 @@
 }
 
 - (void)setDefaultHeader:(NSString *)field value:(NSString *)value {
+    if (!field || !value) {
+        return;
+    }
+
     _defaultHeaderDict[field] = value;
 }
 
@@ -129,10 +133,10 @@
     [self addApi:api forMethod:method];
 }
 
-- (void)handleMethod:(NSString *)method withPath:(NSString *)path target:(id)target selector:(SEL)selector {
+- (void)handleMethod:(NSString *)method withPath:(NSString *)path target:(id)target sel:(SEL)sel {
     VVApi *api = [self apiWithPath:path];
     api.target = target;
-    api.selector = selector;
+    api.sel = sel;
 
     [self addApi:api forMethod:method];
 }
@@ -214,7 +218,7 @@
     } else {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-        [api.target performSelector:api.selector withObject:request withObject:response];
+        [api.target performSelector:api.sel withObject:request withObject:response];
 #pragma clang diagnostic pop
     }
 }

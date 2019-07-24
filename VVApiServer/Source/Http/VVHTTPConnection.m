@@ -740,7 +740,7 @@ static NSMutableArray *recentNonces;
 
             if (byteIndex >= contentLength) return NO;
 
-            [ranges addObject:[NSValue valueWithDDRange:DDMakeRange(byteIndex, 1)]];
+            [ranges addObject:[NSValue valueWithVVRange:DDMakeRange(byteIndex, 1)]];
         } else {
             // We're dealing with a range of bytes
 
@@ -765,7 +765,7 @@ static NSMutableArray *recentNonces;
 
                 UInt64 startIndex = contentLength - r2;
 
-                [ranges addObject:[NSValue valueWithDDRange:DDMakeRange(startIndex, r2)]];
+                [ranges addObject:[NSValue valueWithVVRange:DDMakeRange(startIndex, r2)]];
             } else if (!hasR2) {
                 // We're dealing with a "[#]-" range
                 //
@@ -773,7 +773,7 @@ static NSMutableArray *recentNonces;
 
                 if (r1 >= contentLength) return NO;
 
-                [ranges addObject:[NSValue valueWithDDRange:DDMakeRange(r1, contentLength - r1)]];
+                [ranges addObject:[NSValue valueWithVVRange:DDMakeRange(r1, contentLength - r1)]];
             } else {
                 // We're dealing with a normal "[#]-[#]" range
                 //
@@ -782,7 +782,7 @@ static NSMutableArray *recentNonces;
                 if (r1 > r2) return NO;
                 if (r2 >= contentLength) return NO;
 
-                [ranges addObject:[NSValue valueWithDDRange:DDMakeRange(r1, r2 - r1 + 1)]];
+                [ranges addObject:[NSValue valueWithVVRange:DDMakeRange(r1, r2 - r1 + 1)]];
             }
         }
     }
@@ -792,13 +792,13 @@ static NSMutableArray *recentNonces;
     // Now make sure none of the ranges overlap
 
     for (i = 0; i < [ranges count] - 1; i++) {
-        DDRange range1 = [ranges[i] ddrangeValue];
+        VVRange range1 = [ranges[i] vvrangeValue];
 
         NSUInteger j;
         for (j = i + 1; j < [ranges count]; j++) {
-            DDRange range2 = [ranges[j] ddrangeValue];
+            VVRange range2 = [ranges[j] vvrangeValue];
 
-            DDRange iRange = DDIntersectionRange(range1, range2);
+            VVRange iRange = VVIntersectionRange(range1, range2);
 
             if (iRange.length != 0) {
                 return NO;
@@ -808,7 +808,7 @@ static NSMutableArray *recentNonces;
 
     // Sort the ranges
 
-    [ranges sortUsingSelector:@selector(ddrangeCompare:)];
+    [ranges sortUsingSelector:@selector(vvrangeCompare:)];
 
     return YES;
 }
@@ -931,12 +931,12 @@ static NSMutableArray *recentNonces;
     // Status Code 206 - Partial Content
     VVHTTPMessage *response = [[VVHTTPMessage alloc] initResponseWithStatusCode:206 description:nil version:HTTPVersion1_1];
 
-    DDRange range = [ranges[0] ddrangeValue];
+    VVRange range = [ranges[0] vvrangeValue];
 
     NSString *contentLengthStr = [NSString stringWithFormat:@"%qu", range.length];
     [response setHeaderField:@"Content-Length" value:contentLengthStr];
 
-    NSString *rangeStr = [NSString stringWithFormat:@"%qu-%qu", range.location, DDMaxRange(range) - 1];
+    NSString *rangeStr = [NSString stringWithFormat:@"%qu-%qu", range.location, VVMaxRange(range) - 1];
     NSString *contentRangeStr = [NSString stringWithFormat:@"bytes %@/%qu", rangeStr, contentLength];
     [response setHeaderField:@"Content-Range" value:contentRangeStr];
 
@@ -986,9 +986,9 @@ static NSMutableArray *recentNonces;
 
     NSUInteger i;
     for (i = 0; i < [ranges count]; i++) {
-        DDRange range = [ranges[i] ddrangeValue];
+        VVRange range = [ranges[i] vvrangeValue];
 
-        NSString *rangeStr = [NSString stringWithFormat:@"%qu-%qu", range.location, DDMaxRange(range) - 1];
+        NSString *rangeStr = [NSString stringWithFormat:@"%qu-%qu", range.location, VVMaxRange(range) - 1];
         NSString *contentRangeVal = [NSString stringWithFormat:@"bytes %@/%qu", rangeStr, contentLength];
         NSString *contentRangeStr = [NSString stringWithFormat:@"Content-Range: %@\r\n\r\n", contentRangeVal];
 
@@ -1144,7 +1144,7 @@ static NSMutableArray *recentNonces;
 
             if ([ranges count] == 1) {
                 // Client is requesting a single range
-                DDRange range = [ranges[0] ddrangeValue];
+                VVRange range = [ranges[0] vvrangeValue];
 
                 [httpResponse setOffset:range.location];
 
@@ -1167,7 +1167,7 @@ static NSMutableArray *recentNonces;
                 [asyncSocket writeData:rangeHeaderData withTimeout:TIMEOUT_WRITE_HEAD tag:HTTP_PARTIAL_RESPONSE_HEADER];
 
                 // Start writing range body
-                DDRange range = [ranges[0] ddrangeValue];
+                VVRange range = [ranges[0] vvrangeValue];
 
                 [httpResponse setOffset:range.location];
 
@@ -1285,7 +1285,7 @@ static NSMutableArray *recentNonces;
 
     if (writeQueueSize >= READ_CHUNKSIZE) return;
 
-    DDRange range = [ranges[0] ddrangeValue];
+    VVRange range = [ranges[0] vvrangeValue];
 
     UInt64 offset = [httpResponse offset];
     UInt64 bytesRead = offset - range.location;
@@ -1333,7 +1333,7 @@ static NSMutableArray *recentNonces;
 
     if (writeQueueSize >= READ_CHUNKSIZE) return;
 
-    DDRange range = [ranges[rangeIndex] ddrangeValue];
+    VVRange range = [ranges[rangeIndex] vvrangeValue];
 
     UInt64 offset = [httpResponse offset];
     UInt64 bytesRead = offset - range.location;
@@ -1357,7 +1357,7 @@ static NSMutableArray *recentNonces;
             [asyncSocket writeData:rangeHeader withTimeout:TIMEOUT_WRITE_HEAD tag:HTTP_PARTIAL_RESPONSE_HEADER];
 
             // Start writing range body
-            range = [ranges[rangeIndex] ddrangeValue];
+            range = [ranges[rangeIndex] vvrangeValue];
 
             [httpResponse setOffset:range.location];
 

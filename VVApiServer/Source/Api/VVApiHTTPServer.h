@@ -54,7 +54,7 @@ typedef void (^VVRequestHandler)(VVApiRequest *request, VVApiResponse *response)
 
 - (void)handleMethod:(NSString *)method withPath:(NSString *)path withHandler:(VVRequestHandler)handler;
 
-- (void)handleMethod:(NSString *)method withPath:(NSString *)path target:(id)target selector:(SEL)selector;
+- (void)handleMethod:(NSString *)method withPath:(NSString *)path target:(id)target sel:(SEL)sel;
 
 - (BOOL)supportsMethod:(NSString *)method;
 

@@ -22,7 +22,8 @@
     return _status;
 }
 
-// Implement the required VVHTTPResponse methods
+#pragma Implement the required VVHTTPResponse methods
+
 - (UInt64)contentLength {
     if (_response) {
         return [_response contentLength];
@@ -61,7 +62,8 @@
     }
 }
 
-// Forward all other invocations to the actual response object
+#pragma  Forward all other invocations to the actual response object
+
 - (void)forwardInvocation:(NSInvocation *)invocation {
     if ([_response respondsToSelector:[invocation selector]]) {
         [invocation invokeWithTarget:_response];
