@@ -34,6 +34,13 @@ static const int httpLogLevel = VV_HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE
 
 @implementation VVHTTPAsyncFileResponse
 
+- (void)dealloc {
+    VVHTTPLogTrace();
+
+    if (readBuffer)
+        free(readBuffer);
+}
+
 - (id)initWithFilePath:(NSString *)fpath forConnection:(VVHTTPConnection *)parent {
     if ((self = [super init])) {
         VVHTTPLogTrace();
@@ -343,13 +350,6 @@ static const int httpLogLevel = VV_HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE
             [self cancelReadSource];
         });
     }
-}
-
-- (void)dealloc {
-    VVHTTPLogTrace();
-
-    if (readBuffer)
-        free(readBuffer);
 }
 
 @end

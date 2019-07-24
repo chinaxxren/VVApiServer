@@ -25,7 +25,7 @@
     [super viewDidLoad];
 
     httpServer = [VVApiHTTPServer share];
-    [httpServer setPort:8080];
+    [httpServer setPort:80];
     NSError *error = nil;
     if (![httpServer start:&error]) {
         NSLog(@"HTTP server failed to start");
@@ -35,14 +35,19 @@
 
 - (void)setupApis {
     [httpServer get:@"/test" withHandler:^(VVApiRequest *request, VVApiResponse *response) {
-        [response respondWithString:@"test !"];
+        [response respondWithString:@"test response"];
     }];
 
-    NSDictionary *dict = @{@"msg": @"success", @"status": @0, @"json": @"hello"};
-
-    [httpServer get:@"/hello" port:8080 withHandler:^(VVApiRequest *request, VVApiResponse *response) {
+    [httpServer get:@"/hello" withHandler:^(VVApiRequest *request, VVApiResponse *response) {
+        NSDictionary *dict = @{@"msg": @"success", @"status": @0, @"json": @"hello"};
         NSString *jsonString = [dict JSONString];
         [response respondWithString:jsonString];
+    }];
+
+    [httpServer get:@"/httperror" withHandler:^(VVApiRequest *request, VVApiResponse *response) {
+        [response setStatusCode:405];
+        [response setHeader:@"Content-Type" value:@"text/html"];
+        [response respondWithString:@"<h1>404 File Not Found</h1>"];
     }];
 
     [httpServer get:@"/hello/:name" withHandler:^(VVApiRequest *request, VVApiResponse *response) {
@@ -75,8 +80,6 @@
                                                                wildcards[1]]];
     }];
 
-    [httpServer handleMethod:@"GET" withPath:@"/selector" target:self sel:@selector(handleSelectorRequest:withResponse:)];
-
     [httpServer post:@"/xml" withHandler:^(VVApiRequest *request, VVApiResponse *response) {
         NSData *bodyData = [request body];
         NSString *xml = [[NSString alloc] initWithBytes:[bodyData bytes] length:[bodyData length] encoding:NSUTF8StringEncoding];
@@ -92,10 +95,6 @@
             }
         }
     }];
-}
-
-- (void)handleSelectorRequest:(VVApiRequest *)request withResponse:(VVApiResponse *)response {
-    [response respondWithString:@"/selector"];
 }
 
 - (void)testApis {
@@ -121,19 +120,9 @@
     [self verifyApiNotFoundWithMethod:@"GET" path:@"/form"];
 }
 
-- (void)testPost {
-    NSString *xmlString = @"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-                          "<greenLevel>supergreen</greenLevel>";
-
-    [self verifyMethod:@"POST" path:@"/xml" contentType:@"text/xml" inputString:xmlString responseString:@"supergreen"];
-}
-
 - (void)testGet {
 //    NSString *baseURLString = [NSString stringWithFormat:@"http://127.0.0.1:%d", [httpServer listeningPort]];
-//    NSString *baseURLString = [NSString stringWithFormat:@"http://www.waqu.com:%d", [httpServer listeningPort]];
-//    NSString *baseURLString = @"http://127.0.0.1";
-    NSString *baseURLString = @"http://api.waqu.com";
-
+    NSString *baseURLString = [NSString stringWithFormat:@"http://www.waqu.com:%d", [httpServer listeningPort]];
     NSString *urlString = [baseURLString stringByAppendingString:@"/hello"];
     NSURL *url = [NSURL URLWithString:urlString];
 
@@ -147,38 +136,12 @@
     [sessionDataTask resume];
 }
 
-- (void)testGet1 {
-    //    NSString *baseURLString = [NSString stringWithFormat:@"http://127.0.0.1:%d", [httpServer listeningPort]];
-    //    NSString *baseURLString = [NSString stringWithFormat:@"http://www.waqu.com:%d", [httpServer listeningPort]];
-    //    NSString *baseURLString = @"http://127.0.0.1";
-    NSString *baseURLString = @"http://api.waqu.com";
-
-//    NSString *urlString = [baseURLString stringByAppendingString:@"/users/bob/dosomething"];
-    NSString *urlString = [baseURLString stringByAppendingString:@"/hello"];
-    NSURL *url = [NSURL URLWithString:urlString];
-
-    NSURLSession *session = [NSURLSession sharedSession];
-//    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
-//    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-
-//    NSURLSessionDataTask *sessionDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *responseData, NSURLResponse *response, NSError *error) {
-
-    NSURLSessionDataTask *sessionDataTask = [session dataTaskWithURL:url completionHandler:^(NSData *responseData, NSURLResponse *response,
-            NSError *error) {
-        NSString *responseString = [[NSString alloc] initWithBytes:[responseData bytes] length:[responseData length] encoding:NSUTF8StringEncoding];
-        NSLog(@"%@", responseString);
-    }];
-    NSLog(@"%@", sessionDataTask.currentRequest.URL);
-
-    [sessionDataTask resume];
-}
-
 - (void)verifyApiWithMethod:(NSString *)method path:(NSString *)path {
-    VVApiResponse *response;
+    
     NSDictionary *params = [NSDictionary dictionary];
     VVHTTPMessage *request = [[VVHTTPMessage alloc] initEmptyRequest];
 
-    response = [httpServer apiMethod:method withPath:path parameters:params request:request connection:nil];
+    VVApiResponse *response = [httpServer apiMethod:method withPath:path parameters:params request:request connection:nil];
     //STAssertNotNil(response.proxiedResponse, @"Proxied response is nil for %@ %@", method, path);
 
     NSUInteger length = [response.proxyResponse contentLength];
@@ -188,40 +151,16 @@
 }
 
 - (void)verifyApiNotFoundWithMethod:(NSString *)method path:(NSString *)path {
-    VVApiResponse *response;
+
     NSDictionary *params = [NSDictionary dictionary];
     VVHTTPMessage *request = [[VVHTTPMessage alloc] initEmptyRequest];
 
-    response = [httpServer apiMethod:method withPath:path parameters:params request:request connection:nil];
+    VVApiResponse *response = [httpServer apiMethod:method withPath:path parameters:params request:request connection:nil];
     NSLog(@"Response should have been nil for %@ %@", method, path);
 }
 
-- (void)verifyMethod:(NSString *)method path:(NSString *)path contentType:(NSString *)contentType inputString:(NSString *)inputString responseString:(NSString *)expectedResponseString {
-    NSError *error = nil;
-    NSData *data = [inputString dataUsingEncoding:NSUTF8StringEncoding];
-
-    NSString *baseURLString = [NSString stringWithFormat:@"http://127.0.0.1:%d", [httpServer listeningPort]];
-
-    NSString *urlString = [baseURLString stringByAppendingString:path];
-    NSURL *url = [NSURL URLWithString:urlString];
-
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
-    [request setHTTPMethod:method];
-    [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
-    [request addValue:[NSString stringWithFormat:@"%ld", [data length]] forHTTPHeaderField:@"Content-Length"];
-    [request setHTTPBody:data];
-
-    NSURLResponse *response;
-    NSHTTPURLResponse *httpResponse;
-    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-
-    httpResponse = (NSHTTPURLResponse *) response;
-
-    NSString *responseString = [[NSString alloc] initWithBytes:[responseData bytes] length:[responseData length] encoding:NSUTF8StringEncoding];
-}
-
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event {
-    [self testGet1];
+    [self testApis];
 }
 
 @end

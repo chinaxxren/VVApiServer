@@ -12,6 +12,10 @@ static const int httpLogLevel = VV_HTTP_LOG_LEVEL_OFF; // | HTTP_LOG_FLAG_TRACE;
 
 @implementation VVHTTPDataResponse
 
+- (void)dealloc {
+    VVHTTPLogTrace();
+}
+
 - (id)initWithData:(NSData *)dataParam {
     if ((self = [super init])) {
         VVHTTPLogTrace();
@@ -20,11 +24,6 @@ static const int httpLogLevel = VV_HTTP_LOG_LEVEL_OFF; // | HTTP_LOG_FLAG_TRACE;
         data = dataParam;
     }
     return self;
-}
-
-- (void)dealloc {
-    VVHTTPLogTrace();
-
 }
 
 - (UInt64)contentLength {

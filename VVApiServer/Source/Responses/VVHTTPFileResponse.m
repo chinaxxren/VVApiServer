@@ -18,6 +18,20 @@ static const int httpLogLevel = VV_HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE
 
 @implementation VVHTTPFileResponse
 
+- (void)dealloc {
+    VVHTTPLogTrace();
+
+    if (fileFD != NULL_FD) {
+        VVHTTPLogVerbose(@"%@[%p]: Close fd[%i]", VV_THIS_FILE, self, fileFD);
+
+        close(fileFD);
+    }
+
+    if (buffer)
+        free(buffer);
+
+}
+
 - (id)initWithFilePath:(NSString *)fpath forConnection:(VVHTTPConnection *)parent {
     if ((self = [super init])) {
         VVHTTPLogTrace();
@@ -191,20 +205,6 @@ static const int httpLogLevel = VV_HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE
 
 - (NSString *)filePath {
     return filePath;
-}
-
-- (void)dealloc {
-    VVHTTPLogTrace();
-
-    if (fileFD != NULL_FD) {
-        VVHTTPLogVerbose(@"%@[%p]: Close fd[%i]", VV_THIS_FILE, self, fileFD);
-
-        close(fileFD);
-    }
-
-    if (buffer)
-        free(buffer);
-
 }
 
 @end
