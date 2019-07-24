@@ -38,21 +38,21 @@ typedef void (^VVRequestHandler)(VVApiRequest *request, VVApiResponse *response)
 // elegant with the beauty and the poetry. These are just, you know, here.
 - (void)get:(NSString *)path withHandler:(VVRequestHandler)handler;
 
-- (void)get:(NSString *)path port:(NSString *)port withHandler:(VVRequestHandler)handler;
+- (void)get:(NSString *)path port:(NSInteger )port withHandler:(VVRequestHandler)handler;
 
 - (void)post:(NSString *)path withHandler:(VVRequestHandler)handler;
 
-- (void)post:(NSString *)path port:(NSString *)port withHandler:(VVRequestHandler)handler;
+- (void)post:(NSString *)path port:(NSInteger )port withHandler:(VVRequestHandler)handler;
 
 - (void)put:(NSString *)path withHandler:(VVRequestHandler)handler;
 
-- (void)put:(NSString *)path port:(NSString *)port withHandler:(VVRequestHandler)handler;
+- (void)put:(NSString *)path port:(NSInteger )port withHandler:(VVRequestHandler)handler;
 
 - (void)delete:(NSString *)path withHandler:(VVRequestHandler)handler;
 
-- (void)delete:(NSString *)path port:(NSString *)port withHandler:(VVRequestHandler)handler;
+- (void)delete:(NSString *)path port:(NSInteger )port withHandler:(VVRequestHandler)handler;
 
-- (void)handleMethod:(NSString *)method port:(NSString *)port withPath:(NSString *)path withHandler:(VVRequestHandler)handler;
+- (void)handleMethod:(NSString *)method port:(NSInteger )port withPath:(NSString *)path withHandler:(VVRequestHandler)handler;
 
 - (void)handleMethod:(NSString *)method withPath:(NSString *)path target:(id)target sel:(SEL)sel;
 

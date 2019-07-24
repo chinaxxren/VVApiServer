@@ -90,38 +90,38 @@
 }
 
 - (void)get:(NSString *)path withHandler:(VVRequestHandler)handler {
-    [self get:path port:nil withHandler:handler];
+    [self get:path port:80 withHandler:handler];
 }
 
-- (void)get:(NSString *)path port:(NSString *)port withHandler:(VVRequestHandler)handler {
+- (void)get:(NSString *)path port:(NSInteger)port withHandler:(VVRequestHandler)handler {
     [self handleMethod:@"GET" port:port withPath:path withHandler:handler];
 }
 
 - (void)post:(NSString *)path withHandler:(VVRequestHandler)handler {
-    [self post:path port:nil withHandler:handler];
+    [self post:path port:80 withHandler:handler];
 }
 
-- (void)post:(NSString *)path port:(NSString *)port withHandler:(VVRequestHandler)handler {
+- (void)post:(NSString *)path port:(NSInteger)port withHandler:(VVRequestHandler)handler {
     [self handleMethod:@"POST" port:port withPath:path withHandler:handler];
 }
 
 - (void)put:(NSString *)path withHandler:(VVRequestHandler)handler {
-    [self put:path port:nil withHandler:handler];
+    [self put:path port:80 withHandler:handler];
 }
 
-- (void)put:(NSString *)path port:(NSString *)port withHandler:(VVRequestHandler)handler {
+- (void)put:(NSString *)path port:(NSInteger)port withHandler:(VVRequestHandler)handler {
     [self handleMethod:@"PUT" port:port withPath:path withHandler:handler];
 }
 
 - (void)delete:(NSString *)path withHandler:(VVRequestHandler)handler {
-    [self delete:path port:nil withHandler:handler];
+    [self delete:path port:80 withHandler:handler];
 }
 
-- (void)delete:(NSString *)path port:(NSString *)port withHandler:(VVRequestHandler)handler {
+- (void)delete:(NSString *)path port:(NSInteger)port withHandler:(VVRequestHandler)handler {
     [self handleMethod:@"DELETE" port:port withPath:path withHandler:handler];
 }
 
-- (void)handleMethod:(NSString *)method port:(NSString *)port withPath:(NSString *)path withHandler:(VVRequestHandler)handler {
+- (void)handleMethod:(NSString *)method port:(NSInteger)port withPath:(NSString *)path withHandler:(VVRequestHandler)handler {
     VVApi *api = [self apiWithPath:path];
     api.handler = handler;
     api.port = port;

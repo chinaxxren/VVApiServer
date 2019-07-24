@@ -25,7 +25,7 @@
     [super viewDidLoad];
 
     httpServer = [VVApiHTTPServer share];
-    [httpServer setPort:80];
+    [httpServer setPort:8080];
     NSError *error = nil;
     if (![httpServer start:&error]) {
         NSLog(@"HTTP server failed to start");
@@ -40,7 +40,7 @@
 
     NSDictionary *dict = @{@"msg": @"success", @"status": @0, @"json": @"hello"};
 
-    [httpServer get:@"/hello" port:@"80" withHandler:^(VVApiRequest *request, VVApiResponse *response) {
+    [httpServer get:@"/hello" port:8080 withHandler:^(VVApiRequest *request, VVApiResponse *response) {
         NSString *jsonString = [dict JSONString];
         [response respondWithString:jsonString];
     }];

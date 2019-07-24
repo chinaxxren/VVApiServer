@@ -40,13 +40,7 @@
     if (httpServer.openApi) {
         VVApi *route = [httpServer findApiWithPath:URL.path];
         if (route) {
-            NSString *replace;
-            if (route.port) {
-                replace = [NSString stringWithFormat:@"127.0.0.1:%@", route.port];
-            } else {
-                replace = @"127.0.0.1";
-            }
-
+            NSString *replace = [NSString stringWithFormat:@"127.0.0.1:%zd", route.port];
             NSString *URLString = [URL absoluteString];
             URLString = [URLString stringByReplacingOccurrencesOfString:URL.host withString:replace];
             URL = [NSURL URLWithString:URLString];
