@@ -97,70 +97,41 @@
     }];
 }
 
-- (void)testApis {
-
-    NSDictionary *params = [NSDictionary dictionary];
-    VVHTTPMessage *request = [[VVHTTPMessage alloc] initEmptyRequest];
-
-    VVApiResponse *response = [httpServer apiMethod:@"GET" withPath:@"/null" parameters:params request:request connection:nil];
-
-    [self verifyApiWithMethod:@"GET" path:@"/hello"];
-    [self verifyApiWithMethod:@"GET" path:@"/hello/you"];
-    [self verifyApiWithMethod:@"GET" path:@"/page/3"];
-    [self verifyApiWithMethod:@"GET" path:@"/files/test.txt"];
-    [self verifyApiWithMethod:@"GET" path:@"/selector"];
-    [self verifyApiWithMethod:@"POST" path:@"/form"];
-    [self verifyApiWithMethod:@"POST" path:@"/users/bob"];
-    [self verifyApiWithMethod:@"POST" path:@"/users/bob/dosomething"];
-
-    [self verifyApiNotFoundWithMethod:@"POST" path:@"/hello"];
-    [self verifyApiNotFoundWithMethod:@"POST" path:@"/selector"];
-    [self verifyApiNotFoundWithMethod:@"GET" path:@"/page/a3"];
-    [self verifyApiNotFoundWithMethod:@"GET" path:@"/page/3a"];
-    [self verifyApiNotFoundWithMethod:@"GET" path:@"/form"];
-}
-
-- (void)testGet {
-//    NSString *baseURLString = [NSString stringWithFormat:@"http://127.0.0.1:%d", [httpServer listeningPort]];
+- (void)verifyApiWithMethod:(NSString *)method path:(NSString *)path {
     NSString *baseURLString = [NSString stringWithFormat:@"http://www.waqu.com:%d", [httpServer listeningPort]];
-    NSString *urlString = [baseURLString stringByAppendingString:@"/hello"];
+    NSString *urlString = [baseURLString stringByAppendingString:path];
     NSURL *url = [NSURL URLWithString:urlString];
 
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    request.HTTPMethod = method;
+
     NSURLSession *session = [NSURLSession sharedSession];
-    NSURLSessionDataTask *sessionDataTask = [session dataTaskWithURL:url completionHandler:^(NSData *responseData, NSURLResponse *response, NSError *error) {
+    NSURLSessionDataTask *sessionDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *responseData, NSURLResponse *response, NSError *error) {
         NSString *responseString = [[NSString alloc] initWithBytes:[responseData bytes] length:[responseData length] encoding:NSUTF8StringEncoding];
         NSLog(@"%@", responseString);
     }];
-    NSLog(@"%@", sessionDataTask.currentRequest.URL);
 
     [sessionDataTask resume];
 }
 
-- (void)verifyApiWithMethod:(NSString *)method path:(NSString *)path {
-    
-    NSDictionary *params = [NSDictionary dictionary];
-    VVHTTPMessage *request = [[VVHTTPMessage alloc] initEmptyRequest];
-
-    VVApiResponse *response = [httpServer apiMethod:method withPath:path parameters:params request:request connection:nil];
-    //STAssertNotNil(response.proxiedResponse, @"Proxied response is nil for %@ %@", method, path);
-
-    NSUInteger length = [response.proxyResponse contentLength];
-    NSData *data = [response.proxyResponse readDataOfLength:length];
-    NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    //STAssertEqualObjects(responseString, path, @"Unexpected response for %@ %@", method, path);
-}
-
-- (void)verifyApiNotFoundWithMethod:(NSString *)method path:(NSString *)path {
-
-    NSDictionary *params = [NSDictionary dictionary];
-    VVHTTPMessage *request = [[VVHTTPMessage alloc] initEmptyRequest];
-
-    VVApiResponse *response = [httpServer apiMethod:method withPath:path parameters:params request:request connection:nil];
-    NSLog(@"Response should have been nil for %@ %@", method, path);
-}
-
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event {
-    [self testApis];
+
+    // found
+    [self verifyApiWithMethod:@"GET" path:@"/hello"];
+//    [self verifyApiWithMethod:@"GET" path:@"/hello/you"];
+//    [self verifyApiWithMethod:@"GET" path:@"/page/3"];
+//    [self verifyApiWithMethod:@"GET" path:@"/files/test.txt"];
+//    [self verifyApiWithMethod:@"GET" path:@"/selector"];
+//    [self verifyApiWithMethod:@"POST" path:@"/form"];
+//    [self verifyApiWithMethod:@"POST" path:@"/users/bob"];
+//    [self verifyApiWithMethod:@"POST" path:@"/users/bob/dosomething"];
+
+    // not found
+//    [self verifyApiWithMethod:@"POST" path:@"/hello"];
+//    [self verifyApiWithMethod:@"POST" path:@"/selector"];
+//    [self verifyApiWithMethod:@"GET" path:@"/page/a3"];
+//    [self verifyApiWithMethod:@"GET" path:@"/page/3a"];
+//    [self verifyApiWithMethod:@"GET" path:@"/form"];
 }
 
 @end
