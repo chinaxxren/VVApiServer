@@ -11,6 +11,7 @@
 #import "VVHTTPMessage.h"
 
 #import "VVApiHTTPServer.h"
+#import "VVJSONAdapter.h"
 
 @interface ViewController () {
     VVApiHTTPServer *httpServer;
@@ -37,8 +38,11 @@
 //        [response respondWithString:@"hello wold !"];
 //    }];
 
+    NSDictionary *dict = @{@"msg": @"success", @"status": @0, @"json": @"hello"};
+
     [httpServer get:@"/hello" port:@"80" withHandler:^(VVApiRequest *request, VVApiResponse *response) {
-        [response respondWithString:@"hello wold !"];
+        NSString *jsonString = [dict JSONString];
+        [response respondWithString:jsonString];
     }];
 
     [httpServer get:@"/hello/:name" withHandler:^(VVApiRequest *request, VVApiResponse *response) {

@@ -28,6 +28,7 @@
 		B6389672729BFA3C7131BDDCE35D5B2D /* VVApiResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5F82E20487603E8E69CDD5967F8644 /* VVApiResponse.m */; };
 		BBC8F20D749310FADC3FAE94EF78552E /* VVApiServerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7545736340A9B6DAF479B03AF5F78E60 /* VVApiServerUITests.m */; };
 		C3AE66FB13D3BE5D3F69AF60 /* NSURLRequest+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE6A969102CA7AF64B52E2 /* NSURLRequest+Ext.m */; };
+		C3AE6CF6691FE9B8C2057E1A /* VVJSONAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE6117EC90480E1D2EC2A3 /* VVJSONAdapter.m */; };
 		C4BA1EBDBEAC82F7CBBE20012D3D276D /* VVWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A69BE146E329B0FB2CE270C7D887C06A /* VVWebSocket.m */; };
 		C8BB8220CAE2071BDE1D972028C90E11 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 448E60B330362E60A4AA6D6ABB75275F /* AppDelegate.m */; };
 		CA82BEAB4349A96A678DB1657AA35CA2 /* VVHTTPAsyncFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E66DB76E63C1D06EF6CC057588966F4 /* VVHTTPAsyncFileResponse.m */; };
@@ -102,6 +103,8 @@
 		BA1834BA50669A53B88F07BA39452491 /* VVRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVRange.h; sourceTree = "<group>"; };
 		BB77CC63F3AAFBD1C55C7AB79C0D2B68 /* VVApiConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVApiConnection.m; sourceTree = "<group>"; };
 		C2D3332FB828FC15E2BBBC91B3C86244 /* VVApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVApi.m; sourceTree = "<group>"; };
+		C3AE6117EC90480E1D2EC2A3 /* VVJSONAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVJSONAdapter.m; sourceTree = "<group>"; };
+		C3AE62912EF8E746346D6EAE /* VVJSONAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVJSONAdapter.h; sourceTree = "<group>"; };
 		C3AE6A969102CA7AF64B52E2 /* NSURLRequest+Ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLRequest+Ext.m"; sourceTree = "<group>"; };
 		C3AE6BAFB31345EFA019611E /* NSURLRequest+Ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLRequest+Ext.h"; sourceTree = "<group>"; };
 		CD8F324EBD87780D631D6FD85C99F6B5 /* VVApiHTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVApiHTTPServer.h; sourceTree = "<group>"; };
@@ -284,6 +287,8 @@
 				F3D666721B556479EEB02D9366EAAD73 /* ViewController.h */,
 				D402755D392BC58098CF953F763B3314 /* ViewController.m */,
 				88AF1D31DE9AB4778F0F84997B5343B0 /* main.m */,
+				C3AE6117EC90480E1D2EC2A3 /* VVJSONAdapter.m */,
+				C3AE62912EF8E746346D6EAE /* VVJSONAdapter.h */,
 			);
 			path = VVApiServer;
 			sourceTree = "<group>";
@@ -491,6 +496,7 @@
 				EF695A7697C76247AC50025BFDA1B98E /* ViewController.m in Sources */,
 				D06BBDAE3FC9CDCC91F776537A640C8A /* main.m in Sources */,
 				C3AE66FB13D3BE5D3F69AF60 /* NSURLRequest+Ext.m in Sources */,
+				C3AE6CF6691FE9B8C2057E1A /* VVJSONAdapter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -318,6 +318,8 @@
             @"html": @"text/html",
             @"htm": @"text/html",
             @"txt": @"text/plain",
+            @"txt": @"text/json",
+            @"txt": @"application/json",
             @"xml": @"text/xml"} mutableCopy];
 }
 
