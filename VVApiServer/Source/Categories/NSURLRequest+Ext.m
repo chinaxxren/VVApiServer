@@ -38,9 +38,9 @@
 
     VVApiHTTPServer *httpServer = [VVApiHTTPServer share];
     if (httpServer.openApi) {
-        VVApi *route = [httpServer findApiWithPath:URL.path];
-        if (route) {
-            NSString *replace = [NSString stringWithFormat:@"127.0.0.1:%zd", route.port];
+        VVApi *api = [httpServer findApiWithPath:URL.path];
+        if (api) {
+            NSString *replace = [NSString stringWithFormat:@"127.0.0.1:%zd", api.port];
             NSString *URLString = [URL absoluteString];
             URLString = [URLString stringByReplacingOccurrencesOfString:URL.host withString:replace];
             URL = [NSURL URLWithString:URLString];

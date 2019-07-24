@@ -30,13 +30,13 @@
     if (![httpServer start:&error]) {
         NSLog(@"HTTP server failed to start");
     }
-    [self setupRoutes];
+    [self setupApis];
 }
 
-- (void)setupRoutes {
-//    [httpServer get:@"/hello" withHandler:^(VVApiRequest *request, VVApiResponse *response) {
-//        [response respondWithString:@"hello wold !"];
-//    }];
+- (void)setupApis {
+    [httpServer get:@"/test" withHandler:^(VVApiRequest *request, VVApiResponse *response) {
+        [response respondWithString:@"test !"];
+    }];
 
     NSDictionary *dict = @{@"msg": @"success", @"status": @0, @"json": @"hello"};
 
@@ -98,27 +98,27 @@
     [response respondWithString:@"/selector"];
 }
 
-- (void)testRoutes {
-    VVApiResponse *response;
+- (void)testApis {
+
     NSDictionary *params = [NSDictionary dictionary];
     VVHTTPMessage *request = [[VVHTTPMessage alloc] initEmptyRequest];
 
-    response = [httpServer apiMethod:@"GET" withPath:@"/null" parameters:params request:request connection:nil];
+    VVApiResponse *response = [httpServer apiMethod:@"GET" withPath:@"/null" parameters:params request:request connection:nil];
 
-    [self verifyRouteWithMethod:@"GET" path:@"/hello"];
-    [self verifyRouteWithMethod:@"GET" path:@"/hello/you"];
-    [self verifyRouteWithMethod:@"GET" path:@"/page/3"];
-    [self verifyRouteWithMethod:@"GET" path:@"/files/test.txt"];
-    [self verifyRouteWithMethod:@"GET" path:@"/selector"];
-    [self verifyRouteWithMethod:@"POST" path:@"/form"];
-    [self verifyRouteWithMethod:@"POST" path:@"/users/bob"];
-    [self verifyRouteWithMethod:@"POST" path:@"/users/bob/dosomething"];
+    [self verifyApiWithMethod:@"GET" path:@"/hello"];
+    [self verifyApiWithMethod:@"GET" path:@"/hello/you"];
+    [self verifyApiWithMethod:@"GET" path:@"/page/3"];
+    [self verifyApiWithMethod:@"GET" path:@"/files/test.txt"];
+    [self verifyApiWithMethod:@"GET" path:@"/selector"];
+    [self verifyApiWithMethod:@"POST" path:@"/form"];
+    [self verifyApiWithMethod:@"POST" path:@"/users/bob"];
+    [self verifyApiWithMethod:@"POST" path:@"/users/bob/dosomething"];
 
-    [self verifyRouteNotFoundWithMethod:@"POST" path:@"/hello"];
-    [self verifyRouteNotFoundWithMethod:@"POST" path:@"/selector"];
-    [self verifyRouteNotFoundWithMethod:@"GET" path:@"/page/a3"];
-    [self verifyRouteNotFoundWithMethod:@"GET" path:@"/page/3a"];
-    [self verifyRouteNotFoundWithMethod:@"GET" path:@"/form"];
+    [self verifyApiNotFoundWithMethod:@"POST" path:@"/hello"];
+    [self verifyApiNotFoundWithMethod:@"POST" path:@"/selector"];
+    [self verifyApiNotFoundWithMethod:@"GET" path:@"/page/a3"];
+    [self verifyApiNotFoundWithMethod:@"GET" path:@"/page/3a"];
+    [self verifyApiNotFoundWithMethod:@"GET" path:@"/form"];
 }
 
 - (void)testPost {
@@ -173,7 +173,7 @@
     [sessionDataTask resume];
 }
 
-- (void)verifyRouteWithMethod:(NSString *)method path:(NSString *)path {
+- (void)verifyApiWithMethod:(NSString *)method path:(NSString *)path {
     VVApiResponse *response;
     NSDictionary *params = [NSDictionary dictionary];
     VVHTTPMessage *request = [[VVHTTPMessage alloc] initEmptyRequest];
@@ -187,7 +187,7 @@
     //STAssertEqualObjects(responseString, path, @"Unexpected response for %@ %@", method, path);
 }
 
-- (void)verifyRouteNotFoundWithMethod:(NSString *)method path:(NSString *)path {
+- (void)verifyApiNotFoundWithMethod:(NSString *)method path:(NSString *)path {
     VVApiResponse *response;
     NSDictionary *params = [NSDictionary dictionary];
     VVHTTPMessage *request = [[VVHTTPMessage alloc] initEmptyRequest];
@@ -221,7 +221,7 @@
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event {
-    [self testGet1];
+    [self testApis];
 }
 
 @end
