@@ -4,14 +4,14 @@
 //
 
 
-#import "NSURLRequest+Ext.h"
+#import "NSURLRequest+VVApi.h"
 
 #import <objc/runtime.h>
 
 #import "VVApiHTTPServer.h"
 #import "VVApi.h"
 
-@implementation NSURLRequest (Ext)
+@implementation NSURLRequest (VVApi)
 
 + (void)load {
 #if DEBUG
