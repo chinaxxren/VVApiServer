@@ -22,7 +22,7 @@
     return _status;
 }
 
-#pragma Implement the required VVHTTPResponse methods
+#pragma Implement the VVHTTPResponse methods
 
 - (UInt64)contentLength {
     if (_response) {

@@ -90,7 +90,7 @@
 }
 
 - (void)get:(NSString *)path withHandler:(VVRequestHandler)handler {
-    [self handleMethod:@"GET" withPath:path withHandler:handler];
+    [self get:path port:nil withHandler:handler];
 }
 
 - (void)get:(NSString *)path port:(NSString *)port withHandler:(VVRequestHandler)handler {
@@ -98,7 +98,7 @@
 }
 
 - (void)post:(NSString *)path withHandler:(VVRequestHandler)handler {
-    [self handleMethod:@"POST" withPath:path withHandler:handler];
+    [self post:path port:nil withHandler:handler];
 }
 
 - (void)post:(NSString *)path port:(NSString *)port withHandler:(VVRequestHandler)handler {
@@ -106,7 +106,7 @@
 }
 
 - (void)put:(NSString *)path withHandler:(VVRequestHandler)handler {
-    [self handleMethod:@"PUT" withPath:path withHandler:handler];
+    [self put:path port:nil withHandler:handler];
 }
 
 - (void)put:(NSString *)path port:(NSString *)port withHandler:(VVRequestHandler)handler {
@@ -114,15 +114,11 @@
 }
 
 - (void)delete:(NSString *)path withHandler:(VVRequestHandler)handler {
-    [self handleMethod:@"DELETE" withPath:path withHandler:handler];
+    [self delete:path port:nil withHandler:handler];
 }
 
 - (void)delete:(NSString *)path port:(NSString *)port withHandler:(VVRequestHandler)handler {
     [self handleMethod:@"DELETE" port:port withPath:path withHandler:handler];
-}
-
-- (void)handleMethod:(NSString *)method withPath:(NSString *)path withHandler:(VVRequestHandler)handler {
-    [self handleMethod:method port:nil withPath:path withHandler:handler];
 }
 
 - (void)handleMethod:(NSString *)method port:(NSString *)port withPath:(NSString *)path withHandler:(VVRequestHandler)handler {

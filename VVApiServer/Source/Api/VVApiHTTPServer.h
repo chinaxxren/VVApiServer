@@ -52,7 +52,7 @@ typedef void (^VVRequestHandler)(VVApiRequest *request, VVApiResponse *response)
 
 - (void)delete:(NSString *)path port:(NSString *)port withHandler:(VVRequestHandler)handler;
 
-- (void)handleMethod:(NSString *)method withPath:(NSString *)path withHandler:(VVRequestHandler)handler;
+- (void)handleMethod:(NSString *)method port:(NSString *)port withPath:(NSString *)path withHandler:(VVRequestHandler)handler;
 
 - (void)handleMethod:(NSString *)method withPath:(NSString *)path target:(id)target sel:(SEL)sel;
 
