@@ -11,4 +11,6 @@
 @property(nonatomic, assign) SEL sel;
 @property(nonatomic) NSArray *keys;
 
++ (VVApi *)apiWithPath:(NSString *)path;
+
 @end

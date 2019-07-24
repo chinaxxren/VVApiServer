@@ -221,7 +221,7 @@
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event {
-    [self testApis];
+    [self testGet1];
 }
 
 @end
