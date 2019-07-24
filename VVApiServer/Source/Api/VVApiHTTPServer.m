@@ -14,8 +14,8 @@
 - (instancetype)init {
     if (self = [super init]) {
         connectionClass = [VVApiConnection class];
-        _apiDict = [[NSMutableDictionary alloc] init];
-        _defaultHeaderDict = [[NSMutableDictionary alloc] init];
+        _apiDict = [NSMutableDictionary new];
+        _defaultHeaderDict = [NSMutableDictionary new];
         _openApi = YES;
 
         [self setupMIMETypes];
@@ -38,7 +38,7 @@
     if (headers) {
         _defaultHeaderDict = [headers mutableCopy];
     } else {
-        _defaultHeaderDict = [[NSMutableDictionary alloc] init];
+        _defaultHeaderDict = [NSMutableDictionary new];
     }
 }
 

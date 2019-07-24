@@ -10,7 +10,7 @@
 @property(nonatomic, readonly) NSDictionary *headers;
 @property(nonatomic, strong) NSObject <VVHTTPResponse> *response;
 @property(nonatomic, readonly) NSObject <VVHTTPResponse> *proxyResponse;
-@property(nonatomic) NSInteger statusCode;
+@property(nonatomic, assign) NSInteger statusCode;
 
 - (id)initWithConnection:(VVHTTPConnection *)theConnection;
 
