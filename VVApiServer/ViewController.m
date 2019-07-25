@@ -100,7 +100,7 @@
     }];
 }
 
-- (void)verifyApiWithMethod:(NSString *)method path:(NSString *)path {
+- (void)requestApiWithMethod:(NSString *)method path:(NSString *)path {
     NSString *baseURLString = [NSString stringWithFormat:@"http://www.waqu.com:%d", [httpServer listeningPort]];
     NSString *urlString = [baseURLString stringByAppendingString:path];
     NSURL *url = [NSURL URLWithString:urlString];
@@ -120,21 +120,21 @@
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event {
 
     // found
-    [self verifyApiWithMethod:@"GET" path:@"/hello"];
-//    [self verifyApiWithMethod:@"GET" path:@"/hello/you"];
-//    [self verifyApiWithMethod:@"GET" path:@"/page/3"];
-//    [self verifyApiWithMethod:@"GET" path:@"/files/test.txt"];
-//    [self verifyApiWithMethod:@"GET" path:@"/selector"];
-//    [self verifyApiWithMethod:@"POST" path:@"/form"];
-//    [self verifyApiWithMethod:@"POST" path:@"/users/bob"];
-//    [self verifyApiWithMethod:@"POST" path:@"/users/bob/dosomething"];
+    [self requestApiWithMethod:@"GET" path:@"/hello"];
+    [self requestApiWithMethod:@"GET" path:@"/hello/you"];
+    [self requestApiWithMethod:@"GET" path:@"/page/3"];
+    [self requestApiWithMethod:@"GET" path:@"/files/test.txt"];
+    [self requestApiWithMethod:@"GET" path:@"/selector"];
+    [self requestApiWithMethod:@"POST" path:@"/form"];
+    [self requestApiWithMethod:@"POST" path:@"/users/bob"];
+    [self requestApiWithMethod:@"POST" path:@"/users/bob/dosomething"];
 
     // not found
-//    [self verifyApiWithMethod:@"POST" path:@"/hello"];
-//    [self verifyApiWithMethod:@"POST" path:@"/selector"];
-//    [self verifyApiWithMethod:@"GET" path:@"/page/a3"];
-//    [self verifyApiWithMethod:@"GET" path:@"/page/3a"];
-//    [self verifyApiWithMethod:@"GET" path:@"/form"];
+    [self requestApiWithMethod:@"POST" path:@"/hello"];
+    [self requestApiWithMethod:@"POST" path:@"/selector"];
+    [self requestApiWithMethod:@"GET" path:@"/page/a3"];
+    [self requestApiWithMethod:@"GET" path:@"/page/3a"];
+    [self requestApiWithMethod:@"GET" path:@"/form"];
 }
 
 @end
