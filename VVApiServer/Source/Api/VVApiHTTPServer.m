@@ -3,6 +3,7 @@
 
 #import "VVApiConnection.h"
 #import "VVApi.h"
+#import "VVApiConfig.h"
 
 @implementation VVApiHTTPServer {
     NSMutableDictionary *_apiDict;
@@ -16,7 +17,7 @@
         connectionClass = [VVApiConnection class];
         _apiDict = [NSMutableDictionary new];
         _defaultHeaderDict = [NSMutableDictionary new];
-        _openApi = YES;
+        _apiConfig = [VVApiConfig new];
 
         [self setupMIMETypes];
     }

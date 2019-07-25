@@ -11,6 +11,7 @@
 #import "VVHTTPMessage.h"
 
 #import "VVApiHTTPServer.h"
+#import "VVApiConfig.h"
 #import "VVJSONAdapter.h"
 
 @interface ViewController () {
@@ -26,6 +27,8 @@
 
     httpServer = [VVApiHTTPServer share];
     [httpServer setPort:80];
+    httpServer.apiConfig.timeout = 0.5;
+
     NSError *error = nil;
     if (![httpServer start:&error]) {
         NSLog(@"HTTP server failed to start");

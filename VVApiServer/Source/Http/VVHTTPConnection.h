@@ -5,29 +5,10 @@
 @class VVHTTPServer;
 @class VVWebSocket;
 @protocol VVHTTPResponse;
+@class HTTPConfig;
 
 
 #define HTTPConnectionDidDieNotification  @"HTTPConnectionDidDie"
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#pragma mark -
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-@interface HTTPConfig : NSObject {
-    VVHTTPServer __unsafe_unretained *server;
-    NSString __strong *documentRoot;
-    dispatch_queue_t queue;
-}
-
-- (id)initWithServer:(VVHTTPServer *)server documentRoot:(NSString *)documentRoot;
-
-- (id)initWithServer:(VVHTTPServer *)server documentRoot:(NSString *)documentRoot queue:(dispatch_queue_t)q;
-
-@property(nonatomic, unsafe_unretained, readonly) VVHTTPServer *server;
-@property(nonatomic, strong, readonly) NSString *documentRoot;
-@property(nonatomic, readonly) dispatch_queue_t queue;
-
-@end
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark -
@@ -132,7 +113,9 @@
 @end
 
 @interface VVHTTPConnection (AsynchronousHTTPResponse)
+
 - (void)responseHasAvailableData:(NSObject <VVHTTPResponse> *)sender;
 
 - (void)responseDidAbort:(NSObject <VVHTTPResponse> *)sender;
+
 @end

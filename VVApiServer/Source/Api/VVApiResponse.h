@@ -6,7 +6,6 @@
 
 @interface VVApiResponse : NSObject
 
-@property(nonatomic, assign, readonly) VVHTTPConnection *connection;
 @property(nonatomic, readonly) NSDictionary *headers;
 @property(nonatomic, strong) NSObject <VVHTTPResponse> *response;
 @property(nonatomic, readonly) NSObject <VVHTTPResponse> *proxyResponse;

@@ -7,11 +7,12 @@
 typedef void (^VVRequestHandler)(VVApiRequest *request, VVApiResponse *response);
 
 @class VVApi;
+@class VVApiConfig;
 
 @interface VVApiHTTPServer : VVHTTPServer
 
-@property(nonatomic, assign) BOOL openApi;
 @property(nonatomic, readonly) NSDictionary *defaultHeaderDict;
+@property(nonatomic, readonly) VVApiConfig *apiConfig;
 
 + (instancetype)share;
 

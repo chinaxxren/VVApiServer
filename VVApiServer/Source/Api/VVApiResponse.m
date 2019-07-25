@@ -13,9 +13,8 @@
 
 - (id)initWithConnection:(VVHTTPConnection *)theConnection {
     if (self = [super init]) {
-        _connection = theConnection;
         _headers = [[NSMutableDictionary alloc] init];
-        _proxy = [[VVHTTPResponseProxy alloc] init];
+        _proxy = [[VVHTTPResponseProxy alloc] initWithConnection:theConnection];
     }
     return self;
 }
@@ -66,9 +65,9 @@
 
 - (void)respondWithFile:(NSString *)path async:(BOOL)async {
     if (async) {
-        self.response = [[VVHTTPAsyncFileResponse alloc] initWithFilePath:path forConnection:_connection];
+        self.response = [[VVHTTPAsyncFileResponse alloc] initWithFilePath:path forConnection:_proxy.connection];
     } else {
-        self.response = [[VVHTTPFileResponse alloc] initWithFilePath:path forConnection:_connection];
+        self.response = [[VVHTTPFileResponse alloc] initWithFilePath:path forConnection:_proxy.connection];
     }
 }
 

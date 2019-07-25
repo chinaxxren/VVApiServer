@@ -10,6 +10,7 @@
 
 #import "VVApiHTTPServer.h"
 #import "VVApi.h"
+#import "VVApiConfig.h"
 
 @implementation NSURLRequest (VVApi)
 
@@ -37,7 +38,7 @@
     }
 
     VVApiHTTPServer *httpServer = [VVApiHTTPServer share];
-    if (httpServer.openApi) {
+    if (httpServer.apiConfig.openApi) {
         VVApi *api = [httpServer findApiWithPath:URL.path];
         if (api) {
             NSString *replace = [NSString stringWithFormat:@"127.0.0.1:%zd", api.port];

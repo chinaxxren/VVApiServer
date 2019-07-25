@@ -11,6 +11,7 @@
 #import "VVHTTPAsyncFileResponse.h"
 #import "VVWebSocket.h"
 #import "VVHTTPLogging.h"
+#import "VVHTTPConfig.h"
 
 #if !__has_feature(objc_arc)
 #warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
@@ -2376,42 +2377,3 @@ static NSMutableArray *recentNonces;
 
 @end
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#pragma mark -
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-@implementation HTTPConfig
-
-@synthesize server;
-@synthesize documentRoot;
-@synthesize queue;
-
-- (id)initWithServer:(VVHTTPServer *)aServer documentRoot:(NSString *)aDocumentRoot {
-    if ((self = [super init])) {
-        server = aServer;
-        documentRoot = aDocumentRoot;
-    }
-    return self;
-}
-
-- (id)initWithServer:(VVHTTPServer *)aServer documentRoot:(NSString *)aDocumentRoot queue:(dispatch_queue_t)q {
-    if ((self = [super init])) {
-        server = aServer;
-
-        documentRoot = [aDocumentRoot stringByStandardizingPath];
-        if ([documentRoot hasSuffix:@"/"]) {
-            documentRoot = [documentRoot stringByAppendingString:@"/"];
-        }
-
-        if (q) {
-            queue = q;
-        }
-    }
-    return self;
-}
-
-- (void)dealloc {
-
-}
-
-@end

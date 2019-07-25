@@ -168,9 +168,6 @@
 **/
 - (void)republishBonjour;
 
-/**
- *
-**/
 - (NSDictionary *)TXTRecordDictionary;
 
 - (void)setTXTRecordDictionary:(NSDictionary *)dict;

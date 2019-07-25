@@ -2,7 +2,7 @@
 
 #import "VVApiHTTPServer.h"
 #import "VVHTTPMessage.h"
-#import "VVHTTPResponseProxy.h"
+#import "VVHTTPConfig.h"
 
 @implementation VVApiConnection {
     __weak VVApiHTTPServer *_httpServer;
@@ -26,19 +26,10 @@
     return [super supportsMethod:method atPath:path];
 }
 
-- (BOOL)shouldHandleRequestForMethod:(NSString *)method atPath:(NSString *)path {
-    // The default implementation is strict about the use of Content-Length. Either
-    // a given method + path combination must *always* include data or *never*
-    // include data. The routing connection is lenient, a POST that sometimes does
-    // not include data or a GET that sometimes does is fine. It is up to the api
-    // implementations to decide how to handle these situations.
-    return YES;
-}
-
 - (void)processBodyData:(NSData *)postDataChunk {
     BOOL result = [request appendData:postDataChunk];
     if (!result) {
-        // TODO: Log
+
     }
 }
 
@@ -72,20 +63,6 @@
     }
 
     return staticResponse;
-}
-
-- (void)responseHasAvailableData:(NSObject <VVHTTPResponse> *)sender {
-    VVHTTPResponseProxy *proxy = (VVHTTPResponseProxy *) httpResponse;
-    if (proxy.response == sender) {
-        [super responseHasAvailableData:httpResponse];
-    }
-}
-
-- (void)responseDidAbort:(NSObject <VVHTTPResponse> *)sender {
-    VVHTTPResponseProxy *proxy = (VVHTTPResponseProxy *) httpResponse;
-    if (proxy.response == sender) {
-        [super responseDidAbort:httpResponse];
-    }
 }
 
 - (void)setHeadersForResponse:(VVHTTPMessage *)response isError:(BOOL)isError {
