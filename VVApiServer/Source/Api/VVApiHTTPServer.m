@@ -19,10 +19,16 @@
         _defaultHeaderDict = [NSMutableDictionary new];
         _apiConfig = [VVApiConfig new];
 
-        [self setupMIMETypes];
+        [self setup];
     }
 
     return self;
+}
+
+- (void)setup {
+    [self setupMIMETypes];
+    [self setType:@"_http._tcp."];
+    [self setPort:80];
 }
 
 + (instancetype)share {
