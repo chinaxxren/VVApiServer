@@ -121,20 +121,20 @@
 
     // found
     [self requestApiWithMethod:@"GET" path:@"/hello"];
-    [self requestApiWithMethod:@"GET" path:@"/hello/you"];
-    [self requestApiWithMethod:@"GET" path:@"/page/3"];
-    [self requestApiWithMethod:@"GET" path:@"/files/test.txt"];
-    [self requestApiWithMethod:@"GET" path:@"/selector"];
-    [self requestApiWithMethod:@"POST" path:@"/form"];
-    [self requestApiWithMethod:@"POST" path:@"/users/bob"];
-    [self requestApiWithMethod:@"POST" path:@"/users/bob/dosomething"];
-
-    // not found
-    [self requestApiWithMethod:@"POST" path:@"/hello"];
-    [self requestApiWithMethod:@"POST" path:@"/selector"];
-    [self requestApiWithMethod:@"GET" path:@"/page/a3"];
-    [self requestApiWithMethod:@"GET" path:@"/page/3a"];
-    [self requestApiWithMethod:@"GET" path:@"/form"];
+//    [self requestApiWithMethod:@"GET" path:@"/hello/you"];
+//    [self requestApiWithMethod:@"GET" path:@"/page/3"];
+//    [self requestApiWithMethod:@"GET" path:@"/files/test.txt"];
+//    [self requestApiWithMethod:@"GET" path:@"/selector"];
+//    [self requestApiWithMethod:@"POST" path:@"/form"];
+//    [self requestApiWithMethod:@"POST" path:@"/users/bob"];
+//    [self requestApiWithMethod:@"POST" path:@"/users/bob/dosomething"];
+//
+//    // not found
+//    [self requestApiWithMethod:@"POST" path:@"/hello"];
+//    [self requestApiWithMethod:@"POST" path:@"/selector"];
+//    [self requestApiWithMethod:@"GET" path:@"/page/a3"];
+//    [self requestApiWithMethod:@"GET" path:@"/page/3a"];
+//    [self requestApiWithMethod:@"GET" path:@"/form"];
 }
 
 @end
