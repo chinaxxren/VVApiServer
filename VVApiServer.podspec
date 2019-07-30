@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |spec|
   spec.name         = "VVApiServer"
-  spec.version      = "0.0.2"
+  spec.version      = "0.0.3"
   spec.summary      = "VVORM 封装FMDB数据库操作"
   spec.homepage     = "https://github.com/chinaxxren/VVApiServer"
   spec.license      = "MIT"
