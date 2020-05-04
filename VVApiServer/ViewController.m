@@ -141,11 +141,13 @@
 - (void)afnRequest:(NSString *)method
          urlString:(NSString *)urlString
             params:(NSDictionary *)params
+           headers:(NSDictionary *)headers
     sessionManager:(AFHTTPSessionManager *)sessionManager {
 
     if ([method isEqualToString:@"GET"]) {
         [sessionManager GET:urlString
                  parameters:params
+                    headers:headers
                    progress:nil
                     success:^(NSURLSessionDataTask *_Nonnull task, id _Nullable responseObject) {
                         if ([responseObject isKindOfClass:[NSData class]]) {
@@ -160,6 +162,7 @@
     } else if ([method isEqualToString:@"POST"]) {
         [sessionManager POST:urlString
                   parameters:params
+                     headers:nil
                     progress:nil
                      success:^(NSURLSessionDataTask *_Nonnull task, id _Nullable responseObject) {
                          if ([responseObject isKindOfClass:[NSData class]]) {
@@ -187,15 +190,13 @@
         sessionManager.responseSerializer = [AFHTTPResponseSerializer serializer];
     }
     sessionManager.responseSerializer.acceptableContentTypes = [sessionManager.responseSerializer.acceptableContentTypes setByAddingObjectsFromArray:@[@"text/html", @"text/plain"]];
-    NSDictionary *headerFieldValueDictionary = @{@"xxx": @"1.0"};
-    if (headerFieldValueDictionary != nil) {
-        for (NSString *httpHeaderField in headerFieldValueDictionary.allKeys) {
-            NSString *value = headerFieldValueDictionary[httpHeaderField];
-            [sessionManager.requestSerializer setValue:value forHTTPHeaderField:httpHeaderField];
-        }
-    }
+    NSDictionary *headers = @{@"vv_token": @"123456"};
 
-    [self afnRequest:method urlString:urlString params:params sessionManager:sessionManager];
+    [self afnRequest:method
+           urlString:urlString
+              params:params
+             headers:headers
+      sessionManager:sessionManager];
 }
 
 - (void)delayLocalAFNetworkingWithMethod:(NSString *)method path:(NSString *)path isJson:(BOOL)isJson isDelay:(BOOL)isDelay {
@@ -218,15 +219,12 @@
         sessionManager.responseSerializer = [AFHTTPResponseSerializer serializer];
     }
     sessionManager.responseSerializer.acceptableContentTypes = [sessionManager.responseSerializer.acceptableContentTypes setByAddingObjectsFromArray:@[@"text/html", @"text/plain"]];
-    NSDictionary *headerFieldValueDictionary = @{@"xxx": @"1.0"};
-    if (headerFieldValueDictionary != nil) {
-        for (NSString *httpHeaderField in headerFieldValueDictionary.allKeys) {
-            NSString *value = headerFieldValueDictionary[httpHeaderField];
-            [sessionManager.requestSerializer setValue:value forHTTPHeaderField:httpHeaderField];
-        }
-    }
 
-    [self afnRequest:method urlString:urlString params:params sessionManager:sessionManager];
+    [self afnRequest:method
+           urlString:urlString
+              params:params
+             headers:nil
+      sessionManager:sessionManager];
 }
 
 - (void)remoteAFNetworkingWithMethod:(NSString *)method path:(NSString *)path isLocal:(BOOL)isLocal isJson:(BOOL)isJson {
@@ -252,15 +250,13 @@
         sessionManager.responseSerializer = [AFHTTPResponseSerializer serializer];
     }
     sessionManager.responseSerializer.acceptableContentTypes = [sessionManager.responseSerializer.acceptableContentTypes setByAddingObjectsFromArray:@[@"text/html", @"text/plain"]];
-    NSDictionary *headerFieldValueDictionary = @{@"vv_token": @"12345"};
-    if (headerFieldValueDictionary != nil) {
-        for (NSString *httpHeaderField in headerFieldValueDictionary.allKeys) {
-            NSString *value = headerFieldValueDictionary[httpHeaderField];
-            [sessionManager.requestSerializer setValue:value forHTTPHeaderField:httpHeaderField];
-        }
-    }
+    NSDictionary *headers = @{@"vv_token": @"12345"};
 
-    [self afnRequest:method urlString:urlString params:params sessionManager:sessionManager];
+    [self afnRequest:method
+           urlString:urlString
+              params:params
+             headers:headers
+      sessionManager:sessionManager];
 }
 
 - (void)requestApiWithMethod:(NSString *)method path:(NSString *)path {
