@@ -142,7 +142,7 @@ static const int httpLogLevel = VV_HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE
 
     VVHTTPLogVerbose(@"%@[%p]: Open fd[%i] -> %@", VV_THIS_FILE, self, fileFD, filePath);
 
-    readQueue = dispatch_queue_create("VVHTTPAsyncFileResponse", NULL);
+    readQueue = dispatch_queue_create("vv.http.async.file.response", NULL);
     readSource = dispatch_source_create(DISPATCH_SOURCE_TYPE_READ, fileFD, 0, readQueue);
 
 

@@ -185,7 +185,7 @@ static NSMutableArray *recentNonces;
         if (aConfig.queue) {
             connectionQueue = aConfig.queue;
         } else {
-            connectionQueue = dispatch_queue_create("VVHTTPConnection", NULL);
+            connectionQueue = dispatch_queue_create("vv.http.connection", NULL);
         }
 
         // Take over ownership of the socket

@@ -40,8 +40,8 @@ static const int httpLogLevel = VV_HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE
         VVHTTPLogTrace();
 
         // Setup underlying dispatch queues
-        serverQueue = dispatch_queue_create("VVHTTPServer", NULL);
-        connectionQueue = dispatch_queue_create("VVHTTPConnection", NULL);
+        serverQueue = dispatch_queue_create("vv.http.server", NULL);
+        connectionQueue = dispatch_queue_create("vv.http.connection", NULL);
 
         IsOnServerQueueKey = &IsOnServerQueueKey;
         IsOnConnectionQueueKey = &IsOnConnectionQueueKey;

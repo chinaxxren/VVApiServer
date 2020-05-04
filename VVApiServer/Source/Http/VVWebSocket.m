@@ -162,7 +162,7 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame) {
             VVHTTPLogVerbose(@"%@[%p] Request Headers:\n%@", VV_THIS_FILE, self, temp);
         }
 
-        websocketQueue = dispatch_queue_create("VVWebSocket", NULL);
+        websocketQueue = dispatch_queue_create("vv.web.socket", NULL);
         request = aRequest;
 
         asyncSocket = socket;
