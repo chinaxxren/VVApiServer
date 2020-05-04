@@ -19,7 +19,6 @@
 
 @interface ViewController () {
     VVApiHTTPServer *httpServer;
-    AFHTTPSessionManager *_sessionManager;
 }
 
 @end
