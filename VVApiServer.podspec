@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |spec|
   spec.name         = "VVApiServer"
-  spec.version      = "0.0.6"
+  spec.version      = "0.0.7"
   spec.summary      = "自定义本地和远程Api接口访问结果，同时支持Unit Test"
   spec.homepage     = "https://github.com/chinaxxren/VVApiServer"
   spec.license      = "MIT"
@@ -12,5 +12,5 @@ Pod::Spec.new do |spec|
 
   spec.frameworks  = "UIKit"
   spec.dependency  "CocoaAsyncSocket"
-  spec.dependency "AFNetworking"
+  spec.dependency "AFNetworking", "~> 4.0.1"
 end
