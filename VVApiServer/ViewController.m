@@ -19,6 +19,7 @@
 
 @interface ViewController () {
     VVApiHTTPServer *httpServer;
+    AFHTTPSessionManager *_sessionManager;
 }
 
 @end
@@ -144,45 +145,51 @@
            headers:(NSDictionary *)headers
     sessionManager:(AFHTTPSessionManager *)sessionManager {
 
-    if ([method isEqualToString:@"GET"]) {
+    if ([method isEqualToString:VV_API_GET]) {
         [sessionManager GET:urlString
                  parameters:params
                     headers:headers
-                   progress:nil
-                    success:^(NSURLSessionDataTask *_Nonnull task, id _Nullable responseObject) {
+                   progress:NULL
+                    success:^(NSURLSessionDataTask *task, id responseObject) {
                         if ([responseObject isKindOfClass:[NSData class]]) {
                             NSLog(@"reponse->%@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
                         } else {
                             NSLog(@"reponse->%@", responseObject);
                         }
-                    }
-                    failure:^(NSURLSessionDataTask *_Nullable task, NSError *_Nonnull error) {
-                        NSLog(@"%@,%s", error, __func__);
-                    }];
-    } else if ([method isEqualToString:@"POST"]) {
+                    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                    NSLog(@"%@,%s", error, __func__);
+                }];
+    } else if ([method isEqualToString:VV_API_POST]) {
         [sessionManager POST:urlString
                   parameters:params
-                     headers:nil
-                    progress:nil
-                     success:^(NSURLSessionDataTask *_Nonnull task, id _Nullable responseObject) {
+                     headers:headers
+                    progress:NULL
+                     success:^(NSURLSessionDataTask *task, id responseObject) {
                          if ([responseObject isKindOfClass:[NSData class]]) {
                              NSLog(@"reponse->%@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
                          } else {
                              NSLog(@"reponse->%@", responseObject);
                          }
-                     }
-                     failure:^(NSURLSessionDataTask *_Nullable task, NSError *_Nonnull error) {
-                         NSLog(@"%@,%s", error, __func__);
-                     }];
+                     } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                    NSLog(@"%@,%s", error, __func__);
+                }];
     }
 }
 
-- (void)nomarlLocalAFNetworkingWithMethod:(NSString *)method path:(NSString *)path isJson:(BOOL)isJson {
+- (void)nomarlLocalAFNetworkingWithMethod:(NSString *)method path:(NSString *)path isLocal:(BOOL)isLocal isJson:(BOOL)isJson {
     NSString *urlString;
     NSDictionary *params;
+    NSDictionary *headers;
 
-    urlString = [NSString stringWithFormat:@"http://%@:%d", [VVIPHelper ipAddress], httpServer.port];
-    urlString = [urlString stringByAppendingString:path];
+    if (isLocal) {
+        urlString = [NSString stringWithFormat:@"http://%@:%d", [VVIPHelper ipAddress], httpServer.port];
+        urlString = [urlString stringByAppendingString:path];
+    } else {
+        urlString = @"https://api.apiopen.top";
+        params = @{@"page": @1, @"count": @2};
+        urlString = [urlString stringByAppendingString:path];
+    }
+
     NSLog(@"Origin URL->%@", urlString);
 
     AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
@@ -190,7 +197,6 @@
         sessionManager.responseSerializer = [AFHTTPResponseSerializer serializer];
     }
     sessionManager.responseSerializer.acceptableContentTypes = [sessionManager.responseSerializer.acceptableContentTypes setByAddingObjectsFromArray:@[@"text/html", @"text/plain"]];
-    NSDictionary *headers = @{@"vv_token": @"123456"};
 
     [self afnRequest:method
            urlString:urlString
@@ -287,16 +293,18 @@
     /******************** found **************************/
 
     // 本地地址，访问本地服务器读取本地Json,返回当前读取的Json
-//    [self nomarlLocalAFNetworkingWithMethod:@"GET" path:@"/local/news" isJson:YES];
+//    [self nomarlLocalAFNetworkingWithMethod:@"GET" path:@"/local/news" isLocal:YES isJson:YES];
 //    [self delayLocalAFNetworkingWithMethod:@"GET" path:@"/local/news" isJson:YES isDelay:NO];
 //    [self delayLocalAFNetworkingWithMethod:@"GET" path:@"/local/news" isJson:YES isDelay:YES];
 
     // 远程地址，访问本地服务器，返回本地自定义结果Json
 //    [self remoteAFNetworkingWithMethod:@"POST" path:@"/getWangYiNews" isLocal:YES isJson:YES];
 
+//    [self nomarlLocalAFNetworkingWithMethod:@"GET" path:@"/getWangYiNews" isLocal:NO isJson:YES];
+
     // 远程地址，访问远程服务器，返回远程结果
 //    [self remoteAFNetworkingWithMethod:@"POST" path:@"/getWangYiNews" isLocal:NO isJson:YES];
-//    [self remoteAFNetworkingWithMethod:@"GET" path:@"/musicRankings" isLocal:NO isJson:YES];
+    [self remoteAFNetworkingWithMethod:@"GET" path:@"/musicRankings" isLocal:NO isJson:YES];
 //    [self remoteAFNetworkingWithMethod:@"GET" path:@"/errorurl" isLocal:NO isJson:YES];
 
 //    [self remoteAFNetworkingWithMethod:@"GET" path:@"/musicRankings" isLocal:YES isJson:YES];
@@ -323,7 +331,7 @@
 //    [self requestApiWithMethod:@"GET" path:@"/page/3a"];
 //    [self requestApiWithMethod:@"GET" path:@"/form"];
 
-    [self playLocalVideo:@"/video/sync.mp4"];
+//    [self playLocalVideo:@"/video/sync.mp4"];
 //    [self playLocalVideo:@"/video/async.mp4"];
 }
 
