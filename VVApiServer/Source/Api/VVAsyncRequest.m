@@ -1,7 +1,7 @@
 
 #import "VVAsyncRequest.h"
 
-#import <AFNetworking/AFNetworking.h>
+#import <AFNetworking/AFHTTPSessionManager.h>
 
 #import "VVApiAFNFactory.h"
 #import "VVConnectParams.h"
@@ -33,68 +33,93 @@
 
     VVWeak(self);
     if ([method isEqualToString:VV_API_HEAD]) {
-        [self.sessionManager HEAD:urlString
-                       parameters:params
-                          success:^(NSURLSessionDataTask *task) {
-                              VVStrong(self);
-
-                              [self requsestSuccess:nil];
-                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                    VVStrong(self);
-
-                    [self requestFail:error response:task.response];
-                }];
+        [self headRequest:urlString params:params];
     } else if ([method isEqualToString:VV_API_GET]) {
-        [self.sessionManager GET:urlString
-                      parameters:params
-                        progress:NULL
-                         success:^(NSURLSessionDataTask *task, id responseObject) {
-                             VVStrong(self);
-
-                             [self requsestSuccess:responseObject];
-                         } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                    VVStrong(self);
-
-                    [self requestFail:error response:task.response];
-                }];
+        [self getRequest:urlString params:params];
     } else if ([method isEqualToString:VV_API_POST]) {
-        [self.sessionManager POST:urlString
-                       parameters:params
-                         progress:NULL
-                          success:^(NSURLSessionDataTask *task, id responseObject) {
-                              VVStrong(self);
-
-                              [self requsestSuccess:responseObject];
-                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                    VVStrong(self);
-
-                    [self requestFail:error response:task.response];
-                }];
+        [self postRequst:urlString params:params];
     } else if ([method isEqualToString:VV_API_PUT]) {
-        [self.sessionManager PUT:urlString
-                      parameters:params
-                         success:^(NSURLSessionDataTask *task, id responseObject) {
-                             VVStrong(self);
-
-                             [self requsestSuccess:responseObject];
-                         } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                    VVStrong(self);
-
-                    [self requestFail:error response:task.response];
-                }];
+        [self putRequest:urlString params:params];
     } else if ([method isEqualToString:VV_API_DELETE]) {
-        [self.sessionManager DELETE:urlString
-                         parameters:params
-                            success:^(NSURLSessionDataTask *task, id responseObject) {
-                                VVStrong(self);
-
-                                [self requsestSuccess:responseObject];
-                            } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                    VVStrong(self);
-
-                    [self requestFail:error response:task.response];
-                }];
+        [self deleteRequuest:urlString params:params];
     }
+}
+
+- (void)headRequest:(NSString *)urlString params:(NSDictionary *)params {
+    VVWeak(self);
+    [self.sessionManager HEAD:urlString
+                   parameters:params
+                      success:^(NSURLSessionDataTask *task) {
+                          VVStrong(self);
+
+                          [self requsestSuccess:nil];
+                      } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                VVStrong(self);
+
+                [self requestFail:error response:task.response];
+            }];
+}
+
+- (void)getRequest:(NSString *)urlString params:(NSDictionary *)params {
+    VVWeak(self);
+    [self.sessionManager GET:urlString
+                  parameters:params
+                    progress:NULL
+                     success:^(NSURLSessionDataTask *task, id responseObject) {
+                         VVStrong(self);
+
+                         [self requsestSuccess:responseObject];
+                     } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                VVStrong(self);
+
+                [self requestFail:error response:task.response];
+            }];
+}
+
+- (void)postRequst:(NSString *)urlString params:(NSDictionary *)params {
+    VVWeak(self);
+    [self.sessionManager POST:urlString
+                   parameters:params
+                     progress:NULL
+                      success:^(NSURLSessionDataTask *task, id responseObject) {
+                          VVStrong(self);
+
+                          [self requsestSuccess:responseObject];
+                      } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                VVStrong(self);
+
+                [self requestFail:error response:task.response];
+            }];
+}
+
+- (void)putRequest:(NSString *)urlString params:(NSDictionary *)params {
+    VVWeak(self);
+    [self.sessionManager PUT:urlString
+                  parameters:params
+                     success:^(NSURLSessionDataTask *task, id responseObject) {
+                         VVStrong(self);
+
+                         [self requsestSuccess:responseObject];
+                     } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                VVStrong(self);
+
+                [self requestFail:error response:task.response];
+            }];
+}
+
+- (void)deleteRequuest:(NSString *)urlString params:(NSDictionary *)params {
+    VVWeak(self);
+    [self.sessionManager DELETE:urlString
+                     parameters:params
+                        success:^(NSURLSessionDataTask *task, id responseObject) {
+                            VVStrong(self);
+
+                            [self requsestSuccess:responseObject];
+                        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                VVStrong(self);
+
+                [self requestFail:error response:task.response];
+            }];
 }
 
 - (void)requsestSuccess:(id)responseObject {
