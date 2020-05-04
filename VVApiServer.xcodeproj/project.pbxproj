@@ -94,7 +94,6 @@
 		7545736340A9B6DAF479B03AF5F78E60 /* VVApiServerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VVApiServerUITests.m; sourceTree = "<group>"; };
 		7A50D15D8D10612C4A1013813970EEA8 /* VVApiRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVApiRequest.m; sourceTree = "<group>"; };
 		7CE7D19D1E18350CC7CBCD91982ABB3B /* VVHTTPAuthenticationRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVHTTPAuthenticationRequest.m; sourceTree = "<group>"; };
-		82013D132459CE4E0088AAFE /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		82EA8563245EFB52003EDFBD /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		82EA8565245EFB74003EDFBD /* PlayerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerViewController.h; sourceTree = "<group>"; };
 		82EA8566245EFB74003EDFBD /* PlayerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerViewController.m; sourceTree = "<group>"; };
@@ -358,7 +357,6 @@
 				82EA8565245EFB74003EDFBD /* PlayerViewController.h */,
 				82EA8566245EFB74003EDFBD /* PlayerViewController.m */,
 				88AF1D31DE9AB4778F0F84997B5343B0 /* main.m */,
-				82013D132459CE4E0088AAFE /* README.md */,
 				B6D61E992D697048686FB582 /* Resouces */,
 			);
 			path = VVApiServer;

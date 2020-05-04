@@ -327,7 +327,7 @@
 //    [self requestApiWithMethod:@"GET" path:@"/page/3a"];
 //    [self requestApiWithMethod:@"GET" path:@"/form"];
 
-//    [self playLocalVideo:@"/video/sync.mp4"];
+    [self playLocalVideo:@"/video/sync.mp4"];
 //    [self playLocalVideo:@"/video/async.mp4"];
 }
 
