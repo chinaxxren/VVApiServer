@@ -16,18 +16,27 @@ static const int httpLogLevel = VV_HTTP_LOG_LEVEL_OFF; // | HTTP_LOG_FLAG_TRACE;
     VVHTTPLogTrace();
 }
 
+- (id)init {
+    if ((self = [super init])) {
+        VVHTTPLogTrace();
+
+        offset = 0;
+    }
+    return self;
+}
+
 - (id)initWithData:(NSData *)dataParam {
     if ((self = [super init])) {
         VVHTTPLogTrace();
 
         offset = 0;
-        data = dataParam;
+        self.data = dataParam;
     }
     return self;
 }
 
 - (UInt64)contentLength {
-    UInt64 result = (UInt64) [data length];
+    UInt64 result = (UInt64) [self.data length];
 
     VVHTTPLogTrace2(@"%@[%p]: contentLength - %llu", VV_THIS_FILE, self, result);
 
@@ -49,10 +58,10 @@ static const int httpLogLevel = VV_HTTP_LOG_LEVEL_OFF; // | HTTP_LOG_FLAG_TRACE;
 - (NSData *)readDataOfLength:(NSUInteger)lengthParameter {
     VVHTTPLogTrace2(@"%@[%p]: readDataOfLength:%lu", VV_THIS_FILE, self, (unsigned long) lengthParameter);
 
-    NSUInteger remaining = [data length] - offset;
+    NSUInteger remaining = [self.data length] - offset;
     NSUInteger length = lengthParameter < remaining ? lengthParameter : remaining;
 
-    void *bytes = (void *) ([data bytes] + offset);
+    void *bytes = (void *) ([self.data bytes] + offset);
 
     offset += length;
 
@@ -60,7 +69,7 @@ static const int httpLogLevel = VV_HTTP_LOG_LEVEL_OFF; // | HTTP_LOG_FLAG_TRACE;
 }
 
 - (BOOL)isDone {
-    BOOL result = (offset == [data length]);
+    BOOL result = (offset == [self.data length]);
 
     VVHTTPLogTrace2(@"%@[%p]: isDone - %@", VV_THIS_FILE, self, (result ? @"YES" : @"NO"));
 

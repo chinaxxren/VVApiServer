@@ -1,8 +1,8 @@
 #import "VVWebSocket.h"
 #import "VVHTTPMessage.h"
 #import "GCDAsyncSocket.h"
-#import "NSData+VVData.h"
-#import "NSNumber+VVNumber.h"
+#import "NSData+VVApi.h"
+#import "NSNumber+VVApi.h"
 #import "VVHTTPLogging.h"
 
 #if !__has_feature(objc_arc)

@@ -21,7 +21,7 @@
 
     BOOL started;
 
-    VVHTTPMessage *request;
+    VVHTTPMessage *_requestMessage;
     unsigned int numHeaderLines;
 
     BOOL sentResponseHeaders;
@@ -30,6 +30,7 @@
     long lastNC;
 
     NSObject <VVHTTPResponse> *httpResponse;
+    NSObject <VVHTTPResponse> *apiResponse;
 
     NSMutableArray *ranges;
     NSMutableArray *ranges_headers;

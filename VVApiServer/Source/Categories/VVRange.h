@@ -53,8 +53,8 @@ NSInteger DDRangeCompare(VVRangePointer pDDRange1, VVRangePointer pDDRange2);
 
 + (NSValue *)valueWithVVRange:(VVRange)range;
 
-- (VVRange)vvrangeValue;
+- (VVRange)vv_rangeValue;
 
-- (NSInteger)vvrangeCompare:(NSValue *)other;
+- (NSInteger)vv_rangeCompare:(NSValue *)other;
 
 @end

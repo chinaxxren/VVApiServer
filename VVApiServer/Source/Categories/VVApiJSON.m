@@ -1,11 +1,7 @@
-//
-// Created by Tank on 2019-07-23.
-// Copight (c) 2019 Tank. All rights reserved.
-//
 
-#import "VVJSONAdapter.h"
+#import "VVApiJSON.h"
 
-@implementation VVJSONAdapter
+@implementation VVApiJSON
 
 + (id)objectFromJSONString:(NSString *)string {
     NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding];
@@ -49,61 +45,60 @@
 
 @implementation NSString (JSONDeserializing)
 
-- (id)objectFromJSONString {
-    return [VVJSONAdapter objectFromJSONString:self];
+- (id)toObject {
+    return [VVApiJSON objectFromJSONString:self];
 }
 
-- (id)mutableObjectFromJSONString {
-    return [VVJSONAdapter mutableObjectFromJSONString:self];
+- (id)toMutableObject {
+    return [VVApiJSON mutableObjectFromJSONString:self];
 }
 
 @end
 
 @implementation NSData (JSONDeserializing)
 
-- (id)objectFromJSONData {
-    return [VVJSONAdapter objectFromJSONData:self];
+- (id)toObject {
+    return [VVApiJSON objectFromJSONData:self];
 }
 
-- (id)mutableObjectFromJSONData {
-    return [VVJSONAdapter mutableObjectFromJSONData:self];
+- (id)toMutableObject {
+    return [VVApiJSON mutableObjectFromJSONData:self];
 }
 
 @end
 
-
 @implementation NSString (JSONSerializing)
 
-- (NSData *)JSONData {
-    return [VVJSONAdapter dataWithObject:self];
+- (NSData *)toJSONData {
+    return [VVApiJSON dataWithObject:self];
 }
 
-- (NSString *)JSONString {
-    return [VVJSONAdapter stringWithObject:self];
+- (NSString *)toJSONString {
+    return [VVApiJSON stringWithObject:self];
 }
 
 @end
 
 @implementation NSArray (JSONSerializing)
 
-- (NSData *)JSONData {
-    return [VVJSONAdapter dataWithObject:self];
+- (NSData *)toJSONData {
+    return [VVApiJSON dataWithObject:self];
 }
 
-- (NSString *)JSONString {
-    return [VVJSONAdapter stringWithObject:self];
+- (NSString *)toJSONString {
+    return [VVApiJSON stringWithObject:self];
 }
 
 @end
 
 @implementation NSDictionary (JSONSerializing)
 
-- (NSData *)JSONData {
-    return [VVJSONAdapter dataWithObject:self];
+- (NSData *)toJSONData {
+    return [VVApiJSON dataWithObject:self];
 }
 
-- (NSString *)JSONString {
-    return [VVJSONAdapter stringWithObject:self];
+- (NSString *)toJSONString {
+    return [VVApiJSON stringWithObject:self];
 }
 
 @end

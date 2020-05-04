@@ -3,6 +3,7 @@
 #import "VVApiHTTPServer.h"
 #import "VVHTTPMessage.h"
 #import "VVHTTPConfig.h"
+#import "VVApiJSON.h"
 
 @implementation VVApiConnection {
     __weak VVApiHTTPServer *_httpServer;
@@ -27,30 +28,44 @@
 }
 
 - (void)processBodyData:(NSData *)postDataChunk {
-    BOOL result = [request appendData:postDataChunk];
+    BOOL result = [_requestMessage appendData:postDataChunk];
     if (!result) {
 
     }
 }
 
 - (NSObject <VVHTTPResponse> *)httpResponseForMethod:(NSString *)method URI:(NSString *)path {
-    NSURL *url = [request url];
-    NSString *query = nil;
-    NSDictionary *params = [NSDictionary dictionary];
-    _headerDict = nil;
+    NSURL *url = [_requestMessage url];
+    NSDictionary *headers = [_requestMessage allHeaderFields];
 
+    NSString *query = nil;
+    _headerDict = nil;
+    NSDictionary *params = nil;
+    
     if (url) {
         path = [url path]; // Strip the query string from the path
-        query = [url query];
+        
+        NSData *data = [_requestMessage body];
+        if(data.length > 0) {
+            query = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        } else {
+            query = [url query];
+        }
+    
         if (query) {
             params = [self parseParams:query];
         }
     }
 
-    VVApiResponse *response = [_httpServer apiMethod:method withPath:path parameters:params request:request connection:self];
+    VVApiResponse *response = [_httpServer apiMethod:method
+                                            withPath:path
+                                             headers:headers
+                                          parameters:params
+                                             request:_requestMessage
+                                          connection:self];
     if (response != nil) {
         _headerDict = response.headers;
-        return response.proxyResponse;
+        return response;
     }
 
     // Set a MIME type for static files if possible

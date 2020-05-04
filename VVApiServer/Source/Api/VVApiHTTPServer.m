@@ -3,13 +3,15 @@
 
 #import "VVApiConnection.h"
 #import "VVApi.h"
-#import "VVApiConfig.h"
+#import "VVConnectParams.h"
+#import "VVApiConstants.h"
+#import "VVHTTPMessage.h"
+#import "VVIPHelper.h"
 
 @implementation VVApiHTTPServer {
     NSMutableDictionary *_apiDict;
     NSMutableDictionary *_defaultHeaderDict;
     NSMutableDictionary *_mimeTypeDict;
-    dispatch_queue_t _apiQueue;
 }
 
 - (instancetype)init {
@@ -17,7 +19,6 @@
         connectionClass = [VVApiConnection class];
         _apiDict = [NSMutableDictionary new];
         _defaultHeaderDict = [NSMutableDictionary new];
-        _apiConfig = [VVApiConfig new];
 
         [self setup];
     }
@@ -28,7 +29,7 @@
 - (void)setup {
     [self setupMIMETypes];
     [self setType:@"_http._tcp."];
-    [self setPort:80];
+    [self setPort:9527];
 }
 
 + (instancetype)share {
@@ -55,14 +56,6 @@
     }
 
     _defaultHeaderDict[field] = value;
-}
-
-- (dispatch_queue_t)apiQueue {
-    return _apiQueue;
-}
-
-- (void)setApiQueue:(dispatch_queue_t)queue {
-    _apiQueue = queue;
 }
 
 - (NSDictionary *)mimeTypes {
@@ -97,41 +90,26 @@
 }
 
 - (void)get:(NSString *)path withHandler:(VVRequestHandler)handler {
-    [self get:path port:80 withHandler:handler];
-}
-
-- (void)get:(NSString *)path port:(NSInteger)port withHandler:(VVRequestHandler)handler {
-    [self handleMethod:@"GET" port:port withPath:path withHandler:handler];
+    [self handleMethod:VV_API_GET withPath:path withHandler:handler];
 }
 
 - (void)post:(NSString *)path withHandler:(VVRequestHandler)handler {
-    [self post:path port:80 withHandler:handler];
-}
-
-- (void)post:(NSString *)path port:(NSInteger)port withHandler:(VVRequestHandler)handler {
-    [self handleMethod:@"POST" port:port withPath:path withHandler:handler];
+    [self handleMethod:VV_API_POST withPath:path withHandler:handler];
 }
 
 - (void)put:(NSString *)path withHandler:(VVRequestHandler)handler {
-    [self put:path port:80 withHandler:handler];
-}
-
-- (void)put:(NSString *)path port:(NSInteger)port withHandler:(VVRequestHandler)handler {
-    [self handleMethod:@"PUT" port:port withPath:path withHandler:handler];
+    [self handleMethod:VV_API_PUT withPath:path withHandler:handler];
 }
 
 - (void)delete:(NSString *)path withHandler:(VVRequestHandler)handler {
-    [self delete:path port:80 withHandler:handler];
+    [self handleMethod:VV_API_DELETE withPath:path withHandler:handler];
 }
 
-- (void)delete:(NSString *)path port:(NSInteger)port withHandler:(VVRequestHandler)handler {
-    [self handleMethod:@"DELETE" port:port withPath:path withHandler:handler];
-}
-
-- (void)handleMethod:(NSString *)method port:(NSInteger)port withPath:(NSString *)path withHandler:(VVRequestHandler)handler {
+- (void)handleMethod:(NSString *)method withPath:(NSString *)path withHandler:(VVRequestHandler)handler {
     VVApi *api = [VVApi apiWithPath:path];
     api.handler = handler;
-    api.port = port;
+    api.method = method;
+    api.port = @(self.port);
 
     [self addApi:api forMethod:method];
 }
@@ -140,6 +118,8 @@
     VVApi *api = [VVApi apiWithPath:path];
     api.target = target;
     api.sel = sel;
+    api.method = method;
+    api.port = @(self.port);
 
     [self addApi:api forMethod:method];
 }
@@ -164,17 +144,6 @@
     return _apiDict[method] != nil;
 }
 
-- (void)handleApi:(VVApi *)api withRequest:(VVApiRequest *)request response:(VVApiResponse *)response {
-    if (api.handler) {
-        api.handler(request, response);
-    } else {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-        [api.target performSelector:api.sel withObject:request withObject:response];
-#pragma clang diagnostic pop
-    }
-}
-
 - (VVApi *)findApiWithPath:(NSString *)path {
     for (NSString *key in [_apiDict allKeys]) {
         for (VVApi *api in _apiDict[key]) {
@@ -190,17 +159,27 @@
 
 - (VVApiResponse *)apiMethod:(NSString *)method
                     withPath:(NSString *)path
+                     headers:(NSDictionary *)headers
                   parameters:(NSDictionary *)params
                      request:(VVHTTPMessage *)httpMessage
                   connection:(VVHTTPConnection *)connection {
     NSMutableArray *methodApis = _apiDict[method];
-    if (methodApis == nil)
+    if (methodApis == nil) {
         return nil;
+    }
 
+    VVConnectParams *connectParams;
     for (VVApi *api in methodApis) {
         NSTextCheckingResult *result = [api.regex firstMatchInString:path options:0 range:NSMakeRange(0, path.length)];
-        if (!result)
+        if (!result) {
             continue;
+        }
+
+        connectParams = [VVConnectParams urlParamsWithApi:api path:[httpMessage url].path];
+        connectParams.method = method;
+        connectParams.headers = headers;
+        connectParams.params = params;
+        connectParams.api = api;
 
         // The first range is all of the text matched by the regex.
         NSUInteger captureCount = [result numberOfRanges];
@@ -242,17 +221,11 @@
         }
 
         VVApiRequest *request = [[VVApiRequest alloc] initWithHTTPMessage:httpMessage parameters:params];
-        VVApiResponse *response = [[VVApiResponse alloc] initWithConnection:connection];
-        if (!_apiQueue) {
-            [self handleApi:api withRequest:request response:response];
-        } else {
-            // Process the api on the specified queue
-            dispatch_sync(_apiQueue, ^{
-                @autoreleasepool {
-                    [self handleApi:api withRequest:request response:response];
-                }
-            });
-        }
+        VVApiResponse *response = [[VVApiResponse alloc] initWithConnection:connection connectParams:connectParams];
+        connectParams.request = request;
+        connectParams.response = response;
+        [response serverExcute];
+
         return response;
     }
 

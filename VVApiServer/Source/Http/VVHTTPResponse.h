@@ -56,6 +56,8 @@
 **/
 - (BOOL)delayResponseHeaders;
 
+- (BOOL)filterResponse;
+
 /**
  * Status code for response.
  * Allows for responses such as redirect (301), etc.

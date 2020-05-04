@@ -4,8 +4,9 @@
 
 @interface VVHTTPDataResponse : NSObject <VVHTTPResponse> {
     NSUInteger offset;
-    NSData *data;
 }
+
+@property(nonatomic, strong) NSData *data;
 
 - (id)initWithData:(NSData *)data;
 

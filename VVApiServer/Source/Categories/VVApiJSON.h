@@ -1,11 +1,7 @@
-//
-// Created by Tank on 2019-07-23.
-// Copyright (c) 2019 Tank. All rights reserved.
-//
 
 #import <Foundation/Foundation.h>
 
-@interface VVJSONAdapter : NSObject
+@interface VVApiJSON : NSObject
 
 + (id)objectFromJSONString:(NSString *)string;
 
@@ -23,42 +19,41 @@
 
 @interface NSString (JSONDeserializing)
 
-- (id)objectFromJSONString;
+- (id)toObject;
 
-- (id)mutableObjectFromJSONString;
+- (id)toMutableObject;
 
 @end
 
 @interface NSData (JSONDeserializing)
 
 // the nsdata must be utf8 encoded json.
-- (id)objectFromJSONData;
+- (id)toObject;
 
-- (id)mutableObjectFromJSONData;
+- (id)toMutableObject;
 
 @end
 
-
 @interface NSString (JSONSerializing)
 
-- (NSData *)JSONData;
+- (NSData *)toJSONData;
 
-- (NSString *)JSONString;
+- (NSString *)toJSONString;
 
 @end
 
 @interface NSArray (JSONSerializing)
 
-- (NSData *)JSONData;
+- (NSData *)toJSONData;
 
-- (NSString *)JSONString;
+- (NSString *)toJSONString;
 
 @end
 
 @interface NSDictionary (JSONSerializing)
 
-- (NSData *)JSONData;
+- (NSData *)toJSONData;
 
-- (NSString *)JSONString;
+- (NSString *)toJSONString;
 
 @end

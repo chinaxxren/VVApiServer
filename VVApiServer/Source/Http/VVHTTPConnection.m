@@ -4,14 +4,15 @@
 #import "VVHTTPMessage.h"
 #import "VVHTTPResponse.h"
 #import "VVHTTPAuthenticationRequest.h"
-#import "NSNumber+VVNumber.h"
+#import "NSNumber+VVApi.h"
 #import "VVRange.h"
-#import "NSData+VVData.h"
+#import "NSData+VVApi.h"
 #import "VVHTTPFileResponse.h"
 #import "VVHTTPAsyncFileResponse.h"
 #import "VVWebSocket.h"
 #import "VVHTTPLogging.h"
 #import "VVHTTPConfig.h"
+#import "VVApiConstants.h"
 
 #if !__has_feature(objc_arc)
 #warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
@@ -19,7 +20,7 @@
 
 // Log levels: off, error, warn, info, verbose
 // Other flags: trace
-static const int httpLogLevel = VV_HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
+static const int httpLogLevel = VV_HTTP_LOG_LEVEL_WARN;
 
 // Define chunk size used to read in data for responses
 // This is how much data will be read from disk into RAM at a time
@@ -109,7 +110,7 @@ static NSMutableArray *recentNonces;
     dispatch_once(&onceToken, ^{
 
         // Initialize class variables
-        recentNonceQueue = dispatch_queue_create("VVHTTPConnection-Nonce", NULL);
+        recentNonceQueue = dispatch_queue_create("vv.http.connection.nonce", NULL);
         recentNonces = [[NSMutableArray alloc] initWithCapacity:5];
     });
 }
@@ -200,8 +201,7 @@ static NSMutableArray *recentNonces;
         lastNC = 0;
 
         // Create a new HTTP message
-        request = [[VVHTTPMessage alloc] initEmptyRequest];
-
+        _requestMessage = [[VVHTTPMessage alloc] initEmptyRequest];
         numHeaderLines = 0;
 
         responseDataSizes = [[NSMutableArray alloc] initWithCapacity:5];
@@ -384,7 +384,7 @@ static NSMutableArray *recentNonces;
     VVHTTPLogTrace();
 
     // Extract the authentication information from the Authorization header
-    VVHTTPAuthenticationRequest *auth = [[VVHTTPAuthenticationRequest alloc] initWithRequest:request];
+    VVHTTPAuthenticationRequest *auth = [[VVHTTPAuthenticationRequest alloc] initWithRequest:_requestMessage];
 
     if ([self useDigestAccessAuthentication]) {
         // Digest Access Authentication (RFC 2617)
@@ -406,7 +406,7 @@ static NSMutableArray *recentNonces;
             return NO;
         }
 
-        NSString *url = [[request url] relativeString];
+        NSString *url = [[_requestMessage url] relativeString];
 
         if (![url isEqualToString:[auth uri]]) {
             // Requested URL and Authorization URI do not match
@@ -446,7 +446,7 @@ static NSMutableArray *recentNonces;
         lastNC = authNC;
 
         NSString *HA1str = [NSString stringWithFormat:@"%@:%@:%@", [auth username], [auth realm], password];
-        NSString *HA2str = [NSString stringWithFormat:@"%@:%@", [request method], [auth uri]];
+        NSString *HA2str = [NSString stringWithFormat:@"%@:%@", [_requestMessage method], [auth uri]];
 
         NSString *HA1 = [[[HA1str dataUsingEncoding:NSUTF8StringEncoding] md5Digest] hexStringValue];
 
@@ -596,6 +596,7 @@ static NSMutableArray *recentNonces;
 - (void)startReadingRequest {
     VVHTTPLogTrace();
 
+    //直到读到data这个边界，才会触发代理
     [asyncSocket readDataToData:[GCDAsyncSocket CRLFData]
                     withTimeout:TIMEOUT_READ_FIRST_HEADER_LINE
                       maxLength:MAX_HEADER_LINE_LENGTH
@@ -637,10 +638,15 @@ static NSMutableArray *recentNonces;
                     value = (__bridge_transfer NSString *) v;
 
                     if (key) {
-                        if (value)
+                        if ([key isEqualToString:VV_API_IS_REMOTE] || [key isEqualToString:VV_API_LOCAL_DELAY]) {
+                            continue;
+                        }
+
+                        if (value) {
                             result[key] = value;
-                        else
+                        } else {
                             result[key] = [NSNull null];
+                        }
                     }
                 }
             }
@@ -661,11 +667,11 @@ static NSMutableArray *recentNonces;
  * }
 **/
 - (NSDictionary *)parseGetParams {
-    if (![request isHeaderComplete]) return nil;
+    if (![_requestMessage isHeaderComplete]) return nil;
 
     NSDictionary *result = nil;
 
-    NSURL *url = [request url];
+    NSURL *url = [_requestMessage url];
     if (url) {
         NSString *query = [url query];
         if (query) {
@@ -793,11 +799,11 @@ static NSMutableArray *recentNonces;
     // Now make sure none of the ranges overlap
 
     for (i = 0; i < [ranges count] - 1; i++) {
-        VVRange range1 = [ranges[i] vvrangeValue];
+        VVRange range1 = [ranges[i] vv_rangeValue];
 
         NSUInteger j;
         for (j = i + 1; j < [ranges count]; j++) {
-            VVRange range2 = [ranges[j] vvrangeValue];
+            VVRange range2 = [ranges[j] vv_rangeValue];
 
             VVRange iRange = VVIntersectionRange(range1, range2);
 
@@ -809,15 +815,15 @@ static NSMutableArray *recentNonces;
 
     // Sort the ranges
 
-    [ranges sortUsingSelector:@selector(vvrangeCompare:)];
+    [ranges sortUsingSelector:@selector(vv_rangeCompare:)];
 
     return YES;
 }
 
 - (NSString *)requestURI {
-    if (request == nil) return nil;
+    if (_requestMessage == nil) return nil;
 
-    return [[request url] relativeString];
+    return [[_requestMessage url] relativeString];
 }
 
 /**
@@ -828,7 +834,7 @@ static NSMutableArray *recentNonces;
     VVHTTPLogTrace();
 
     if (VV_HTTP_LOG_VERBOSE) {
-        NSData *tempData = [request messageData];
+        NSData *tempData = [_requestMessage messageData];
 
         NSString *tempStr = [[NSString alloc] initWithData:tempData encoding:NSUTF8StringEncoding];
         VVHTTPLogVerbose(@"%@[%p]: Received HTTP request:\n%@", VV_THIS_FILE, self, tempStr);
@@ -836,7 +842,7 @@ static NSMutableArray *recentNonces;
 
     // Check the HTTP version
     // We only support version 1.0 and 1.1
-    NSString *version = [request version];
+    NSString *version = [_requestMessage version];
     if (![version isEqualToString:HTTPVersion1_1] && ![version isEqualToString:HTTPVersion1_0]) {
         [self handleVersionNotSupported:version];
         return;
@@ -846,7 +852,7 @@ static NSMutableArray *recentNonces;
     NSString *uri = [self requestURI];
 
     // Check for VVWebSocket request
-    if ([VVWebSocket isWebSocketRequest:request]) {
+    if ([VVWebSocket isWebSocketRequest:_requestMessage]) {
         VVHTTPLogVerbose(@"isWebSocket");
 
         VVWebSocket *ws = [self webSocketForURI:uri];
@@ -907,7 +913,7 @@ static NSMutableArray *recentNonces;
     }
 
     // Extract the method
-    NSString *method = [request method];
+    NSString *method = [_requestMessage method];
 
     // Note: We already checked to ensure the method was supported in onSocket:didReadData:withTag:
 
@@ -930,18 +936,18 @@ static NSMutableArray *recentNonces;
     VVHTTPLogTrace();
 
     // Status Code 206 - Partial Content
-    VVHTTPMessage *response = [[VVHTTPMessage alloc] initResponseWithStatusCode:206 description:nil version:HTTPVersion1_1];
+    VVHTTPMessage *responseMessage = [[VVHTTPMessage alloc] initResponseWithStatusCode:206 description:nil version:HTTPVersion1_1];
 
-    VVRange range = [ranges[0] vvrangeValue];
+    VVRange range = [ranges[0] vv_rangeValue];
 
     NSString *contentLengthStr = [NSString stringWithFormat:@"%qu", range.length];
-    [response setHeaderField:@"Content-Length" value:contentLengthStr];
+    [responseMessage setHeaderField:@"Content-Length" value:contentLengthStr];
 
     NSString *rangeStr = [NSString stringWithFormat:@"%qu-%qu", range.location, VVMaxRange(range) - 1];
     NSString *contentRangeStr = [NSString stringWithFormat:@"bytes %@/%qu", rangeStr, contentLength];
-    [response setHeaderField:@"Content-Range" value:contentRangeStr];
+    [responseMessage setHeaderField:@"Content-Range" value:contentRangeStr];
 
-    return response;
+    return responseMessage;
 }
 
 /**
@@ -953,7 +959,7 @@ static NSMutableArray *recentNonces;
     VVHTTPLogTrace();
 
     // Status Code 206 - Partial Content
-    VVHTTPMessage *response = [[VVHTTPMessage alloc] initResponseWithStatusCode:206 description:nil version:HTTPVersion1_1];
+    VVHTTPMessage *responseMessage = [[VVHTTPMessage alloc] initResponseWithStatusCode:206 description:nil version:HTTPVersion1_1];
 
     // We have to send each range using multipart/byteranges
     // So each byterange has to be prefix'd and suffix'd with the boundry
@@ -987,7 +993,7 @@ static NSMutableArray *recentNonces;
 
     NSUInteger i;
     for (i = 0; i < [ranges count]; i++) {
-        VVRange range = [ranges[i] vvrangeValue];
+        VVRange range = [ranges[i] vv_rangeValue];
 
         NSString *rangeStr = [NSString stringWithFormat:@"%qu-%qu", range.location, VVMaxRange(range) - 1];
         NSString *contentRangeVal = [NSString stringWithFormat:@"bytes %@/%qu", rangeStr, contentLength];
@@ -1007,12 +1013,12 @@ static NSMutableArray *recentNonces;
     actualContentLength += [endingBoundryData length];
 
     NSString *contentLengthStr = [NSString stringWithFormat:@"%qu", actualContentLength];
-    [response setHeaderField:@"Content-Length" value:contentLengthStr];
+    [responseMessage setHeaderField:@"Content-Length" value:contentLengthStr];
 
     NSString *contentTypeStr = [NSString stringWithFormat:@"multipart/byteranges; boundary=%@", ranges_boundry];
-    [response setHeaderField:@"Content-Type" value:contentTypeStr];
+    [responseMessage setHeaderField:@"Content-Type" value:contentTypeStr];
 
-    return response;
+    return responseMessage;
 }
 
 /**
@@ -1037,6 +1043,12 @@ static NSMutableArray *recentNonces;
 }
 
 - (void)sendResponseHeadersAndBody {
+    if ([httpResponse respondsToSelector:@selector(filterResponse)]) {
+        if ([httpResponse filterResponse]) {
+            return;
+        }
+    }
+
     if ([httpResponse respondsToSelector:@selector(delayResponseHeaders)]) {
         if ([httpResponse delayResponseHeaders]) {
             return;
@@ -1057,7 +1069,7 @@ static NSMutableArray *recentNonces;
     }
 
     // Check for specific range request
-    NSString *rangeHeader = [request headerField:@"Range"];
+    NSString *rangeHeader = [_requestMessage headerField:@"Range"];
 
     BOOL isRangeRequest = NO;
 
@@ -1071,7 +1083,7 @@ static NSMutableArray *recentNonces;
         }
     }
 
-    VVHTTPMessage *message;
+    VVHTTPMessage *responseMessage;
 
     if (!isRangeRequest) {
         // Create response
@@ -1081,19 +1093,19 @@ static NSMutableArray *recentNonces;
         if ([httpResponse respondsToSelector:@selector(status)]) {
             status = [httpResponse status];
         }
-        message = [[VVHTTPMessage alloc] initResponseWithStatusCode:status description:nil version:HTTPVersion1_1];
+        responseMessage = [[VVHTTPMessage alloc] initResponseWithStatusCode:status description:nil version:HTTPVersion1_1];
 
         if (isChunked) {
-            [message setHeaderField:@"Transfer-Encoding" value:@"chunked"];
+            [responseMessage setHeaderField:@"Transfer-Encoding" value:@"chunked"];
         } else {
             NSString *contentLengthStr = [NSString stringWithFormat:@"%qu", contentLength];
-            [message setHeaderField:@"Content-Length" value:contentLengthStr];
+            [responseMessage setHeaderField:@"Content-Length" value:contentLengthStr];
         }
     } else {
         if ([ranges count] == 1) {
-            message = [self newUniRangeResponse:contentLength];
+            responseMessage = [self newUniRangeResponse:contentLength];
         } else {
-            message = [self newMultiRangeResponse:contentLength];
+            responseMessage = [self newMultiRangeResponse:contentLength];
         }
     }
 
@@ -1102,14 +1114,14 @@ static NSMutableArray *recentNonces;
     // If they issue a 'HEAD' command, we don't have to include the file
     // If they issue a 'GET' command, we need to include the file
 
-    if ([[request method] isEqualToString:@"HEAD"] || isZeroLengthResponse) {
-        NSData *responseData = [self preprocessResponse:message];
+    if ([[_requestMessage method] isEqualToString:@"HEAD"] || isZeroLengthResponse) {
+        NSData *responseData = [self preprocessResponse:responseMessage];
         [asyncSocket writeData:responseData withTimeout:TIMEOUT_WRITE_HEAD tag:HTTP_RESPONSE];
 
         sentResponseHeaders = YES;
     } else {
         // Write the header response
-        NSData *responseData = [self preprocessResponse:message];
+        NSData *responseData = [self preprocessResponse:responseMessage];
         [asyncSocket writeData:responseData withTimeout:TIMEOUT_WRITE_HEAD tag:HTTP_PARTIAL_RESPONSE_HEADER];
 
         sentResponseHeaders = YES;
@@ -1145,7 +1157,7 @@ static NSMutableArray *recentNonces;
 
             if ([ranges count] == 1) {
                 // Client is requesting a single range
-                VVRange range = [ranges[0] vvrangeValue];
+                VVRange range = [ranges[0] vv_rangeValue];
 
                 [httpResponse setOffset:range.location];
 
@@ -1168,7 +1180,7 @@ static NSMutableArray *recentNonces;
                 [asyncSocket writeData:rangeHeaderData withTimeout:TIMEOUT_WRITE_HEAD tag:HTTP_PARTIAL_RESPONSE_HEADER];
 
                 // Start writing range body
-                VVRange range = [ranges[0] vvrangeValue];
+                VVRange range = [ranges[0] vv_rangeValue];
 
                 [httpResponse setOffset:range.location];
 
@@ -1286,7 +1298,7 @@ static NSMutableArray *recentNonces;
 
     if (writeQueueSize >= READ_CHUNKSIZE) return;
 
-    VVRange range = [ranges[0] vvrangeValue];
+    VVRange range = [ranges[0] vv_rangeValue];
 
     UInt64 offset = [httpResponse offset];
     UInt64 bytesRead = offset - range.location;
@@ -1334,7 +1346,7 @@ static NSMutableArray *recentNonces;
 
     if (writeQueueSize >= READ_CHUNKSIZE) return;
 
-    VVRange range = [ranges[rangeIndex] vvrangeValue];
+    VVRange range = [ranges[rangeIndex] vv_rangeValue];
 
     UInt64 offset = [httpResponse offset];
     UInt64 bytesRead = offset - range.location;
@@ -1358,7 +1370,7 @@ static NSMutableArray *recentNonces;
             [asyncSocket writeData:rangeHeader withTimeout:TIMEOUT_WRITE_HEAD tag:HTTP_PARTIAL_RESPONSE_HEADER];
 
             // Start writing range body
-            range = [ranges[rangeIndex] vvrangeValue];
+            range = [ranges[rangeIndex] vv_rangeValue];
 
             [httpResponse setOffset:range.location];
 
@@ -1590,10 +1602,10 @@ static NSMutableArray *recentNonces;
 
     VVHTTPLogWarn(@"HTTP Server: Error 505 - Version Not Supported: %@ (%@)", version, [self requestURI]);
 
-    VVHTTPMessage *response = [[VVHTTPMessage alloc] initResponseWithStatusCode:505 description:nil version:HTTPVersion1_1];
-    [response setHeaderField:@"Content-Length" value:@"0"];
+    VVHTTPMessage *responseMessage = [[VVHTTPMessage alloc] initResponseWithStatusCode:505 description:nil version:HTTPVersion1_1];
+    [responseMessage setHeaderField:@"Content-Length" value:@"0"];
 
-    NSData *responseData = [self preprocessErrorResponse:response];
+    NSData *responseData = [self preprocessErrorResponse:responseMessage];
     [asyncSocket writeData:responseData withTimeout:TIMEOUT_WRITE_ERROR tag:HTTP_RESPONSE];
 }
 
@@ -1608,16 +1620,16 @@ static NSMutableArray *recentNonces;
     VVHTTPLogInfo(@"HTTP Server: Error 401 - Unauthorized (%@)", [self requestURI]);
 
     // Status Code 401 - Unauthorized
-    VVHTTPMessage *response = [[VVHTTPMessage alloc] initResponseWithStatusCode:401 description:nil version:HTTPVersion1_1];
-    [response setHeaderField:@"Content-Length" value:@"0"];
+    VVHTTPMessage *responseMessage = [[VVHTTPMessage alloc] initResponseWithStatusCode:401 description:nil version:HTTPVersion1_1];
+    [responseMessage setHeaderField:@"Content-Length" value:@"0"];
 
     if ([self useDigestAccessAuthentication]) {
-        [self addDigestAuthChallenge:response];
+        [self addDigestAuthChallenge:responseMessage];
     } else {
-        [self addBasicAuthChallenge:response];
+        [self addBasicAuthChallenge:responseMessage];
     }
 
-    NSData *responseData = [self preprocessErrorResponse:response];
+    NSData *responseData = [self preprocessErrorResponse:responseMessage];
     [asyncSocket writeData:responseData withTimeout:TIMEOUT_WRITE_ERROR tag:HTTP_RESPONSE];
 }
 
@@ -1634,11 +1646,11 @@ static NSMutableArray *recentNonces;
     VVHTTPLogWarn(@"HTTP Server: Error 400 - Bad Request (%@)", [self requestURI]);
 
     // Status Code 400 - Bad Request
-    VVHTTPMessage *response = [[VVHTTPMessage alloc] initResponseWithStatusCode:400 description:nil version:HTTPVersion1_1];
-    [response setHeaderField:@"Content-Length" value:@"0"];
-    [response setHeaderField:@"Connection" value:@"close"];
+    VVHTTPMessage *responseMessage = [[VVHTTPMessage alloc] initResponseWithStatusCode:400 description:nil version:HTTPVersion1_1];
+    [responseMessage setHeaderField:@"Content-Length" value:@"0"];
+    [responseMessage setHeaderField:@"Connection" value:@"close"];
 
-    NSData *responseData = [self preprocessErrorResponse:response];
+    NSData *responseData = [self preprocessErrorResponse:responseMessage];
     [asyncSocket writeData:responseData withTimeout:TIMEOUT_WRITE_ERROR tag:HTTP_FINAL_RESPONSE];
 
 
@@ -1661,11 +1673,11 @@ static NSMutableArray *recentNonces;
     VVHTTPLogWarn(@"HTTP Server: Error 405 - Method Not Allowed: %@ (%@)", method, [self requestURI]);
 
     // Status code 405 - Method Not Allowed
-    VVHTTPMessage *response = [[VVHTTPMessage alloc] initResponseWithStatusCode:405 description:nil version:HTTPVersion1_1];
-    [response setHeaderField:@"Content-Length" value:@"0"];
-    [response setHeaderField:@"Connection" value:@"close"];
+    VVHTTPMessage *responseMessage = [[VVHTTPMessage alloc] initResponseWithStatusCode:405 description:nil version:HTTPVersion1_1];
+    [responseMessage setHeaderField:@"Content-Length" value:@"0"];
+    [responseMessage setHeaderField:@"Connection" value:@"close"];
 
-    NSData *responseData = [self preprocessErrorResponse:response];
+    NSData *responseData = [self preprocessErrorResponse:responseMessage];
     [asyncSocket writeData:responseData withTimeout:TIMEOUT_WRITE_ERROR tag:HTTP_FINAL_RESPONSE];
 
 
@@ -1685,10 +1697,12 @@ static NSMutableArray *recentNonces;
     VVHTTPLogInfo(@"HTTP Server: Error 404 - Not Found (%@)", [self requestURI]);
 
     // Status Code 404 - Not Found
-    VVHTTPMessage *response = [[VVHTTPMessage alloc] initResponseWithStatusCode:404 description:nil version:HTTPVersion1_1];
-    [response setHeaderField:@"Content-Length" value:@"0"];
+    VVHTTPMessage *responseMessage = [[VVHTTPMessage alloc] initResponseWithStatusCode:404
+                                                                           description:nil
+                                                                               version:HTTPVersion1_1];
+    [responseMessage setHeaderField:@"Content-Length" value:@"0"];
 
-    NSData *responseData = [self preprocessErrorResponse:response];
+    NSData *responseData = [self preprocessErrorResponse:responseMessage];
     [asyncSocket writeData:responseData withTimeout:TIMEOUT_WRITE_ERROR tag:HTTP_RESPONSE];
 }
 
@@ -1826,12 +1840,13 @@ static NSMutableArray *recentNonces;
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
     if (tag == HTTP_REQUEST_HEADER) {
         // Append the header line to the http message
-        BOOL result = [request appendData:data];
+        BOOL result = [_requestMessage appendData:data];
+
         if (!result) {
             VVHTTPLogWarn(@"%@[%p]: Malformed request", VV_THIS_FILE, self);
 
             [self handleInvalidRequest:data];
-        } else if (![request isHeaderComplete]) {
+        } else if (![_requestMessage isHeaderComplete]) {
             // We don't have a complete header yet
             // That is, we haven't yet received a CRLF on a line by itself, indicating the end of the header
             if (++numHeaderLines > MAX_HEADER_LINES) {
@@ -1851,16 +1866,16 @@ static NSMutableArray *recentNonces;
             // We have an entire HTTP request header from the client
 
             // Extract the method (such as GET, HEAD, POST, etc)
-            NSString *method = [request method];
+            NSString *method = [_requestMessage method];
 
             // Extract the uri (such as "/index.html")
             NSString *uri = [self requestURI];
 
             // Check for a Transfer-Encoding field
-            NSString *transferEncoding = [request headerField:@"Transfer-Encoding"];
+            NSString *transferEncoding = [_requestMessage headerField:@"Transfer-Encoding"];
 
             // Check for a Content-Length field
-            NSString *contentLength = [request headerField:@"Content-Length"];
+            NSString *contentLength = [_requestMessage headerField:@"Content-Length"];
 
             // Content-Length MUST be present for upload methods (such as POST or PUT)
             // and MUST NOT be present for other methods.
@@ -2192,9 +2207,9 @@ static NSMutableArray *recentNonces;
 
                 // If this assertion fails, it likely means you overrode the
                 // finishBody method and forgot to call [super finishBody].
-                NSAssert(request == nil, @"Request not properly released in finishBody");
+                NSAssert(_requestMessage == nil, @"Request not properly released in finishBody");
 
-                request = [[VVHTTPMessage alloc] initEmptyRequest];
+                _requestMessage = [[VVHTTPMessage alloc] initEmptyRequest];
 
                 numHeaderLines = 0;
                 sentResponseHeaders = NO;
@@ -2303,7 +2318,7 @@ static NSMutableArray *recentNonces;
     //
     // If you override this method, you should take care to invoke [super finishResponse] at some point.
 
-    request = nil;
+    _requestMessage = nil;
 
     httpResponse = nil;
 
@@ -2328,19 +2343,19 @@ static NSMutableArray *recentNonces;
 
     BOOL shouldDie = NO;
 
-    NSString *version = [request version];
+    NSString *version = [_requestMessage version];
     if ([version isEqualToString:HTTPVersion1_1]) {
         // HTTP version 1.1
         // Connection should only be closed if request included "Connection: close" header
 
-        NSString *connection = [request headerField:@"Connection"];
+        NSString *connection = [_requestMessage headerField:@"Connection"];
 
         shouldDie = (connection && ([connection caseInsensitiveCompare:@"close"] == NSOrderedSame));
     } else if ([version isEqualToString:HTTPVersion1_0]) {
         // HTTP version 1.0
         // Connection should be closed unless request included "Connection: Keep-Alive" header
 
-        NSString *connection = [request headerField:@"Connection"];
+        NSString *connection = [_requestMessage headerField:@"Connection"];
 
         if (connection == nil)
             shouldDie = YES;

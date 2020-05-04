@@ -1,5 +1,5 @@
 #import "VVRange.h"
-#import "NSNumber+VVNumber.h"
+#import "NSNumber+VVApi.h"
 
 VVRange VVUnionRange(VVRange range1, VVRange range2) {
     VVRange result;
@@ -75,15 +75,15 @@ NSInteger DDRangeCompare(VVRangePointer pDDRange1, VVRangePointer pDDRange2) {
     return [NSValue valueWithBytes:&range objCType:@encode(VVRange)];
 }
 
-- (VVRange)vvrangeValue {
+- (VVRange)vv_rangeValue {
     VVRange result;
     [self getValue:&result];
     return result;
 }
 
-- (NSInteger)vvrangeCompare:(NSValue *)other {
-    VVRange r1 = [self vvrangeValue];
-    VVRange r2 = [other vvrangeValue];
+- (NSInteger)vv_rangeCompare:(NSValue *)other {
+    VVRange r1 = [self vv_rangeValue];
+    VVRange r2 = [other vv_rangeValue];
 
     return DDRangeCompare(&r1, &r2);
 }

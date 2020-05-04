@@ -8,11 +8,14 @@
 
 #import "ViewController.h"
 
-#import "VVHTTPMessage.h"
+#import <AFNetworking/AFNetworking.h>
 
 #import "VVApiHTTPServer.h"
-#import "VVApiConfig.h"
-#import "VVJSONAdapter.h"
+#import "VVApiJSON.h"
+#import "NSString+VVApi.h"
+#import "NSURL+VVApi.h"
+#import "PlayerViewController.h"
+#import "VVIPHelper.h"
 
 @interface ViewController () {
     VVApiHTTPServer *httpServer;
@@ -26,25 +29,61 @@
     [super viewDidLoad];
 
     httpServer = [VVApiHTTPServer share];
-    [httpServer setPort:80];
-    httpServer.apiConfig.timeout = 0.5;
-
     NSError *error = nil;
     if (![httpServer start:&error]) {
         NSLog(@"HTTP server failed to start");
     }
+
     [self setupApis];
 }
 
 - (void)setupApis {
+    [httpServer post:@"/getWangYiNews" withHandler:^(VVApiRequest *request, VVApiResponse *response) {
+        if (response.responseObject) {
+            [response respondWithString:[response.responseObject toJSONString]];
+        } else {
+            NSDictionary *dict = @{@"result": @"getWangYiNews", @"msg": @"success", @"code": @(0)};
+            [response respondWithString:[dict toJSONString]];
+        }
+    }];
+
+    [httpServer get:@"/musicRankings" withHandler:^(VVApiRequest *request, VVApiResponse *response) {
+        if (response.responseObject) {
+            [response respondWithString:[response.responseObject toJSONString]];
+        } else {
+            NSDictionary *dict = @{@"result": @"abcd", @"msg": @"success", @"code": @(0)};
+            [response respondWithString:[dict toJSONString]];
+        }
+    }];
+
+    [httpServer get:@"/errorurl" withHandler:^(VVApiRequest *request, VVApiResponse *response) {
+
+    }];
+
+    [httpServer get:@"/local/news" withHandler:^(VVApiRequest *request, VVApiResponse *response) {
+        NSString *jsonPath = [[NSBundle mainBundle] pathForResource:@"news" ofType:@"json"];
+        NSString *jsonString = [[NSString alloc] initWithContentsOfFile:jsonPath encoding:NSUTF8StringEncoding error:nil];
+        [response respondWithString:jsonString];
+    }];
+
+    [httpServer get:@"/video/sync.mp4" withHandler:^(VVApiRequest *request, VVApiResponse *response) {
+        NSString *jsonPath = [[NSBundle mainBundle] pathForResource:@"video" ofType:@"mp4"];
+        [response respondWithFile:jsonPath async:NO];
+    }];
+
+    [httpServer get:@"/video/async.mp4" withHandler:^(VVApiRequest *request, VVApiResponse *response) {
+        NSString *jsonPath = [[NSBundle mainBundle] pathForResource:@"video" ofType:@"mp4"];
+        [response respondWithFile:jsonPath async:YES];
+    }];
+
     [httpServer get:@"/test" withHandler:^(VVApiRequest *request, VVApiResponse *response) {
-        [response respondWithString:@"test response"];
+        NSDictionary *dict = @{@"result": @"test", @"msg": @"success", @"code": @(0)};
+        [response respondWithString:[dict toJSONString]];
     }];
 
     [httpServer get:@"/hello" withHandler:^(VVApiRequest *request, VVApiResponse *response) {
-        NSDictionary *dict = @{@"msg": @"success", @"status": @0, @"json": @"hello"};
-        NSString *jsonString = [dict JSONString];
-        [response respondWithString:jsonString];
+        NSDictionary *dict = @{@"result": @"hello", @"msg": @"success", @"code": @(0)};
+        [response respondWithString:[dict toJSONString]];
     }];
 
     [httpServer get:@"/httperror" withHandler:^(VVApiRequest *request, VVApiResponse *response) {
@@ -87,7 +126,6 @@
         NSData *bodyData = [request body];
         NSString *xml = [[NSString alloc] initWithBytes:[bodyData bytes] length:[bodyData length] encoding:NSUTF8StringEncoding];
 
-        // Green?
         NSRange tagRange = [xml rangeOfString:@"<greenLevel>"];
         if (tagRange.location != NSNotFound) {
             NSUInteger start = tagRange.location + tagRange.length;
@@ -100,41 +138,204 @@
     }];
 }
 
+- (void)afnRequest:(NSString *)method
+         urlString:(NSString *)urlString
+            params:(NSDictionary *)params
+    sessionManager:(AFHTTPSessionManager *)sessionManager {
+
+    if ([method isEqualToString:@"GET"]) {
+        [sessionManager GET:urlString
+                 parameters:params
+                   progress:nil
+                    success:^(NSURLSessionDataTask *_Nonnull task, id _Nullable responseObject) {
+                        if ([responseObject isKindOfClass:[NSData class]]) {
+                            NSLog(@"reponse->%@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+                        } else {
+                            NSLog(@"reponse->%@", responseObject);
+                        }
+                    }
+                    failure:^(NSURLSessionDataTask *_Nullable task, NSError *_Nonnull error) {
+                        NSLog(@"%@,%s", error, __func__);
+                    }];
+    } else if ([method isEqualToString:@"POST"]) {
+        [sessionManager POST:urlString
+                  parameters:params
+                    progress:nil
+                     success:^(NSURLSessionDataTask *_Nonnull task, id _Nullable responseObject) {
+                         if ([responseObject isKindOfClass:[NSData class]]) {
+                             NSLog(@"reponse->%@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+                         } else {
+                             NSLog(@"reponse->%@", responseObject);
+                         }
+                     }
+                     failure:^(NSURLSessionDataTask *_Nullable task, NSError *_Nonnull error) {
+                         NSLog(@"%@,%s", error, __func__);
+                     }];
+    }
+}
+
+- (void)nomarlLocalAFNetworkingWithMethod:(NSString *)method path:(NSString *)path isJson:(BOOL)isJson {
+    NSString *urlString;
+    NSDictionary *params;
+
+    urlString = [NSString stringWithFormat:@"http://%@:%d", [VVIPHelper ipAddress], httpServer.port];
+    urlString = [urlString stringByAppendingString:path];
+    NSLog(@"Origin URL->%@", urlString);
+
+    AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
+    if (!isJson) {
+        sessionManager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    }
+    sessionManager.responseSerializer.acceptableContentTypes = [sessionManager.responseSerializer.acceptableContentTypes setByAddingObjectsFromArray:@[@"text/html", @"text/plain"]];
+    NSDictionary *headerFieldValueDictionary = @{@"xxx": @"1.0"};
+    if (headerFieldValueDictionary != nil) {
+        for (NSString *httpHeaderField in headerFieldValueDictionary.allKeys) {
+            NSString *value = headerFieldValueDictionary[httpHeaderField];
+            [sessionManager.requestSerializer setValue:value forHTTPHeaderField:httpHeaderField];
+        }
+    }
+
+    [self afnRequest:method urlString:urlString params:params sessionManager:sessionManager];
+}
+
+- (void)delayLocalAFNetworkingWithMethod:(NSString *)method path:(NSString *)path isJson:(BOOL)isJson isDelay:(BOOL)isDelay {
+    NSString *urlString;
+    NSDictionary *params;
+
+    urlString = [NSString stringWithFormat:@"http://%@:%d", [VVIPHelper ipAddress], httpServer.port];
+    urlString = [urlString stringByAppendingString:path];
+
+    NSLog(@"Origin URL->%@", urlString);
+    if (isDelay) {
+        urlString = [urlString localURLProxyWithDelay];
+    } else {
+        urlString = [urlString localURLProxy];
+    }
+    NSLog(@"Proxy URL->%@", urlString);
+
+    AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
+    if (!isJson) {
+        sessionManager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    }
+    sessionManager.responseSerializer.acceptableContentTypes = [sessionManager.responseSerializer.acceptableContentTypes setByAddingObjectsFromArray:@[@"text/html", @"text/plain"]];
+    NSDictionary *headerFieldValueDictionary = @{@"xxx": @"1.0"};
+    if (headerFieldValueDictionary != nil) {
+        for (NSString *httpHeaderField in headerFieldValueDictionary.allKeys) {
+            NSString *value = headerFieldValueDictionary[httpHeaderField];
+            [sessionManager.requestSerializer setValue:value forHTTPHeaderField:httpHeaderField];
+        }
+    }
+
+    [self afnRequest:method urlString:urlString params:params sessionManager:sessionManager];
+}
+
+- (void)remoteAFNetworkingWithMethod:(NSString *)method path:(NSString *)path isLocal:(BOOL)isLocal isJson:(BOOL)isJson {
+    NSString *urlString;
+    NSDictionary *params;
+
+    urlString = @"https://api.apiopen.top";
+    if ([method isEqualToString:@"POST"]) {
+        params = @{@"page": @1, @"count": @2};
+    }
+    urlString = [urlString stringByAppendingString:path];
+
+    NSLog(@"Origin URL->%@", urlString);
+    if (isLocal) {
+        urlString = [urlString localURLProxy];
+    } else {
+        urlString = [urlString remoteURLProxyWithFilter];
+    }
+    NSLog(@"Proxy URL->%@", urlString);
+
+    AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
+    if (!isJson) {
+        sessionManager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    }
+    sessionManager.responseSerializer.acceptableContentTypes = [sessionManager.responseSerializer.acceptableContentTypes setByAddingObjectsFromArray:@[@"text/html", @"text/plain"]];
+    NSDictionary *headerFieldValueDictionary = @{@"vv_token": @"12345"};
+    if (headerFieldValueDictionary != nil) {
+        for (NSString *httpHeaderField in headerFieldValueDictionary.allKeys) {
+            NSString *value = headerFieldValueDictionary[httpHeaderField];
+            [sessionManager.requestSerializer setValue:value forHTTPHeaderField:httpHeaderField];
+        }
+    }
+
+    [self afnRequest:method urlString:urlString params:params sessionManager:sessionManager];
+}
+
 - (void)requestApiWithMethod:(NSString *)method path:(NSString *)path {
-    NSString *baseURLString = [NSString stringWithFormat:@"http://www.waqu.com:%d", [httpServer listeningPort]];
+
+    NSString *baseURLString = [NSString stringWithFormat:@"http://%@:%d", [VVIPHelper ipAddress], httpServer.port];;
     NSString *urlString = [baseURLString stringByAppendingString:path];
     NSURL *url = [NSURL URLWithString:urlString];
+    url = [url localURLProxyWithDelay];
+
 
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     request.HTTPMethod = method;
-
     NSURLSession *session = [NSURLSession sharedSession];
-    NSURLSessionDataTask *sessionDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *responseData, NSURLResponse *response, NSError *error) {
-        NSString *responseString = [[NSString alloc] initWithBytes:[responseData bytes] length:[responseData length] encoding:NSUTF8StringEncoding];
-        NSLog(@"%@", responseString);
-    }];
+
+    NSURLSessionDataTask *sessionDataTask = [session dataTaskWithRequest:request
+                                                       completionHandler:^(NSData *responseData, NSURLResponse *response, NSError *error) {
+                                                           NSString *responseString = [[NSString alloc] initWithBytes:[responseData bytes]
+                                                                                                               length:[responseData length]
+                                                                                                             encoding:NSUTF8StringEncoding];
+                                                           NSLog(@"%@", responseString);
+                                                       }];
 
     [sessionDataTask resume];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event {
 
-    // found
-    [self requestApiWithMethod:@"GET" path:@"/hello"];
-//    [self requestApiWithMethod:@"GET" path:@"/hello/you"];
-//    [self requestApiWithMethod:@"GET" path:@"/page/3"];
+    /******************** found **************************/
+
+    // 本地地址，访问本地服务器读取本地Json,返回当前读取的Json
+//    [self nomarlLocalAFNetworkingWithMethod:@"GET" path:@"/local/news" isJson:YES];
+//    [self delayLocalAFNetworkingWithMethod:@"GET" path:@"/local/news" isJson:YES isDelay:NO];
+//    [self delayLocalAFNetworkingWithMethod:@"GET" path:@"/local/news" isJson:YES isDelay:YES];
+
+    // 远程地址，访问本地服务器，返回本地自定义结果Json
+//    [self remoteAFNetworkingWithMethod:@"POST" path:@"/getWangYiNews" isLocal:YES isJson:YES];
+
+    // 远程地址，访问远程服务器，返回远程结果
+//    [self remoteAFNetworkingWithMethod:@"POST" path:@"/getWangYiNews" isLocal:NO isJson:YES];
+//    [self remoteAFNetworkingWithMethod:@"GET" path:@"/musicRankings" isLocal:NO isJson:YES];
+//    [self remoteAFNetworkingWithMethod:@"GET" path:@"/errorurl" isLocal:NO isJson:YES];
+
+//    [self remoteAFNetworkingWithMethod:@"GET" path:@"/musicRankings" isLocal:YES isJson:YES];
+//    [self localAFNetworkingWithMethod:@"GET" path:@"/hello?aa=bb&cc=dd" isJson:YES];
+//    [self localAFNetworkingWithMethod:@"GET" path:@"/hello/you?aa=bb&cc=dd" isJson:NO];
+
+//    [self requestApiWithMethod:@"GET" path:@"/hello?aa=bb&cc=dd"];
+//    [self requestApiWithMethod:@"GET" path:@"/hello/you?aa=bb&cc=dd"];
+//    [self requestApiWithMethod:@"GET" path:@"/httperror"];
 //    [self requestApiWithMethod:@"GET" path:@"/files/test.txt"];
 //    [self requestApiWithMethod:@"GET" path:@"/selector"];
 //    [self requestApiWithMethod:@"POST" path:@"/form"];
 //    [self requestApiWithMethod:@"POST" path:@"/users/bob"];
 //    [self requestApiWithMethod:@"POST" path:@"/users/bob/dosomething"];
-//
-//    // not found
+
+    /******************** not found **************************/
+
+//    [self localAFNetworkingWithMethod:@"GET" path:@"/helloworld" isJson:NO];
+
+//    [self requestApiWithMethod:@"GET" path:@"/helloworld"];
 //    [self requestApiWithMethod:@"POST" path:@"/hello"];
 //    [self requestApiWithMethod:@"POST" path:@"/selector"];
 //    [self requestApiWithMethod:@"GET" path:@"/page/a3"];
 //    [self requestApiWithMethod:@"GET" path:@"/page/3a"];
 //    [self requestApiWithMethod:@"GET" path:@"/form"];
+
+//    [self playLocalVideo:@"/video/sync.mp4"];
+//    [self playLocalVideo:@"/video/async.mp4"];
+}
+
+- (void)playLocalVideo:(NSString *)path {
+    NSString *urlString = [NSString stringWithFormat:@"http://%@:%d%@", [VVIPHelper ipAddress], httpServer.port, path];
+    NSLog(@"video->%@", urlString);
+    PlayerViewController *playerViewController = [[PlayerViewController alloc] initWithUrl:[NSURL URLWithString:urlString]];
+    [self.navigationController pushViewController:playerViewController animated:YES];
 }
 
 @end

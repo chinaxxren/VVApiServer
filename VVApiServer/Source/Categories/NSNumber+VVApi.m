@@ -1,7 +1,7 @@
-#import "NSNumber+VVNumber.h"
+#import "NSNumber+VVApi.h"
 
 
-@implementation NSNumber (VVNumber)
+@implementation NSNumber (VVApi)
 
 + (BOOL)parseString:(NSString *)str intoSInt64:(SInt64 *)pNum {
     if (str == nil) {

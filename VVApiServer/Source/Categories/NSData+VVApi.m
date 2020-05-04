@@ -1,8 +1,8 @@
-#import "NSData+VVData.h"
+#import "NSData+VVApi.h"
 #import <CommonCrypto/CommonDigest.h>
 
 
-@implementation NSData (VVData)
+@implementation NSData (VVApi)
 
 static char encodingTable[64] = {
         'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',

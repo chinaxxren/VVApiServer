@@ -3,16 +3,13 @@
 #import "VVHTTPServer.h"
 #import "VVApiRequest.h"
 #import "VVApiResponse.h"
-
-typedef void (^VVRequestHandler)(VVApiRequest *request, VVApiResponse *response);
+#import "VVApiConstants.h"
 
 @class VVApi;
-@class VVApiConfig;
 
 @interface VVApiHTTPServer : VVHTTPServer
 
 @property(nonatomic, readonly) NSDictionary *defaultHeaderDict;
-@property(nonatomic, readonly) VVApiConfig *apiConfig;
 
 + (instancetype)share;
 
@@ -21,10 +18,6 @@ typedef void (^VVRequestHandler)(VVApiRequest *request, VVApiResponse *response)
 - (void)setDefaultHeaders:(NSDictionary *)headers;
 
 - (void)setDefaultHeader:(NSString *)field value:(NSString *)value;
-
-- (dispatch_queue_t)apiQueue;
-
-- (void)setApiQueue:(dispatch_queue_t)queue;
 
 - (NSDictionary *)mimeTypes;
 
@@ -36,21 +29,11 @@ typedef void (^VVRequestHandler)(VVApiRequest *request, VVApiResponse *response)
 
 - (void)get:(NSString *)path withHandler:(VVRequestHandler)handler;
 
-- (void)get:(NSString *)path port:(NSInteger)port withHandler:(VVRequestHandler)handler;
-
 - (void)post:(NSString *)path withHandler:(VVRequestHandler)handler;
-
-- (void)post:(NSString *)path port:(NSInteger)port withHandler:(VVRequestHandler)handler;
 
 - (void)put:(NSString *)path withHandler:(VVRequestHandler)handler;
 
-- (void)put:(NSString *)path port:(NSInteger)port withHandler:(VVRequestHandler)handler;
-
 - (void)delete:(NSString *)path withHandler:(VVRequestHandler)handler;
-
-- (void)delete:(NSString *)path port:(NSInteger)port withHandler:(VVRequestHandler)handler;
-
-- (void)handleMethod:(NSString *)method port:(NSInteger)port withPath:(NSString *)path withHandler:(VVRequestHandler)handler;
 
 - (void)handleMethod:(NSString *)method withPath:(NSString *)path target:(id)target sel:(SEL)sel;
 
@@ -60,6 +43,7 @@ typedef void (^VVRequestHandler)(VVApiRequest *request, VVApiResponse *response)
 
 - (VVApiResponse *)apiMethod:(NSString *)method
                     withPath:(NSString *)path
+                     headers:(NSDictionary *)headers
                   parameters:(NSDictionary *)params
                      request:(VVHTTPMessage *)httpMessage
                   connection:(VVHTTPConnection *)connection;

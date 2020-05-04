@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 
-@interface NSData (VVData)
+@interface NSData (VVApi)
 
 - (NSData *)md5Digest;
 
