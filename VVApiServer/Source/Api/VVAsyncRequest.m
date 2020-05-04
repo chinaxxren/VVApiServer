@@ -31,7 +31,6 @@
     AFHTTPResponseSerializer <AFURLResponseSerialization> *responseSerializer = self.sessionManager.responseSerializer;
     responseSerializer.acceptableContentTypes = [responseSerializer.acceptableContentTypes setByAddingObjectsFromArray:@[@"text/html", @"text/plain"]];
 
-    VVWeak(self);
     if ([method isEqualToString:VV_API_HEAD]) {
         [self headRequest:urlString params:params];
     } else if ([method isEqualToString:VV_API_GET]) {
