@@ -29,6 +29,9 @@
     [super viewDidLoad];
 
     httpServer = [VVApiHTTPServer share];
+    NSString *webPath = [[NSBundle mainBundle] resourcePath];
+    NSLog(@"webPath : %@", webPath);
+    [httpServer setDocumentRoot:webPath];
     NSError *error = nil;
     if (![httpServer start:&error]) {
         NSLog(@"HTTP server failed to start");

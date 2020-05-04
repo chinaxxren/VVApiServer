@@ -36,6 +36,7 @@
 		B6D619D44E5554C91C3C023C /* NSURL+VVApi.m in Sources */ = {isa = PBXBuildFile; fileRef = B6D61CD718FD7EDF11D1253A /* NSURL+VVApi.m */; };
 		B6D61A3E4D5DDA6F497DC04D /* video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = B6D61A9D8F9DC39B8C517244 /* video.mp4 */; };
 		B6D61AC248708CD6558EC569 /* NSString+VVApi.m in Sources */ = {isa = PBXBuildFile; fileRef = B6D6175FEA1B74056409D596 /* NSString+VVApi.m */; };
+		B6D61ACEC379CDECC05B9A9D /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = B6D6179C53BA8D163852A820 /* index.html */; };
 		B6D61B076FC664046FE13927 /* VVAsyncRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B6D61FB5F2ACD30A9A198A13 /* VVAsyncRequest.m */; };
 		B6D61F15A5AB04A4A6A6EB0C /* VVAsyncFile.m in Sources */ = {isa = PBXBuildFile; fileRef = B6D618904630E539308B73DA /* VVAsyncFile.m */; };
 		BBC8F20D749310FADC3FAE94EF78552E /* VVApiServerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7545736340A9B6DAF479B03AF5F78E60 /* VVApiServerUITests.m */; };
@@ -122,6 +123,7 @@
 		B6D61565447F4F46B4345FED /* VVAsyncRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVAsyncRequest.h; sourceTree = "<group>"; };
 		B6D615DB4ADFAA8ED10A716C /* VVApiJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVApiJSON.m; sourceTree = "<group>"; };
 		B6D6175FEA1B74056409D596 /* NSString+VVApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+VVApi.m"; sourceTree = "<group>"; };
+		B6D6179C53BA8D163852A820 /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
 		B6D6184D6CBF994DB674A3AD /* VVConnectParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVConnectParams.m; sourceTree = "<group>"; };
 		B6D6189021A629CA0EC48F15 /* VVApiAFNFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVApiAFNFactory.h; sourceTree = "<group>"; };
 		B6D618904630E539308B73DA /* VVAsyncFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVAsyncFile.m; sourceTree = "<group>"; };
@@ -330,6 +332,7 @@
 			children = (
 				B6D61A9D8F9DC39B8C517244 /* video.mp4 */,
 				B6D61142A7B230FEF843BC72 /* news.json */,
+				B6D6179C53BA8D163852A820 /* index.html */,
 			);
 			path = Resouces;
 			sourceTree = "<group>";
@@ -487,6 +490,7 @@
 				1BCD7ED9C97ED78F8CCC64D862E47585 /* Podfile in Resources */,
 				B6D61A3E4D5DDA6F497DC04D /* video.mp4 in Resources */,
 				B6D618ECAE4ECF139BA7E762 /* news.json in Resources */,
+				B6D61ACEC379CDECC05B9A9D /* index.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
