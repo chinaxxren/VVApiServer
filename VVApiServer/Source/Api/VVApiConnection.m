@@ -83,7 +83,7 @@ static const int httpLogLevel = VV_HTTP_LOG_LEVEL_VERBOSE | VV_HTTP_LOG_FLAG_TRA
                 params = [self parseParams:query];
             }
         }
-        
+
         [params removeObjectForKey:VV_API_DELAY];
     }
 
@@ -217,23 +217,23 @@ static const int httpLogLevel = VV_HTTP_LOG_LEVEL_VERBOSE | VV_HTTP_LOG_FLAG_TRA
         return;
     }
 
-    NSString *uploadDirPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-
-    BOOL isDir = YES;
     NSFileManager *defaultManager = [NSFileManager defaultManager];
-    if (![defaultManager fileExistsAtPath:uploadDirPath isDirectory:&isDir]) {
-        [defaultManager createDirectoryAtPath:uploadDirPath withIntermediateDirectories:YES attributes:nil error:nil];
+    static NSString *uploadDirPath;
+    if (!uploadDirPath) {
+        uploadDirPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
+        uploadDirPath = [uploadDirPath stringByAppendingPathComponent:@"upload"];
+
+        BOOL isDir = YES;
+        if (![defaultManager fileExistsAtPath:uploadDirPath isDirectory:&isDir]) {
+            [defaultManager createDirectoryAtPath:uploadDirPath withIntermediateDirectories:YES attributes:nil error:nil];
+        }
     }
 
     NSString *filePath = [uploadDirPath stringByAppendingPathComponent:filename];
-
     if ([defaultManager fileExistsAtPath:filePath]) {
         [defaultManager removeItemAtPath:filePath error:nil];
     } else {
         VVHTTPLogVerbose(@"Saving file to %@", filePath);
-        if (![defaultManager createDirectoryAtPath:uploadDirPath withIntermediateDirectories:true attributes:nil error:nil]) {
-            VVHTTPLogError(@"Could not create directory at path: %@", filePath);
-        }
         if (![defaultManager createFileAtPath:filePath contents:nil attributes:nil]) {
             VVHTTPLogError(@"Could not create file at path: %@", filePath);
         }
