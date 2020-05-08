@@ -19,7 +19,7 @@
 - (NSURL *)proxyWithDelay:(NSString *)delay {
     NSURLComponents *urlComponents = [[NSURLComponents alloc] initWithURL:self resolvingAgainstBaseURL:NO];
     NSMutableArray<NSURLQueryItem *> *queryItems = [NSMutableArray arrayWithArray:urlComponents.queryItems];
-    [queryItems addObject:[NSURLQueryItem queryItemWithName:VV_API_LOCAL_DELAY value:delay]];
+    [queryItems addObject:[NSURLQueryItem queryItemWithName:VV_API_DELAY value:delay]];
     urlComponents.queryItems = queryItems;
     return urlComponents.URL;
 }
@@ -27,7 +27,7 @@
 - (NSURL *)remoteURLProxyWithFilter {
     NSURLComponents *urlComponents = [[NSURLComponents alloc] initWithURL:self resolvingAgainstBaseURL:NO];
     NSMutableArray<NSURLQueryItem *> *queryItems = [NSMutableArray arrayWithArray:urlComponents.queryItems];
-    [queryItems addObject:[NSURLQueryItem queryItemWithName:VV_API_IS_REMOTE value:@"1"]];
+    [queryItems addObject:[NSURLQueryItem queryItemWithName:VV_API_DELAY value:@"-1"]];
     urlComponents.queryItems = queryItems;
     return urlComponents.URL;
 }

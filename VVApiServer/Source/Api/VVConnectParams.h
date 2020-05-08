@@ -13,7 +13,6 @@
 @property(nonatomic, copy) NSDictionary *headers;
 @property(nonatomic, copy) NSDictionary *params;
 @property(nonatomic, copy) NSArray *files;
-@property(nonatomic, assign) BOOL remote;
 @property(nonatomic, assign) CGFloat delay;
 @property(nonatomic, weak) VVApi *api;
 @property(nonatomic, weak) VVApiResponse *response;

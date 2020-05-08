@@ -46,7 +46,7 @@ static const int httpLogLevel = VV_HTTP_LOG_LEVEL_INFO;
 }
 
 - (void)serverExcute {
-    if (_connectParams.remote) {
+    if (_connectParams.delay < 0) {
         [self doAsyncRequest];
     } else if (_connectParams.delay > 0) {
         [self doAsyncStuff];
@@ -118,11 +118,11 @@ static const int httpLogLevel = VV_HTTP_LOG_LEVEL_INFO;
 }
 
 - (BOOL)hasAsync {
-    return self.connectParams.remote || self.connectParams.delay > 0;
+    return self.connectParams.delay != 0;
 }
 
 - (BOOL)filterResponse {
-    if (self.connectParams.remote) {
+    if (self.connectParams.delay < 0) {
         __block BOOL filterResponse = NO;
         dispatch_sync(_responseQueue, ^{
             filterResponse = !_readyToSendResponseHeaders;

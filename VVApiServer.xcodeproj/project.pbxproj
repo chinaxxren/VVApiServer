@@ -20,6 +20,7 @@
 		4E7FAEE556C32F8A4913D72CEF008724 /* VVHTTPFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B0A77B30B9A98FB0DE868D31157E154F /* VVHTTPFileResponse.m */; };
 		735A89BA97AFAF6C2EADC7AB1698423F /* VVHTTPLogging.m in Sources */ = {isa = PBXBuildFile; fileRef = A3E78F4B8B05689F029E4DF2B3BF8B3A /* VVHTTPLogging.m */; };
 		800278573384056D85E8B33309C1742F /* VVApiConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = BB77CC63F3AAFBD1C55C7AB79C0D2B68 /* VVApiConnection.m */; };
+		8254E715246546A800A55BDE /* VVApiFilter.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8254E714246546A800A55BDE /* VVApiFilter.plist */; };
 		82EA8564245EFB52003EDFBD /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82EA8563245EFB52003EDFBD /* AVKit.framework */; };
 		82EA8567245EFB74003EDFBD /* PlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82EA8566245EFB74003EDFBD /* PlayerViewController.m */; };
 		82EA856C245FDDD9003EDFBD /* VVIPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 82EA856B245FDDD9003EDFBD /* VVIPHelper.m */; };
@@ -99,6 +100,7 @@
 		7545736340A9B6DAF479B03AF5F78E60 /* VVApiServerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VVApiServerUITests.m; sourceTree = "<group>"; };
 		7A50D15D8D10612C4A1013813970EEA8 /* VVApiRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVApiRequest.m; sourceTree = "<group>"; };
 		7CE7D19D1E18350CC7CBCD91982ABB3B /* VVHTTPAuthenticationRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVHTTPAuthenticationRequest.m; sourceTree = "<group>"; };
+		8254E714246546A800A55BDE /* VVApiFilter.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = VVApiFilter.plist; sourceTree = "<group>"; };
 		82EA8563245EFB52003EDFBD /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		82EA8565245EFB74003EDFBD /* PlayerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerViewController.h; sourceTree = "<group>"; };
 		82EA8566245EFB74003EDFBD /* PlayerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerViewController.m; sourceTree = "<group>"; };
@@ -361,6 +363,7 @@
 				B6D61A9D8F9DC39B8C517244 /* video.mp4 */,
 				B6D61142A7B230FEF843BC72 /* news.json */,
 				B6D6179C53BA8D163852A820 /* index.html */,
+				8254E714246546A800A55BDE /* VVApiFilter.plist */,
 			);
 			path = Resouces;
 			sourceTree = "<group>";
@@ -515,6 +518,7 @@
 			files = (
 				F08996694E174D4C260D01DAACABD0FC /* Assets.xcassets in Resources */,
 				8B37E061E67DE5407B6F857385370E01 /* LaunchScreen.storyboard in Resources */,
+				8254E715246546A800A55BDE /* VVApiFilter.plist in Resources */,
 				1BCD7ED9C97ED78F8CCC64D862E47585 /* Podfile in Resources */,
 				B6D61A3E4D5DDA6F497DC04D /* video.mp4 in Resources */,
 				B6D618ECAE4ECF139BA7E762 /* news.json in Resources */,

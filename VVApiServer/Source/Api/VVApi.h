@@ -15,8 +15,7 @@
 @property(nonatomic, weak) id target;
 @property(nonatomic, assign) SEL sel;
 @property(nonatomic) NSArray *keys;
-@property(nonatomic, assign) BOOL remote; // 用于远程URL
-@property(nonatomic, assign) CGFloat localDelay; // 用于本地URL
+@property(nonatomic, assign) CGFloat delay;
 
 + (VVApi *)apiWithPath:(NSString *)path;
 

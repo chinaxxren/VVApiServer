@@ -7,8 +7,7 @@
 
 @implementation VVApiConstants
 
-NSString *const VV_API_IS_REMOTE = @"vv_api_is_remote";
-NSString *const VV_API_LOCAL_DELAY = @"vv_api_local_delay";
+NSString *const VV_API_DELAY = @"vv_api_delay";
 
 NSString *const VV_API_GET = @"GET";
 NSString *const VV_API_POST = @"POST";

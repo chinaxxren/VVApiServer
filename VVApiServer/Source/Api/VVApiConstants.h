@@ -15,8 +15,7 @@ typedef void (^VVRequestHandler)(VVApiRequest *request, VVApiResponse *response)
 
 @interface VVApiConstants : NSObject
 
-extern NSString *const VV_API_IS_REMOTE;
-extern NSString *const VV_API_LOCAL_DELAY;
+extern NSString *const VV_API_DELAY;
 
 extern NSString *const VV_API_GET;
 extern NSString *const VV_API_POST;

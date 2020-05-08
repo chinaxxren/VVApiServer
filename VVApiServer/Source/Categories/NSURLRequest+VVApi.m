@@ -46,12 +46,8 @@
 
             BOOL hasFilter = NO;
             for (NSURLQueryItem *item in queryItems) {
-                if ([item.name isEqualToString:VV_API_IS_REMOTE] && item.value) {
-                    api.remote = [item.value boolValue];
-                    hasFilter = YES;
-                    break;
-                } else if ([item.name isEqualToString:VV_API_LOCAL_DELAY] && item.name) {
-                    api.localDelay = [item.value floatValue];
+                if ([item.name isEqualToString:VV_API_DELAY]) {
+                    api.delay = [item.value floatValue];
                     hasFilter = YES;
                     break;
                 }

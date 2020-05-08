@@ -638,7 +638,7 @@ static NSMutableArray *recentNonces;
                     value = (__bridge_transfer NSString *) v;
 
                     if (key) {
-                        if ([key isEqualToString:VV_API_IS_REMOTE] || [key isEqualToString:VV_API_LOCAL_DELAY]) {
+                        if ([key isEqualToString:VV_API_DELAY]) {
                             continue;
                         }
 

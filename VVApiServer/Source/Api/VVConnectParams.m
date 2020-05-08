@@ -26,11 +26,9 @@
     
     [url appendString:path];
 
-
     VVConnectParams *params = [VVConnectParams new];
     params.url = [url description];
-    params.remote = api.remote;
-    params.delay = api.localDelay;
+    params.delay = api.delay;
 
     return params;
 }
