@@ -161,6 +161,7 @@
                     withPath:(NSString *)path
                      headers:(NSDictionary *)headers
                   parameters:(NSDictionary *)params
+                       files:(NSArray *)files
                      request:(VVHTTPMessage *)httpMessage
                   connection:(VVHTTPConnection *)connection {
     NSMutableArray *methodApis = _apiDict[method];
@@ -179,6 +180,7 @@
         connectParams.method = method;
         connectParams.headers = headers;
         connectParams.params = params;
+        connectParams.files = files;
         connectParams.api = api;
 
         // The first range is all of the text matched by the regex.

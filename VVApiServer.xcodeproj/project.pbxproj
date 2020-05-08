@@ -28,13 +28,17 @@
 		B56EE66D23D7EAC2A0E4E4D7A0052BE1 /* VVHTTPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A4D2CD086E924784CB4D866349F70F /* VVHTTPMessage.m */; };
 		B6389672729BFA3C7131BDDCE35D5B2D /* VVApiResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5F82E20487603E8E69CDD5967F8644 /* VVApiResponse.m */; };
 		B6D6141D8989A103751475F9 /* NSURLRequest+VVApi.m in Sources */ = {isa = PBXBuildFile; fileRef = B6D6122E5C1B14A116354A78 /* NSURLRequest+VVApi.m */; };
+		B6D6144DF9D2887C16CC26FA /* MultipartMessageHeaderField.m in Sources */ = {isa = PBXBuildFile; fileRef = B6D6122BF63C6D9D1643559E /* MultipartMessageHeaderField.m */; };
+		B6D6159CD616AA933FD6C0A0 /* MultipartFormDataParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B6D61E1A9FF03FDDB650E7C7 /* MultipartFormDataParser.m */; };
 		B6D6163C91CA9435E1CC43BD /* VVConnectParams.m in Sources */ = {isa = PBXBuildFile; fileRef = B6D6184D6CBF994DB674A3AD /* VVConnectParams.m */; };
 		B6D618C7C006313637BDBCA4 /* VVApiConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B6D61BBC6E2DF0DF83FD8D16 /* VVApiConstants.m */; };
 		B6D618ECAE4ECF139BA7E762 /* news.json in Resources */ = {isa = PBXBuildFile; fileRef = B6D61142A7B230FEF843BC72 /* news.json */; };
 		B6D6192FEC34A4DDF4C1C153 /* VVApiJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = B6D615DB4ADFAA8ED10A716C /* VVApiJSON.m */; };
 		B6D6194FA0CE70A34CF1C9F3 /* VVApiAFNFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = B6D614818FD6C46A4BDF7410 /* VVApiAFNFactory.m */; };
+		B6D6195C72C9C167B4052B66 /* MultipartMessageHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = B6D61B5F55A9C4CB367C39A4 /* MultipartMessageHeader.m */; };
 		B6D619D44E5554C91C3C023C /* NSURL+VVApi.m in Sources */ = {isa = PBXBuildFile; fileRef = B6D61CD718FD7EDF11D1253A /* NSURL+VVApi.m */; };
 		B6D61A3E4D5DDA6F497DC04D /* video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = B6D61A9D8F9DC39B8C517244 /* video.mp4 */; };
+		B6D61A6D4D0FE1F6E118D002 /* VVFileParams.m in Sources */ = {isa = PBXBuildFile; fileRef = B6D61CE047A9B8D3BAB5EB30 /* VVFileParams.m */; };
 		B6D61AC248708CD6558EC569 /* NSString+VVApi.m in Sources */ = {isa = PBXBuildFile; fileRef = B6D6175FEA1B74056409D596 /* NSString+VVApi.m */; };
 		B6D61ACEC379CDECC05B9A9D /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = B6D6179C53BA8D163852A820 /* index.html */; };
 		B6D61B076FC664046FE13927 /* VVAsyncRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B6D61FB5F2ACD30A9A198A13 /* VVAsyncRequest.m */; };
@@ -117,7 +121,9 @@
 		B0A77B30B9A98FB0DE868D31157E154F /* VVHTTPFileResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVHTTPFileResponse.m; sourceTree = "<group>"; };
 		B6D61142A7B230FEF843BC72 /* news.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = news.json; sourceTree = "<group>"; };
 		B6D611DDEFC1F7CC5704ECD5 /* VVConnectParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVConnectParams.h; sourceTree = "<group>"; };
+		B6D6122BF63C6D9D1643559E /* MultipartMessageHeaderField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultipartMessageHeaderField.m; sourceTree = "<group>"; };
 		B6D6122E5C1B14A116354A78 /* NSURLRequest+VVApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLRequest+VVApi.m"; sourceTree = "<group>"; };
+		B6D613772C741D2788542D92 /* VVFileParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVFileParams.h; sourceTree = "<group>"; };
 		B6D614818FD6C46A4BDF7410 /* VVApiAFNFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVApiAFNFactory.m; sourceTree = "<group>"; };
 		B6D615257482F4870B2430C6 /* NSURL+VVApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+VVApi.h"; sourceTree = "<group>"; };
 		B6D61565447F4F46B4345FED /* VVAsyncRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVAsyncRequest.h; sourceTree = "<group>"; };
@@ -125,16 +131,22 @@
 		B6D6175FEA1B74056409D596 /* NSString+VVApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+VVApi.m"; sourceTree = "<group>"; };
 		B6D6179C53BA8D163852A820 /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
 		B6D6184D6CBF994DB674A3AD /* VVConnectParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVConnectParams.m; sourceTree = "<group>"; };
+		B6D618890E086A91BE0EEFAF /* MultipartMessageHeaderField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultipartMessageHeaderField.h; sourceTree = "<group>"; };
 		B6D6189021A629CA0EC48F15 /* VVApiAFNFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVApiAFNFactory.h; sourceTree = "<group>"; };
 		B6D618904630E539308B73DA /* VVAsyncFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVAsyncFile.m; sourceTree = "<group>"; };
 		B6D618E58B85AF9CF5036AF2 /* VVAsyncFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVAsyncFile.h; sourceTree = "<group>"; };
 		B6D61A9BA4083FD116684BC8 /* VVApiConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVApiConstants.h; sourceTree = "<group>"; };
 		B6D61A9D8F9DC39B8C517244 /* video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file.mp4; path = video.mp4; sourceTree = "<group>"; };
 		B6D61B56DCCBCD2DC68BEFC8 /* VVApiJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVApiJSON.h; sourceTree = "<group>"; };
+		B6D61B5F55A9C4CB367C39A4 /* MultipartMessageHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultipartMessageHeader.m; sourceTree = "<group>"; };
 		B6D61BBC6E2DF0DF83FD8D16 /* VVApiConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVApiConstants.m; sourceTree = "<group>"; };
+		B6D61BDA031AA41113AF336F /* MultipartMessageHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultipartMessageHeader.h; sourceTree = "<group>"; };
 		B6D61CC3332A8F27AE2D655C /* NSURLRequest+VVApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLRequest+VVApi.h"; sourceTree = "<group>"; };
 		B6D61CD718FD7EDF11D1253A /* NSURL+VVApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+VVApi.m"; sourceTree = "<group>"; };
+		B6D61CE047A9B8D3BAB5EB30 /* VVFileParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVFileParams.m; sourceTree = "<group>"; };
+		B6D61E1A9FF03FDDB650E7C7 /* MultipartFormDataParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultipartFormDataParser.m; sourceTree = "<group>"; };
 		B6D61E6FF2BB779773A9E127 /* NSString+VVApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+VVApi.h"; sourceTree = "<group>"; };
+		B6D61EF0B7E898DF44EA8D6C /* MultipartFormDataParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultipartFormDataParser.h; sourceTree = "<group>"; };
 		B6D61FB5F2ACD30A9A198A13 /* VVAsyncRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVAsyncRequest.m; sourceTree = "<group>"; };
 		B736AFF638E831971C755E783D8582C3 /* Pods-VVApiServer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VVApiServer.debug.xcconfig"; path = "Target Support Files/Pods-VVApiServer/Pods-VVApiServer.debug.xcconfig"; sourceTree = "<group>"; };
 		BA1834BA50669A53B88F07BA39452491 /* VVRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVRange.h; sourceTree = "<group>"; };
@@ -241,6 +253,7 @@
 				407E79863419A488960F9D684C041DF3 /* Http */,
 				4012CB2AA9CBB584267DBC7898D1F599 /* Responses */,
 				9BA3056ECE0DE40931DDC4DECDC41025 /* Api */,
+				B6D61DBA2F26DCFB94BEC619 /* Mime */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -313,6 +326,8 @@
 				B6D61565447F4F46B4345FED /* VVAsyncRequest.h */,
 				B6D618904630E539308B73DA /* VVAsyncFile.m */,
 				B6D618E58B85AF9CF5036AF2 /* VVAsyncFile.h */,
+				B6D61CE047A9B8D3BAB5EB30 /* VVFileParams.m */,
+				B6D613772C741D2788542D92 /* VVFileParams.h */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -325,6 +340,19 @@
 				1B85E500C559EE143EC323899F34EF5B /* VVApiServerUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		B6D61DBA2F26DCFB94BEC619 /* Mime */ = {
+			isa = PBXGroup;
+			children = (
+				B6D61BDA031AA41113AF336F /* MultipartMessageHeader.h */,
+				B6D61B5F55A9C4CB367C39A4 /* MultipartMessageHeader.m */,
+				B6D61EF0B7E898DF44EA8D6C /* MultipartFormDataParser.h */,
+				B6D61E1A9FF03FDDB650E7C7 /* MultipartFormDataParser.m */,
+				B6D618890E086A91BE0EEFAF /* MultipartMessageHeaderField.h */,
+				B6D6122BF63C6D9D1643559E /* MultipartMessageHeaderField.m */,
+			);
+			path = Mime;
 			sourceTree = "<group>";
 		};
 		B6D61E992D697048686FB582 /* Resouces */ = {
@@ -583,6 +611,10 @@
 				B6D6192FEC34A4DDF4C1C153 /* VVApiJSON.m in Sources */,
 				B6D61B076FC664046FE13927 /* VVAsyncRequest.m in Sources */,
 				B6D61F15A5AB04A4A6A6EB0C /* VVAsyncFile.m in Sources */,
+				B6D6195C72C9C167B4052B66 /* MultipartMessageHeader.m in Sources */,
+				B6D6144DF9D2887C16CC26FA /* MultipartMessageHeaderField.m in Sources */,
+				B6D6159CD616AA933FD6C0A0 /* MultipartFormDataParser.m in Sources */,
+				B6D61A6D4D0FE1F6E118D002 /* VVFileParams.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -45,6 +45,7 @@
                     withPath:(NSString *)path
                      headers:(NSDictionary *)headers
                   parameters:(NSDictionary *)params
+                       files:(NSArray *)files
                      request:(VVHTTPMessage *)httpMessage
                   connection:(VVHTTPConnection *)connection;
 

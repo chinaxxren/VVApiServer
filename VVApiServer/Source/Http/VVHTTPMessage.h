@@ -18,6 +18,9 @@
     CFHTTPMessageRef message;
 }
 
+@property(nonatomic, strong) NSMutableDictionary *params;
+@property(nonatomic, strong) NSMutableArray *files;
+
 - (id)initEmptyRequest;
 
 - (id)initRequestWithMethod:(NSString *)method URL:(NSURL *)url version:(NSString *)version;
