@@ -69,7 +69,7 @@
 
 - (NSString *)passwordForUser:(NSString *)username;
 
-- (NSDictionary *)parseParams:(NSString *)query;
+- (NSMutableDictionary *)parseParams:(NSString *)query;
 
 - (NSDictionary *)parseGetParams;
 

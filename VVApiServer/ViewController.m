@@ -41,6 +41,15 @@
 }
 
 - (void)setupApis {
+    [httpServer post:@"/upload.html" withHandler:^(VVApiRequest *request, VVApiResponse *response) {
+        if (response.responseObject) {
+            [response respondWithString:[response.responseObject toJSONString]];
+        } else {
+            NSDictionary *dict = @{@"result": @"upload.html", @"msg": @"success", @"code": @(0)};
+            [response respondWithString:[dict toJSONString]];
+        }
+    }];
+
     [httpServer post:@"/getWangYiNews" withHandler:^(VVApiRequest *request, VVApiResponse *response) {
         if (response.responseObject) {
             [response respondWithString:[response.responseObject toJSONString]];

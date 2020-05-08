@@ -64,7 +64,7 @@ static const int httpLogLevel = VV_HTTP_LOG_LEVEL_VERBOSE | VV_HTTP_LOG_FLAG_TRA
 
     NSString *query = nil;
     _headerDict = nil;
-    NSDictionary *params = nil;
+    NSMutableDictionary *params = nil;
 
     if (url) {
         path = [url path]; // Strip the query string from the path
@@ -83,6 +83,8 @@ static const int httpLogLevel = VV_HTTP_LOG_LEVEL_VERBOSE | VV_HTTP_LOG_FLAG_TRA
                 params = [self parseParams:query];
             }
         }
+        
+        [params removeObjectForKey:VV_API_DELAY];
     }
 
     VVApiResponse *response = [_httpServer apiMethod:method

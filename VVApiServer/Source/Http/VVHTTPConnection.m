@@ -613,7 +613,7 @@ static NSMutableArray *recentNonces;
  *   num = "50"
  * }
 **/
-- (NSDictionary *)parseParams:(NSString *)query {
+- (NSMutableDictionary *)parseParams:(NSString *)query {
     NSArray *components = [query componentsSeparatedByString:@"&"];
     NSMutableDictionary *result = [NSMutableDictionary dictionaryWithCapacity:[components count]];
 
@@ -638,10 +638,6 @@ static NSMutableArray *recentNonces;
                     value = (__bridge_transfer NSString *) v;
 
                     if (key) {
-                        if ([key isEqualToString:VV_API_DELAY]) {
-                            continue;
-                        }
-
                         if (value) {
                             result[key] = value;
                         } else {

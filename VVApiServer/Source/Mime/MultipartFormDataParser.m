@@ -338,41 +338,14 @@ static const int httpLogLevel = VV_HTTP_LOG_LEVEL_WARN;
         for (i = 0; i < boundaryLength; i++) {
             if (boundaryBytes[i] != dataBytes[offset + i]) {
                 break;
-            } else {
-                NSLog(@"%c,%d",boundaryBytes[i],i);
             }
         }
+        
         if (i == boundaryLength) {
             break;
         }
         offset++;
     }
-    
-//    char *boundaryBytes = (char *) _boundaryData.bytes;
-//    char *dataBytes = (char *) data.bytes;
-//    NSUInteger dataLength = data.length;
-//    NSUInteger boundaryLength = _boundaryData.length;
-//
-//    NSLog(@"");
-//    int currnet = 0;
-//    int last = 0;
-//    while (offset < dataLength) {
-//        int i;
-//        for (i = 0; i < boundaryLength; i++) {
-//            if (boundaryBytes[i] != dataBytes[offset + i]) {
-//                break;
-//            }
-//        }
-//
-//        if (i == boundaryLength) {
-//            last = 0;
-//            currnet = offset;
-//            NSString *text = [[NSString alloc] initWithBytes:dataBytes + last length:currnet - last encoding:NSUTF8StringEncoding];
-//            NSLog(@"%@",text);
-//        }
-//
-//        offset++;
-//    }
     
     if (offset == dataLength) {
         // the end of preamble wasn't found in this chunk
