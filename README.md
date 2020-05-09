@@ -78,8 +78,8 @@
 ```
 
 ### 未完功能
-不支持websocket。
-不支持远程下载（开发中）
+* 不支持websocket。
+* 不支持远程下载（开发中）
 
 ### 感谢
 [CocoaHTTPServer](https://github.com/robbiehanson/CocoaHTTPServer)
