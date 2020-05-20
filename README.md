@@ -1,6 +1,15 @@
-# VVApiServer
+### 起源
+在开发中常常遇到以下几个问题。
+1. 对接完产品需求和技术文档，客户端不能立即进入开发调试状态，时常等待后端接口，可能导致进入加班状态或则拖延开发周期。
+2. 开发中网络不稳定，或者服务器重启次数过多
+3. 开发过程中想调用服务器某个接口，返回某个字段的特殊值或者整个结构改变进行调试。
+4. 写本地的Unit Test
 
-* 在开发中，当服务器端不能访问、按需求提供Api接口访问结果的时候，我们可以通过VVApiServer在本地生成需要访问Api接口的结果，当远程服务器能正常访问后，无缝的切换到远程服务器方式。
+正是由于上面的问题，我一直想自己写一个本地服务器且又能兼容远程服务器的组件。在iOS中网上已经有开源的[CocoaHTTPServer](https://github.com/robbiehanson/CocoaHTTPServer),在前人的基础上进行二次修改出来了[VVApiServer](https://github.com/chinaxxren/VVApiServer)。
+### 原理
+
+![](https://user-gold-cdn.xitu.io/2020/5/9/171f8aae6c565792?w=1582&h=432&f=png&s=95521)
+> 拦截匹配Path的客户端发起的请求，转化为都是请求VVApiServer的本地请求。VVApiServer得到请求的host和vv_api_delay两个参数，决定是否由VVApiServer发起第二次真实请求。等返回结果再处理或则直接返回本地自定义结果。
 
 ### 使用介绍
 1. VVApiServer通过请求参数来控制访问方式
@@ -76,10 +85,14 @@
     }];
     
 ```
+### 代码例子
+
+[VVApiServer](https://github.com/chinaxxren/VVApiServer)
 
 ### 未完功能
-* 不支持websocket。
-* 不支持远程下载（开发中）
+
+不支持websocket。
+不支持远程下载（开发中）
 
 ### 感谢
 [CocoaHTTPServer](https://github.com/robbiehanson/CocoaHTTPServer)
